@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Table KeyType="System.UInt16" ValueType="System.String">
+  <Element Key="0x0032">Stalfos</Element>
+  <Element Key="0x0039">Deku Baba</Element>
+  <Element Key="0x0036">Various Deku Tree objects</Element>
+  <Element Key="0x001E">Gohma Larva</Element>
+  <Element Key="0x0024">Skulltula</Element>
+  <Element Key="0x000E">Treasure chest</Element>
+  <Element Key="0x00A4">Torches</Element>
+  <Element Key="0x012B">Grass clump</Element>
+  <Element Key="0x000D">Keese</Element>
+  <Element Key="0x0168">Business Scrub</Element>
+  <Element Key="0x0164">Hint-giving Deku Scrub</Element>
+  <Element Key="0x0170">Crate</Element>
+  <Element Key="0x012F">Cuttable signpost</Element>
+  <Element Key="0x00B7">Recovery Heart (GI)</Element>
+  <Element Key="0x015C">Gold Skulltula Token (GI)</Element>
+  <Element Key="0x004A">Mad Scrub</Element>
+  <Element Key="0x0163">Bombable boulder</Element>
+  <Element Key="0x0190">Time Block</Element>
+  <Element Key="0x00A2">Gravestone</Element>
+  <Element Key="0x002B">Various Dodongo's Cavern objects</Element>
+  <Element Key="0x0031">Bomb Flower</Element>
+  <Element Key="0x018A">Bombable wall</Element>
+  <Element Key="0x002F">Various Hyrule Field objects</Element>
+  <Element Key="0x0131">Kaepora Gaebora</Element>
+  <Element Key="0x007C">Greenery</Element>
+  <Element Key="0x0018">Peahat</Element>
+  <Element Key="0x0184">Stalchild</Element>
+  <Element Key="0x0048">Blue Warp</Element>
+</Table>

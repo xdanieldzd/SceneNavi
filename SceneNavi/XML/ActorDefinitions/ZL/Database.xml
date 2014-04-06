@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ActorDatabase ProgramVersion="1.0.1.9">
+  <Definition IsDefault="RoomActor, SpawnPoint">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+  <Definition IsDefault="TransitionActor">
+    <Item Index="4" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="0" ValueType="System.Byte" Usage="NextRoomFront" Description="Next Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="1" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Next)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Byte" Usage="NextRoomBack" Description="Previous Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="3" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Previous)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+  <Definition Number="0x0009" DisplayModel="ColoredDoor" PickModel="Door" FrontOffset="180.0">
+    <Item Index="4" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="0" ValueType="System.Byte" Usage="NextRoomFront" Description="Next Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="1" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Next)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Byte" Usage="NextRoomBack" Description="Previous Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="3" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Previous)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+  <Definition Number="0x000A" DisplayModel="ColoredSlab" PickModel="Slab" FrontOffset="180.0">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" Description="Chest Type" Mask="0xF000" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0x0000" Description="No action (large)"></Option>
+      <Option Value="0x1000" Description="Clear Trigger (large)"></Option>
+      <Option Value="0x2000" Description="No action (ornate, boss key)"></Option>
+      <Option Value="0x3000" Description="Falling (large, switch-triggered)"></Option>
+      <Option Value="0x4000" Description="Invisible (large)"></Option>
+      <Option Value="0x5000" Description="No action (small)"></Option>
+      <Option Value="0x6000" Description="Invisible (small)"></Option>
+      <Option Value="0x7000" Description="Clear Trigger (small)"></Option>
+      <Option Value="0x8000" Description="Falling (small, switch-triggered)"></Option>
+      <Option Value="0x9000" Description="Zelda's Lullaby (large)"></Option>
+      <Option Value="0xA000" Description="Sun's Song (large)"></Option>
+      <Option Value="0xB000" Description="Appearing (large, switch-triggered)"></Option>
+    </Item>
+    <Item Index="14" ValueType="System.UInt16" Description="Contents" Mask="0x0FE0" ControlType="System.Windows.Forms.ComboBox">
+      <!-- todo fix descriptions -->
+      <Option Value="0x0020" Description="Bombs"></Option>
+      <Option Value="0x0040" Description="Deku Nuts"></Option>
+      <Option Value="0x0060" Description="Bombchus"></Option>
+      <Option Value="0x0080" Description="Fairy Bow"></Option>
+      <Option Value="0x00A0" Description="Fairy Slingshot"></Option>
+      <Option Value="0x00C0" Description="Boomerang"></Option>
+      <Option Value="0x00E0" Description="Deku Stick"></Option>
+      <Option Value="0x0100" Description="Hookshot"></Option>
+      <Option Value="0x0120" Description="Longshot"></Option>
+      <Option Value="0x0140" Description="Lens of Truth"></Option>
+      <Option Value="0x0160" Description="Zelda's Letter"></Option>
+      <Option Value="0x0180" Description="Ocarina of Time"></Option>
+      <Option Value="0x01A0" Description="Megaton Hammer"></Option>
+      <Option Value="0x01C0" Description="Cojiro"></Option>
+      <Option Value="0x01E0" Description="Empty Bottle"></Option>
+      <Option Value="0x0200" Description="Red Potion"></Option>
+      <Option Value="0x0220" Description="Green Potion"></Option>
+      <Option Value="0x0240" Description="Blue Potion"></Option>
+      <Option Value="0x0260" Description="Bottled Fairy"></Option>
+      <Option Value="0x0280" Description="Lon Lon Milk"></Option>
+      <Option Value="0x02A0" Description="Bottled Letter"></Option>
+      <Option Value="0x02C0" Description="Magic Beans"></Option>
+      <Option Value="0x02E0" Description="Skull Mask"></Option>
+      <Option Value="0x0300" Description="Spooky Mask"></Option>
+      <Option Value="0x0320" Description="(Chicken in child trading slot w/ Cucco icon; text says Magic Bean)"></Option>
+      <Option Value="0x0340" Description="Keaton Mask"></Option>
+      <Option Value="0x0360" Description="Bunny Hood"></Option>
+      <Option Value="0x0380" Description="Mask of Truth"></Option>
+      <Option Value="0x03A0" Description="Pocket Egg"></Option>
+      <Option Value="0x03C0" Description="(Pocket Cucco in adult trading slot; text says Magic Bean)"></Option>
+      <Option Value="0x03E0" Description="Odd Mushroom"></Option>
+      <Option Value="0x0400" Description="Odd Potion"></Option>
+      <Option Value="0x0420" Description="Poacher's Saw"></Option>
+      <Option Value="0x0440" Description="Broken Goron's Sword"></Option>
+      <Option Value="0x0460" Description="Prescription"></Option>
+      <Option Value="0x0480" Description="Eyeball Frog"></Option>
+      <Option Value="0x04A0" Description="Eye Drops"></Option>
+      <Option Value="0x04C0" Description="Claim Check"></Option>
+      <Option Value="0x04E0" Description="Kokiri's Sword"></Option>
+      <Option Value="0x0500" Description="Giant's Knife"></Option>
+      <Option Value="0x0520" Description="Blue Rupee"></Option>
+      <Option Value="0x0540" Description="Blue Rupee"></Option>
+      <Option Value="0x0560" Description="Mirror Shield"></Option>
+      <Option Value="0x0580" Description="Blue Rupee"></Option>
+      <Option Value="0x05A0" Description="Blue Rupee"></Option>
+      <Option Value="0x05C0" Description="Iron Boots"></Option>
+      <Option Value="0x05E0" Description="Hover Boots"></Option>
+      <Option Value="0x0600" Description="Big Quiver"></Option>
+      <Option Value="0x0620" Description="Biggest Quiver"></Option>
+      <Option Value="0x0640" Description="Bomb Bag"></Option>
+      <Option Value="0x0660" Description="Big Bomb Bag"></Option>
+      <Option Value="0x0680" Description="Biggest Bomb Bag"></Option>
+      <Option Value="0x06A0" Description="Silver Gauntlets"></Option>
+      <Option Value="0x06C0" Description="Golden Gauntlets"></Option>
+      <Option Value="0x06E0" Description="Silver Scale"></Option>
+      <Option Value="0x0700" Description="Golden Scale"></Option>
+      <Option Value="0x0720" Description="Stone of Agony"></Option>
+      <Option Value="0x0740" Description="Gerudo Membership Card"></Option>
+      <Option Value="0x0760" Description="(Fairy Ocarina; text says Ocarina of Time)"></Option>
+      <Option Value="0x0780" Description="Blue Rupee"></Option>
+      <Option Value="0x07A0" Description="Heart Container"></Option>
+      <Option Value="0x07C0" Description="Piece of Heart"></Option>
+      <Option Value="0x07E0" Description="Boss Key"></Option>
+      <Option Value="0x0800" Description="Compass"></Option>
+      <Option Value="0x0820" Description="Dungeon Map"></Option>
+      <Option Value="0x0840" Description="Small Key"></Option>
+      <Option Value="0x0860" Description="Blue Rupee"></Option>
+      <Option Value="0x0880" Description="Blue Rupee"></Option>
+      <Option Value="0x08A0" Description="Adult Wallet"></Option>
+      <Option Value="0x08C0" Description="Giant Wallet"></Option>
+      <Option Value="0x08E0" Description="Weird Egg"></Option>
+      <Option Value="0x0900" Description="Recovery Heart"></Option>
+      <Option Value="0x0920" Description="Arrows (5)"></Option>
+      <Option Value="0x0940" Description="Arrows (10)"></Option>
+      <Option Value="0x0960" Description="Arrows (30)"></Option>
+      <Option Value="0x0980" Description="Green Rupee"></Option>
+      <Option Value="0x09A0" Description="Blue Rupee"></Option>
+      <Option Value="0x09C0" Description="Red Rupee"></Option>
+      <Option Value="0x09E0" Description="Heart Container"></Option>
+      <Option Value="0x0A00" Description="Lon Lon Milk"></Option>
+      <Option Value="0x0A20" Description="Goron Mask"></Option>
+      <Option Value="0x0A40" Description="Zora Mask"></Option>
+      <Option Value="0x0A60" Description="Gerudo Mask"></Option>
+      <Option Value="0x0A80" Description="Goron Bracelet"></Option>
+      <Option Value="0x0AA0" Description="Purple Rupee"></Option>
+      <Option Value="0x0AC0" Description="Huge Rupee (200)"></Option>
+      <Option Value="0x0AE0" Description="Biggoron's Sword"></Option>
+      <Option Value="0x0B00" Description="Fire Arrow"></Option>
+      <Option Value="0x0B20" Description="Ice Arrow"></Option>
+      <Option Value="0x0B40" Description="Light Arrow"></Option>
+      <Option Value="0x0B60" Description="Gold Skulltula token"></Option>
+      <Option Value="0x0B80" Description="Din's Fire"></Option>
+      <Option Value="0x0BA0" Description="Farore's Wind"></Option>
+      <Option Value="0x0BC0" Description="Nayru's Love"></Option>
+      <Option Value="0x0BE0" Description="Deku Seeds Bullet Bag (40)"></Option>
+      <Option Value="0x0C00" Description="Deku Seeds Bullet Bag (40)"></Option>
+      <Option Value="0x0C20" Description="Deku Stick"></Option>
+      <Option Value="0x0C40" Description="Deku Stick"></Option>
+      <Option Value="0x0C60" Description="Deku Nuts"></Option>
+      <Option Value="0x0C80" Description="Deku Nuts"></Option>
+      <Option Value="0x0CA0" Description="Bombs"></Option>
+      <Option Value="0x0CC0" Description="Bombs"></Option>
+      <Option Value="0x0CE0" Description="Bombs"></Option>
+      <Option Value="0x0D00" Description="Bombs"></Option>
+      <Option Value="0x0D20" Description="Blue Rupee"></Option>
+      <Option Value="0x0D40" Description="Bombchus"></Option>
+      <Option Value="0x0D60" Description="Bombchus"></Option>
+      <Option Value="0x0D80" Description="Bottled Fish"></Option>
+      <Option Value="0x0DA0" Description="Bottled Bug"></Option>
+      <Option Value="0x0DC0" Description="Blue Fire"></Option>
+      <Option Value="0x0DE0" Description="Bottled Poe"></Option>
+      <Option Value="0x0E00" Description="Bottled Giant Poe"></Option>
+      <Option Value="0x0E20" Description="Door Key (Treasure Chest Contest)"></Option>
+      <Option Value="0x0E40" Description="Loser's Green Rupee (Treasure Chest Contest)"></Option>
+      <Option Value="0x0E60" Description="Loser's Blue Rupee (Treasure Chest Contest)"></Option>
+      <Option Value="0x0E80" Description="Loser's Red Rupee (Treasure Chest Contest)"></Option>
+      <Option Value="0x0EA0" Description="Winner's Purple Rupee (Treasure Chest Contest)"></Option>
+      <Option Value="0x0EC0" Description="Winner's Piece of Heart"></Option>
+      <Option Value="0x0EE0" Description="Deku Stick Upgrade (20)"></Option>
+      <Option Value="0x0F00" Description="Deku Stick Upgrade (30)"></Option>
+      <Option Value="0x0F20" Description="Deku Nut Upgrade (30)"></Option>
+      <Option Value="0x0F40" Description="Deku Nut Upgrade (40)"></Option>
+      <Option Value="0x0F60" Description="Deku Seeds Bullet Bag (50)"></Option>
+      <Option Value="0x0F80" Description="Freezes Link when opened"></Option>
+      <Option Value="0x0FA0" Description="Pocket Egg (no model)"></Option>
+    </Item>
+    <Item Index="13" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Attached Switch" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Chest Flag" Mask="0x1F" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+  <Definition Number="0x0013">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Attached Switch" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" Description="Type" Mask="0x07" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0" Description="Fire Keese"></Option>
+      <Option Value="1" Description="Fire Keese; returns to origin"></Option>
+      <Option Value="2" Description="Aggressive Keese"></Option>
+      <Option Value="3" Description="Roosting Keese"></Option>
+      <Option Value="4" Description="Ice Keese"></Option>
+    </Item>
+  </Definition>
+  <Definition Number="0x0023" DisplayModel="Sphere" PickModel="Sphere" FrontOffset="180.0">
+    <Item Index="4" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="0" ValueType="System.Byte" Usage="NextRoomFront" Description="Next Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="1" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Next)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Byte" Usage="NextRoomBack" Description="Previous Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="3" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Previous)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+  <Definition Number="0x002E" DisplayModel="ColoredDoor" PickModel="Door" FrontOffset="180.0">
+    <Item Index="4" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="0" ValueType="System.Byte" Usage="NextRoomFront" Description="Next Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="1" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Next)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Byte" Usage="NextRoomBack" Description="Previous Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="3" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Previous)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Generic variable" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+  <Definition Number="0x0037">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" Description="Type" Mask="0x03" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0" Description="Normal Skulltula"></Option>
+      <Option Value="1" Description="Big Skulltula"></Option>
+      <Option Value="2" Description="Invisible"></Option>
+    </Item>
+  </Definition>
+  <Definition Number="0x003B">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Sound Effect" Mask="0xFFFF" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0x0000" Description="Nothing"></Option>
+      <Option Value="0x0001" Description="Stream"></Option>
+      <Option Value="0x0002" Description="Magma"></Option>
+      <Option Value="0x0003" Description="Waterfall"></Option>
+      <Option Value="0x0004" Description="Small stream (?)"></Option>
+      <Option Value="0x0005" Description="Stream (?)"></Option>
+      <Option Value="0x0006" Description="Fire Temple's lower ambient noise"></Option>
+      <Option Value="0x0007" Description="Fire Temple's higher ambient noise"></Option>
+      <Option Value="0x0008" Description="Dripping noise"></Option>
+      <Option Value="0x0009" Description="River"></Option>
+      <Option Value="0x000A" Description="Market gibberish"></Option>
+      <Option Value="0x000B" Description="Unknown (volume decreased, no ambient sound?)"></Option>
+      <Option Value="0x000C" Description="(?)"></Option>
+      <Option Value="0x000D" Description="Saria's Song (proximity)"></Option>
+      <Option Value="0x000E" Description="Howling wind"></Option>
+      <Option Value="0x000F" Description="Gurgling"></Option>
+      <Option Value="0x0010" Description="Temple of Light's dripping sounds"></Option>
+      <Option Value="0x0011" Description="Low booming-likish sound"></Option>
+      <Option Value="0x0012" Description="Quake/Collapse"></Option>
+      <Option Value="0x0013" Description="Fairy Fountain"></Option>
+      <Option Value="0x0014" Description="Torches"></Option>
+      <Option Value="0x0015" Description="Cows"></Option>
+    </Item>
+  </Definition>
+  <Definition Number="0x00F1">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" Description="Appearance" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0" Description="Ocarina of Time (tossed, higher)"></Option>
+      <Option Value="1" Description="Ocarina of Time (tossed)"></Option>
+      <Option Value="2" Description="Ocarina of Time"></Option>
+      <Option Value="3" Description="Collectible Ocarina of Time"></Option>
+    </Item>
+  </Definition>
+  <Definition Number="0x011B">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Description="Trigger Radius" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Description="Unknown (1)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Description="Unknown (2)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Message Number" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Switch Flag" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.Byte" Description="Manually triggered (C-Up)?" Mask="0x80" ControlType="System.Windows.Forms.CheckBox"></Item>
+    <Item Index="14" ValueType="System.Byte" Description="Unknown modifier" Mask="0x40" ControlType="System.Windows.Forms.CheckBox"></Item>
+  </Definition>
+  <Definition Number="0x012A">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Switch Number" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" Description="Appearance" Mask="0x07" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0" Description="Floor switch"></Option>
+      <Option Value="1" Description="Rusted floor switch"></Option>
+      <Option Value="2" Description="Eye switch"></Option>
+      <Option Value="3" Description="Crystal switch"></Option>
+      <Option Value="4" Description="Targetable crystal switch"></Option>
+    </Item>
+    <Item Index="15" ValueType="System.Byte" Description="Is frozen in ice?" Mask="0x80" ControlType="System.Windows.Forms.CheckBox"></Item>
+    <Item Index="15" ValueType="System.Byte" Description="Auto-activate when flag is set?" Mask="0x40" ControlType="System.Windows.Forms.CheckBox"></Item>
+    <Item Index="15" ValueType="System.Byte" Description="Clears when not stood on?" Mask="0x20" ControlType="System.Windows.Forms.CheckBox"></Item>
+    <Item Index="15" ValueType="System.Byte" Description="Can be toggled on/off?" Mask="0x10" ControlType="System.Windows.Forms.CheckBox"></Item>
+  </Definition>
+  <!--<Definition Number="0x0169">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox" />
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="14" ValueType="System.UInt16" Description="Type" ControlType="System.Windows.Forms.ComboBox" Mask="0x0001">
+      <Option Value="0x0000" Description="Brick Pillar" />
+      <Option Value="0x0001" Description="Brick Throne" />
+    </Item>
+  </Definition>-->
+  <Definition Number="0x018D">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Attached Switch" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" Description="Type" Mask="0x03" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0" Description="Waterhole bottom"></Option>
+      <Option Value="1" Description="Entrance gate"></Option>
+    </Item>
+  </Definition>
+  <Definition Number="0x01B9">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Flag" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Message Number" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+  <Definition Number="0x01BC">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Path Number" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" Description="Type" Mask="0x03" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0" Description="Purple pants (stationary)"></Option>
+      <Option Value="1" Description="Blue pants (ignores collision/elevation)"></Option>
+      <Option Value="2" Description="Green pants"></Option>
+      <Option Value="3" Description="Purple pants"></Option>
+    </Item>
+  </Definition>
+</ActorDatabase>

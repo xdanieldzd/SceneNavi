@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Table KeyType="System.UInt32" ValueType="System.String">
+  <!-- Inside the Deku Tree -->
+  <Element Key="0x01FD0000">3F-1F: Main hall</Element>
+  <Element Key="0x01FE6000">2F: Corridor before Compass</Element>
+  <Element Key="0x01FEB000">2F: Compass room</Element>
+  <Element Key="0x01FF1000">B1F: Center room</Element>
+  <Element Key="0x02006000">B1F: Room before Spike Roller</Element>
+  <Element Key="0x0200B000">B1F: Spike Roller room</Element>
+  <Element Key="0x02014000">B1F: Gohma Larva (x8) room</Element>
+  <Element Key="0x02019000">B1F: Gravestone hall</Element>
+  <Element Key="0x02022000">B1F: Small Gold Skulltula room</Element>
+  <Element Key="0x02023000">B2F: Room before boss</Element>
+  <Element Key="0x0202D000">3F: Slingshot room</Element>
+  <Element Key="0x02032000">B2F: Boss room (dummy)</Element>
+</Table>
