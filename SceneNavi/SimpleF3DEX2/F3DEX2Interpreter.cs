@@ -152,8 +152,8 @@ namespace SceneNavi.SimpleF3DEX2
                 if (!call)
                 {
                     GL.DepthMask(true);
-                    GL.Disable((EnableCap)All.FragmentProgram);
-                    GL.UseProgram(0);
+                    if (OpenGLHelpers.Initialization.SupportsFunction("glGenProgramsARB")) GL.Disable((EnableCap)All.FragmentProgram);
+                    if (OpenGLHelpers.Initialization.SupportsFunction("glCreateShader")) GL.UseProgram(0);
 
                     PrimColor = EnvColor = new Color4(0.5f, 0.5f, 0.5f, 0.5f);
 

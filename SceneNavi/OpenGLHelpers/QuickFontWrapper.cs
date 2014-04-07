@@ -31,7 +31,7 @@ namespace SceneNavi.OpenGLHelpers
             GL.PushAttrib(AttribMask.AllAttribBits);
             GL.Disable(EnableCap.Lighting);
             GL.Enable(EnableCap.Texture2D);
-            GL.Disable((EnableCap)All.FragmentProgram);
+            if (Initialization.SupportsFunction("glGenProgramsARB")) GL.Disable((EnableCap)All.FragmentProgram);
             QuickFont.QFont.Begin();
         }
 

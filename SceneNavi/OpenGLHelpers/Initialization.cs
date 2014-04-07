@@ -28,7 +28,12 @@ namespace SceneNavi.OpenGLHelpers
 
         public static string ShadingLanguageVersionString
         {
-            get { return GL.GetString(StringName.ShadingLanguageVersion) ?? "[null]"; }
+            get
+            {
+                string str = GL.GetString(StringName.ShadingLanguageVersion);
+                if (str == null || str == string.Empty) return "[unsupported]";
+                else return str;
+            }
         }
 
         public static string[] SupportedExtensions

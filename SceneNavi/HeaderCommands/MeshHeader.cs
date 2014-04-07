@@ -132,7 +132,7 @@ namespace SceneNavi.HeaderCommands
             GL.NewList(PickGLID, ListMode.Compile);
             GL.Disable(EnableCap.Lighting);
             GL.Disable(EnableCap.Texture2D);
-            GL.Disable((EnableCap)All.FragmentProgram);
+            if (OpenGLHelpers.Initialization.SupportsFunction("glGenProgramsARB")) GL.Disable((EnableCap)All.FragmentProgram);
             GL.Begin(BeginMode.Triangles);
             foreach (SimpleF3DEX2.SimpleTriangle st in TriangleList)
             {

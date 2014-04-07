@@ -66,6 +66,8 @@ namespace SceneNavi
         Camera camera;
         FPSMonitor fpsMonitor;
 
+        bool supportsCreateShader, supportsGenProgramsARB;
+
         ToolModes internalToolMode;
         ToolModes currentToolMode
         {
@@ -1025,7 +1027,8 @@ namespace SceneNavi
             }
             */
             /* With Intel out of the way, check if all necessary GL extensions etc. are supported */
-            bool supportsGenProgramsARB = ((GraphicsContext.CurrentContext as IGraphicsContextInternal).GetAddress("glGenProgramsARB") != IntPtr.Zero);
+            supportsCreateShader = Initialization.SupportsFunction("glCreateShader");
+            supportsGenProgramsARB = Initialization.SupportsFunction("glGenProgramsARB");
 
             StringBuilder extErrorMessages = new StringBuilder();
             List<string> extMissAll = new List<string>();
@@ -1132,199 +1135,206 @@ namespace SceneNavi
         {
             if (!ready) return;
 
-            fpsMonitor.Update();
-
-            RenderInit(((GLControl)sender).Width, ((GLControl)sender).Height);
-
-            if (rom != null && rom.Loaded)
+            try
             {
-                /* Scene/rooms */
-                RenderScene();
+                fpsMonitor.Update();
 
-                /* Prepare for actors */
-                GL.PushAttrib(AttribMask.AllAttribBits);
-                GL.Disable(EnableCap.Texture2D);
-                GL.Disable(EnableCap.Lighting);
-                GL.Disable((EnableCap)All.FragmentProgram);
-                GL.UseProgram(0);
+                RenderInit(((GLControl)sender).Width, ((GLControl)sender).Height);
+
+                if (rom != null && rom.Loaded)
                 {
-                    /* Room actors */
-                    if (Configuration.RenderRoomActors && currentRoom != null && currentRoom.ActiveRoomActorData != null)
-                        foreach (HeaderCommands.Actors.Entry ac in currentRoom.ActiveRoomActorData.ActorList)
-                            ac.Render(ac == (cbActors.SelectedItem as HeaderCommands.Actors.Entry) &&
-                                cbActors.Visible ? HeaderCommands.PickableObjectRenderType.Selected : HeaderCommands.PickableObjectRenderType.Normal);
+                    /* Scene/rooms */
+                    RenderScene();
 
-                    /* Spawn points */
-                    if (Configuration.RenderSpawnPoints && currentScene != null && currentScene.ActiveSpawnPointData != null)
-                        foreach (HeaderCommands.Actors.Entry ac in currentScene.ActiveSpawnPointData.ActorList)
-                            ac.Render(ac == (cbSpawnPoints.SelectedItem as HeaderCommands.Actors.Entry) &&
-                                cbSpawnPoints.Visible ? HeaderCommands.PickableObjectRenderType.Selected : HeaderCommands.PickableObjectRenderType.Normal);
-
-                    /* Transitions */
-                    if (Configuration.RenderTransitions && currentScene != null && currentScene.ActiveTransitionData != null)
-                        foreach (HeaderCommands.Actors.Entry ac in currentScene.ActiveTransitionData.ActorList)
-                            ac.Render(ac == (cbTransitions.SelectedItem as HeaderCommands.Actors.Entry) &&
-                                cbTransitions.Visible ? HeaderCommands.PickableObjectRenderType.Selected : HeaderCommands.PickableObjectRenderType.Normal);
-
-                    /* Path waypoints */
-                    if (Configuration.RenderPathWaypoints && activePathHeader != null && activePathHeader.Points != null)
+                    /* Prepare for actors */
+                    GL.PushAttrib(AttribMask.AllAttribBits);
+                    GL.Disable(EnableCap.Texture2D);
+                    GL.Disable(EnableCap.Lighting);
+                    if (supportsGenProgramsARB) GL.Disable((EnableCap)All.FragmentProgram);
+                    if (supportsCreateShader) GL.UseProgram(0);
                     {
-                        /* Link waypoints? */
-                        if (Configuration.LinkAllWPinPath)
+                        /* Room actors */
+                        if (Configuration.RenderRoomActors && currentRoom != null && currentRoom.ActiveRoomActorData != null)
+                            foreach (HeaderCommands.Actors.Entry ac in currentRoom.ActiveRoomActorData.ActorList)
+                                ac.Render(ac == (cbActors.SelectedItem as HeaderCommands.Actors.Entry) &&
+                                    cbActors.Visible ? HeaderCommands.PickableObjectRenderType.Selected : HeaderCommands.PickableObjectRenderType.Normal);
+
+                        /* Spawn points */
+                        if (Configuration.RenderSpawnPoints && currentScene != null && currentScene.ActiveSpawnPointData != null)
+                            foreach (HeaderCommands.Actors.Entry ac in currentScene.ActiveSpawnPointData.ActorList)
+                                ac.Render(ac == (cbSpawnPoints.SelectedItem as HeaderCommands.Actors.Entry) &&
+                                    cbSpawnPoints.Visible ? HeaderCommands.PickableObjectRenderType.Selected : HeaderCommands.PickableObjectRenderType.Normal);
+
+                        /* Transitions */
+                        if (Configuration.RenderTransitions && currentScene != null && currentScene.ActiveTransitionData != null)
+                            foreach (HeaderCommands.Actors.Entry ac in currentScene.ActiveTransitionData.ActorList)
+                                ac.Render(ac == (cbTransitions.SelectedItem as HeaderCommands.Actors.Entry) &&
+                                    cbTransitions.Visible ? HeaderCommands.PickableObjectRenderType.Selected : HeaderCommands.PickableObjectRenderType.Normal);
+
+                        /* Path waypoints */
+                        if (Configuration.RenderPathWaypoints && activePathHeader != null && activePathHeader.Points != null)
                         {
-                            GL.LineWidth(4.0f);
-                            GL.Color3(0.25, 0.5, 1.0);
-
-                            GL.Begin(BeginMode.LineStrip);
-                            foreach (HeaderCommands.Waypoints.Waypoint wp in activePathHeader.Points) GL.Vertex3(wp.X, wp.Y, wp.Z);
-                            GL.End();
-                        }
-
-                        HeaderCommands.Waypoints.Waypoint selwp = (dgvPathWaypoints.SelectedCells.Count != 0 ? dgvPathWaypoints.SelectedCells[0].OwningRow.DataBoundItem as HeaderCommands.Waypoints.Waypoint : null);
-                        foreach (HeaderCommands.Waypoints.Waypoint wp in activePathHeader.Points)
-                            wp.Render(wp == selwp && cbPathHeaders.Visible ? HeaderCommands.PickableObjectRenderType.Selected : HeaderCommands.PickableObjectRenderType.Normal);
-                    }
-                }
-                GL.PopAttrib();
-
-                /* Collision */
-                if (Configuration.RenderCollision && currentScene != null && currentScene.ActiveCollision != null)
-                {
-                    if (!collisionDirty && collisionDL != null)
-                    {
-                        collisionDL.Render();
-                    }
-                    else
-                    {
-                        collisionDirty = false;
-
-                        if (collisionDL != null) collisionDL.Dispose();
-                        collisionDL = new DisplayList(ListMode.CompileAndExecute);
-
-                        GL.PushAttrib(AttribMask.AllAttribBits);
-                        GL.Disable(EnableCap.Texture2D);
-                        GL.Disable(EnableCap.Lighting);
-                        GL.Disable((EnableCap)All.FragmentProgram);
-                        GL.UseProgram(0);
-                        GL.DepthRange(0.0, 0.99999);
-
-                        if (Configuration.RenderCollisionAsWhite) GL.Color4(1.0, 1.0, 1.0, 0.5);
-
-                        GL.Begin(BeginMode.Triangles);
-                        foreach (HeaderCommands.Collision.Polygon poly in currentScene.ActiveCollision.Polygons)
-                        {
-                            if (poly == currentCollisionPolygon && cbCollisionPolys.Visible)
+                            /* Link waypoints? */
+                            if (Configuration.LinkAllWPinPath)
                             {
-                                GL.Color4(0.5, 0.5, 1.0, 0.5);
-                                poly.Render(HeaderCommands.PickableObjectRenderType.NoColor);
-                                if (Configuration.RenderCollisionAsWhite) GL.Color4(1.0, 1.0, 1.0, 0.5);
+                                GL.LineWidth(4.0f);
+                                GL.Color3(0.25, 0.5, 1.0);
+
+                                GL.Begin(BeginMode.LineStrip);
+                                foreach (HeaderCommands.Waypoints.Waypoint wp in activePathHeader.Points) GL.Vertex3(wp.X, wp.Y, wp.Z);
+                                GL.End();
                             }
-                            else
+
+                            HeaderCommands.Waypoints.Waypoint selwp = (dgvPathWaypoints.SelectedCells.Count != 0 ? dgvPathWaypoints.SelectedCells[0].OwningRow.DataBoundItem as HeaderCommands.Waypoints.Waypoint : null);
+                            foreach (HeaderCommands.Waypoints.Waypoint wp in activePathHeader.Points)
+                                wp.Render(wp == selwp && cbPathHeaders.Visible ? HeaderCommands.PickableObjectRenderType.Selected : HeaderCommands.PickableObjectRenderType.Normal);
+                        }
+                    }
+                    GL.PopAttrib();
+
+                    /* Collision */
+                    if (Configuration.RenderCollision && currentScene != null && currentScene.ActiveCollision != null)
+                    {
+                        if (!collisionDirty && collisionDL != null)
+                        {
+                            collisionDL.Render();
+                        }
+                        else
+                        {
+                            collisionDirty = false;
+
+                            if (collisionDL != null) collisionDL.Dispose();
+                            collisionDL = new DisplayList(ListMode.CompileAndExecute);
+
+                            GL.PushAttrib(AttribMask.AllAttribBits);
+                            GL.Disable(EnableCap.Texture2D);
+                            GL.Disable(EnableCap.Lighting);
+                            if (supportsGenProgramsARB) GL.Disable((EnableCap)All.FragmentProgram);
+                            if (supportsCreateShader) GL.UseProgram(0);
+                            GL.DepthRange(0.0, 0.99999);
+
+                            if (Configuration.RenderCollisionAsWhite) GL.Color4(1.0, 1.0, 1.0, 0.5);
+
+                            GL.Begin(BeginMode.Triangles);
+                            foreach (HeaderCommands.Collision.Polygon poly in currentScene.ActiveCollision.Polygons)
                             {
-                                if (Configuration.RenderCollisionAsWhite)
+                                if (poly == currentCollisionPolygon && cbCollisionPolys.Visible)
+                                {
+                                    GL.Color4(0.5, 0.5, 1.0, 0.5);
                                     poly.Render(HeaderCommands.PickableObjectRenderType.NoColor);
+                                    if (Configuration.RenderCollisionAsWhite) GL.Color4(1.0, 1.0, 1.0, 0.5);
+                                }
                                 else
-                                    poly.Render(HeaderCommands.PickableObjectRenderType.Normal);
+                                {
+                                    if (Configuration.RenderCollisionAsWhite)
+                                        poly.Render(HeaderCommands.PickableObjectRenderType.NoColor);
+                                    else
+                                        poly.Render(HeaderCommands.PickableObjectRenderType.Normal);
+                                }
                             }
+                            GL.End();
+
+                            GL.DepthRange(0.0, 0.99998);
+                            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+                            GL.LineWidth(2.0f);
+                            GL.Color3(Color.Black);
+                            GL.Begin(BeginMode.Triangles);
+                            foreach (HeaderCommands.Collision.Polygon poly in currentScene.ActiveCollision.Polygons) poly.Render(HeaderCommands.PickableObjectRenderType.NoColor);
+                            GL.End();
+
+                            GL.PopAttrib();
+
+                            collisionDL.End();
                         }
-                        GL.End();
-
-                        GL.DepthRange(0.0, 0.99998);
-                        GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                        GL.LineWidth(2.0f);
-                        GL.Color3(Color.Black);
-                        GL.Begin(BeginMode.Triangles);
-                        foreach (HeaderCommands.Collision.Polygon poly in currentScene.ActiveCollision.Polygons) poly.Render(HeaderCommands.PickableObjectRenderType.NoColor);
-                        GL.End();
-
-                        GL.PopAttrib();
-
-                        collisionDL.End();
                     }
-                }
 
-                /* Waterboxes */
-                if (Configuration.RenderWaterboxes && currentScene != null && currentScene.ActiveCollision != null)
-                {
-                    if (!waterboxesDirty && waterboxDL != null)
+                    /* Waterboxes */
+                    if (Configuration.RenderWaterboxes && currentScene != null && currentScene.ActiveCollision != null)
                     {
-                        waterboxDL.Render();
-                    }
-                    else
-                    {
-                        waterboxesDirty = false;
-
-                        if (waterboxDL != null) waterboxDL.Dispose();
-                        waterboxDL = new DisplayList(ListMode.CompileAndExecute);
-
-                        GL.PushAttrib(AttribMask.AllAttribBits);
-                        GL.Disable(EnableCap.Texture2D);
-                        GL.Disable(EnableCap.Lighting);
-                        GL.Disable((EnableCap)All.FragmentProgram);
-                        GL.UseProgram(0);
-                        GL.Disable(EnableCap.CullFace);
-
-                        GL.Begin(BeginMode.Quads);
-                        foreach (HeaderCommands.Collision.Waterbox wb in currentScene.ActiveCollision.Waterboxes)
+                        if (!waterboxesDirty && waterboxDL != null)
                         {
-                            double alpha = ((Configuration.ShowWaterboxesPerRoom && currentRoom != null && (wb.RoomNumber != currentRoom.Number && wb.RoomNumber != 0x3F)) ? 0.1 : 0.5);
-
-                            if (wb == currentWaterbox && cbWaterboxes.Visible)
-                                GL.Color4(0.5, 1.0, 0.5, alpha);
-                            else
-                                GL.Color4(0.0, 0.5, 1.0, alpha);
-
-                            wb.Render(HeaderCommands.PickableObjectRenderType.Normal);
+                            waterboxDL.Render();
                         }
-                        GL.End();
-
-                        GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                        GL.LineWidth(2.0f);
-                        GL.Begin(BeginMode.Quads);
-                        foreach (HeaderCommands.Collision.Waterbox wb in currentScene.ActiveCollision.Waterboxes)
+                        else
                         {
-                            double alpha = ((Configuration.ShowWaterboxesPerRoom && currentRoom != null && (wb.RoomNumber != currentRoom.Number && wb.RoomNumber != 0x3F)) ? 0.1 : 0.5);
-                            GL.Color4(0.0, 0.0, 0.0, alpha);
-                            wb.Render(HeaderCommands.PickableObjectRenderType.Normal);
+                            waterboxesDirty = false;
+
+                            if (waterboxDL != null) waterboxDL.Dispose();
+                            waterboxDL = new DisplayList(ListMode.CompileAndExecute);
+
+                            GL.PushAttrib(AttribMask.AllAttribBits);
+                            GL.Disable(EnableCap.Texture2D);
+                            GL.Disable(EnableCap.Lighting);
+                            if (supportsGenProgramsARB) GL.Disable((EnableCap)All.FragmentProgram);
+                            if (supportsCreateShader) GL.UseProgram(0);
+                            GL.Disable(EnableCap.CullFace);
+
+                            GL.Begin(BeginMode.Quads);
+                            foreach (HeaderCommands.Collision.Waterbox wb in currentScene.ActiveCollision.Waterboxes)
+                            {
+                                double alpha = ((Configuration.ShowWaterboxesPerRoom && currentRoom != null && (wb.RoomNumber != currentRoom.Number && wb.RoomNumber != 0x3F)) ? 0.1 : 0.5);
+
+                                if (wb == currentWaterbox && cbWaterboxes.Visible)
+                                    GL.Color4(0.5, 1.0, 0.5, alpha);
+                                else
+                                    GL.Color4(0.0, 0.5, 1.0, alpha);
+
+                                wb.Render(HeaderCommands.PickableObjectRenderType.Normal);
+                            }
+                            GL.End();
+
+                            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+                            GL.LineWidth(2.0f);
+                            GL.Begin(BeginMode.Quads);
+                            foreach (HeaderCommands.Collision.Waterbox wb in currentScene.ActiveCollision.Waterboxes)
+                            {
+                                double alpha = ((Configuration.ShowWaterboxesPerRoom && currentRoom != null && (wb.RoomNumber != currentRoom.Number && wb.RoomNumber != 0x3F)) ? 0.1 : 0.5);
+                                GL.Color4(0.0, 0.0, 0.0, alpha);
+                                wb.Render(HeaderCommands.PickableObjectRenderType.Normal);
+                            }
+                            GL.End();
+
+                            GL.Enable(EnableCap.CullFace);
+                            GL.PopAttrib();
+
+                            GL.Color4(Color.White);
+
+                            waterboxDL.End();
                         }
-                        GL.End();
-
-                        GL.Enable(EnableCap.CullFace);
-                        GL.PopAttrib();
-
-                        GL.Color4(Color.White);
-
-                        waterboxDL.End();
                     }
-                }
 
-                /* Render selected room triangle overlay */
-                if (currentRoomTriangle != null && !Configuration.RenderCollision)
-                {
-                    currentRoomTriangle.Render(HeaderCommands.PickableObjectRenderType.Normal);
-                }
-
-                /* BOUNDING BOX TEST */
-                if (false)
-                {
-                    if (currentScene != null && currentScene.ActiveCollision != null)
+                    /* Render selected room triangle overlay */
+                    if (currentRoomTriangle != null && !Configuration.RenderCollision)
                     {
-                        GL.PushAttrib(AttribMask.AllAttribBits);
-                        GL.Disable(EnableCap.Texture2D);
-                        GL.Disable(EnableCap.Lighting);
-                        GL.Disable((EnableCap)All.FragmentProgram);
-                        GL.UseProgram(0);
-                        GL.Disable(EnableCap.CullFace);
-                        MiscDrawingHelpers.DrawBox(currentScene.ActiveCollision.AbsoluteMinimum, currentScene.ActiveCollision.AbsoluteMaximum, new Color4(0.5f, 0.0f, 0.0f, 0.25f), true);
-                        GL.PopAttrib();
+                        currentRoomTriangle.Render(HeaderCommands.PickableObjectRenderType.Normal);
                     }
+
+                    /* BOUNDING BOX TEST */
+                    if (false)
+                    {
+                        if (currentScene != null && currentScene.ActiveCollision != null)
+                        {
+                            GL.PushAttrib(AttribMask.AllAttribBits);
+                            GL.Disable(EnableCap.Texture2D);
+                            GL.Disable(EnableCap.Lighting);
+                            if (supportsGenProgramsARB) GL.Disable((EnableCap)All.FragmentProgram);
+                            if (supportsCreateShader) GL.UseProgram(0);
+                            GL.Disable(EnableCap.CullFace);
+                            MiscDrawingHelpers.DrawBox(currentScene.ActiveCollision.AbsoluteMinimum, currentScene.ActiveCollision.AbsoluteMaximum, new Color4(0.5f, 0.0f, 0.0f, 0.25f), true);
+                            GL.PopAttrib();
+                        }
+                    }
+
+                    /* 2D text overlay */
+                    RenderTextOverlay();
                 }
 
-                /* 2D text overlay */
-                RenderTextOverlay();
+                ((GLControl)sender).SwapBuffers();
             }
-
-            ((GLControl)sender).SwapBuffers();
+            catch (EntryPointNotFoundException)
+            {
+                //
+            }
         }
 
         private void RenderInit(int width, int height)
@@ -1541,8 +1551,8 @@ namespace SceneNavi
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.Lighting);
             GL.Enable(EnableCap.Blend);
-            GL.Disable((EnableCap)All.FragmentProgram);
-            GL.UseProgram(0);
+            if (supportsGenProgramsARB) GL.Disable((EnableCap)All.FragmentProgram);
+            if (supportsCreateShader) GL.UseProgram(0);
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
             GL.ClearColor(0.0f, 0.0f, 0.0f, 0.0f);

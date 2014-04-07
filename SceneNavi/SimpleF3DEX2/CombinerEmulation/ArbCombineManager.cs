@@ -11,10 +11,12 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 {
     internal class ArbCombineManager
     {
+        bool supported;
         List<ArbCombineProgram> fragcache;
 
         public ArbCombineManager()
         {
+            supported = ((GraphicsContext.CurrentContext as IGraphicsContextInternal).GetAddress("glGenProgramsARB") != IntPtr.Zero);
             fragcache = new List<ArbCombineProgram>();
 
             ResetFragmentCache();
@@ -22,6 +24,8 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 
         public void BindCombiner(uint m0, uint m1, bool tex)
         {
+            if (!supported) return;
+
             GL.Enable((EnableCap)All.FragmentProgram);
             foreach (ArbCombineProgram frag in fragcache)
             {
@@ -38,6 +42,8 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 
         public void ResetFragmentCache()
         {
+            if (!supported) return;
+
             if (fragcache != null)
             {
                 foreach (ArbCombineProgram fc in fragcache) if (GL.Arb.IsProgram(fc.GLID)) { int glid = fc.GLID; GL.Arb.DeleteProgram(1, ref glid); }

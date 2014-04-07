@@ -11,11 +11,13 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 {
     internal class GLSLCombineManager
     {
+        bool supported;
         F3DEX2Interpreter F3DEX2;
         List<GLSLShaders> shaderCache;
 
         public GLSLCombineManager(F3DEX2Interpreter f3dex2)
         {
+            supported = ((GraphicsContext.CurrentContext as IGraphicsContextInternal).GetAddress("glCreateShader") != IntPtr.Zero);
             F3DEX2 = f3dex2;
             shaderCache = new List<GLSLShaders>();
 
@@ -28,6 +30,8 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 
         public void BindCombiner(uint m0, uint m1, bool tex)
         {
+            if (!supported) return;
+
             if (m0 == 0 && m1 == 0) return;
 
             GLSLShaders shader = shaderCache.FirstOrDefault(x => x.Mux0 == m0 && x.Mux1 == m1 &&

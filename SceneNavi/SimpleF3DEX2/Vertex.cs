@@ -69,7 +69,7 @@ namespace SceneNavi.SimpleF3DEX2
                 GL.PushAttrib(AttribMask.AllAttribBits);
                 GL.Disable(EnableCap.Texture2D);
                 GL.Disable(EnableCap.Lighting);
-                GL.Disable((EnableCap)All.FragmentProgram);
+                if (OpenGLHelpers.Initialization.SupportsFunction("glGenProgramsARB")) GL.Disable((EnableCap)All.FragmentProgram);
                 GL.Disable(EnableCap.CullFace);
 
                 GL.DepthRange(0.0, 0.999);

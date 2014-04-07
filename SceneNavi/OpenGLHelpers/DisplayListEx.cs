@@ -46,8 +46,8 @@ namespace SceneNavi.OpenGLHelpers
                     GL.PushAttrib(AttribMask.AllAttribBits);
                     GL.Disable(EnableCap.Texture2D);
                     GL.Disable(EnableCap.Lighting);
-                    GL.Disable((EnableCap)All.FragmentProgram);
-                    GL.UseProgram(0);
+                    if (Initialization.SupportsFunction("glGenProgramsARB")) GL.Disable((EnableCap)All.FragmentProgram);
+                    if (Initialization.SupportsFunction("glCreateShader")) GL.UseProgram(0);
                     GL.Disable(EnableCap.CullFace);
                     GL.Enable(EnableCap.Blend);
                     GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
