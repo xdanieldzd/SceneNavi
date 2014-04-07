@@ -41,7 +41,7 @@ namespace SceneNavi
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Critical error occured: " + ex.Message + "\nTarget site: " + ex.TargetSite, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Critical error occured: " + ex.GetType().FullName + " - " + ex.Message + "\nTarget site: " + ex.TargetSite, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             finally
             {

@@ -581,12 +581,12 @@ namespace SceneNavi
 
             if (currentScene != null)
             {
-                HeaderCommands.Rooms rooms = (currentScene.CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Rooms) as HeaderCommands.Rooms);
-
                 if (currentRoom == null)
                 {
                     infostrs.Add(string.Format("{0}", currentScene.Name));
-                    infostrs.Add(string.Format("{0} room{1}", rooms.RoomInformation.Count, (rooms.RoomInformation.Count != 1 ? "s" : "")));
+
+                    HeaderCommands.Rooms rooms = (currentScene.CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Rooms) as HeaderCommands.Rooms);
+                    if (rooms != null) infostrs.Add(string.Format("{0} room{1}", rooms.RoomInformation.Count, (rooms.RoomInformation.Count != 1 ? "s" : "")));
                 }
                 else if (currentRoom != null)
                 {
@@ -604,14 +604,14 @@ namespace SceneNavi
                 infostrs.Add(string.Format("{0} room actor{1}", currentRoom.ActiveRoomActorData.ActorList.Count, (currentRoom.ActiveRoomActorData.ActorList.Count != 1 ? "s" : "")));
             }
 
-            if (currentScene != null && currentScene.ActiveTransitionData != null)
+            if (currentScene != null && currentScene.ActiveTransitionData != null && currentRoom == null)
             {
-                if (currentRoom == null) infostrs.Add(string.Format("{0} transition actor{1}", currentScene.ActiveTransitionData.ActorList.Count, (currentScene.ActiveTransitionData.ActorList.Count != 1 ? "s" : "")));
+                infostrs.Add(string.Format("{0} transition actor{1}", currentScene.ActiveTransitionData.ActorList.Count, (currentScene.ActiveTransitionData.ActorList.Count != 1 ? "s" : "")));
             }
 
-            if (currentScene != null && currentScene.ActiveSpawnPointData != null)
+            if (currentScene != null && currentScene.ActiveSpawnPointData != null && currentRoom == null)
             {
-                if (currentRoom == null) infostrs.Add(string.Format("{0} spawn point{1}", currentScene.ActiveSpawnPointData.ActorList.Count, (currentScene.ActiveSpawnPointData.ActorList.Count != 1 ? "s" : "")));
+                infostrs.Add(string.Format("{0} spawn point{1}", currentScene.ActiveSpawnPointData.ActorList.Count, (currentScene.ActiveSpawnPointData.ActorList.Count != 1 ? "s" : "")));
             }
 
             if (currentRoom != null && currentRoom.ActiveObjects != null)
@@ -619,9 +619,9 @@ namespace SceneNavi
                 infostrs.Add(string.Format("{0} object{1}", currentRoom.ActiveObjects.ObjectList.Count, (currentRoom.ActiveObjects.ObjectList.Count != 1 ? "s" : "")));
             }
 
-            if (currentScene != null && currentScene.ActiveWaypoints != null)
+            if (currentScene != null && currentScene.ActiveWaypoints != null && currentRoom == null)
             {
-                if (currentRoom == null) infostrs.Add(string.Format("{0} path{1}", currentScene.ActiveWaypoints.Paths.Count, (currentScene.ActiveWaypoints.Paths.Count != 1 ? "s" : "")));
+                infostrs.Add(string.Format("{0} path{1}", currentScene.ActiveWaypoints.Paths.Count, (currentScene.ActiveWaypoints.Paths.Count != 1 ? "s" : "")));
             }
 
             Program.Status.Message = string.Join("; ", infostrs);
@@ -1024,7 +1024,9 @@ namespace SceneNavi
                 }
             }
             */
-            /* With Intel out of the way, check if all necessary GL extensions are supported */
+            /* With Intel out of the way, check if all necessary GL extensions etc. are supported */
+            bool supportsGenProgramsARB = ((GraphicsContext.CurrentContext as IGraphicsContextInternal).GetAddress("glGenProgramsARB") != IntPtr.Zero);
+
             StringBuilder extErrorMessages = new StringBuilder();
             List<string> extMissAll = new List<string>();
 
@@ -1048,7 +1050,7 @@ namespace SceneNavi
             {
                 List<string> extMissARBCombiner = Initialization.CheckForExtensions(requiredOglExtensionsARBCombiner);
                 extMissAll.AddRange(extMissARBCombiner);
-                if (extMissARBCombiner.Count > 0)
+                if (extMissARBCombiner.Count > 0 || !supportsGenProgramsARB)
                 {
                     extErrorMessages.AppendLine("ARB Fragment Programs are not supported. ARB Assembly Combiner has been disabled.");
                 }
@@ -1060,20 +1062,32 @@ namespace SceneNavi
                     extErrorMessages.AppendLine("OpenGL Shading Language is not supported. GLSL Combiner has been disabled.");
                 }
 
-                DisableCombiner((extMissARBCombiner.Count > 0), (extMissGLSLCombiner.Count > 0));
+                DisableCombiner((extMissARBCombiner.Count > 0 || !supportsGenProgramsARB), (extMissGLSLCombiner.Count > 0));
             }
 
-            if (extMissAll.Count > 0)
+            if (extMissAll.Count > 0 || !supportsGenProgramsARB)
             {
                 if (!Configuration.ShownExtensionWarning)
                 {
                     Configuration.ShownExtensionWarning = true;
 
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendFormat("The following OpenGL Extension{0} not supported by your hardware:\n", ((extMissAll.Count - 1) > 0 ? "s are" : " is"));
-                    sb.AppendLine();
-                    foreach (string str in extMissAll) sb.AppendFormat("* {0}\n", str);
-                    sb.AppendLine();
+
+                    if (extMissAll.Count > 0)
+                    {
+                        sb.AppendFormat("The following OpenGL Extension{0} not supported by your hardware:\n", ((extMissAll.Count - 1) > 0 ? "s are" : " is"));
+                        sb.AppendLine();
+                        foreach (string str in extMissAll) sb.AppendFormat("* {0}\n", str);
+                        sb.AppendLine();
+                    }
+
+                    if (!supportsGenProgramsARB)
+                    {
+                        //TODO make nicer, like exts above, not just bools?
+                        sb.AppendFormat("The OpenGL function call glGenProgramARB is not supported by your hardware.");
+                        sb.AppendLine();
+                        sb.AppendLine();
+                    }
 
                     sb.Append(extErrorMessages);
 
@@ -1092,7 +1106,10 @@ namespace SceneNavi
                 if (tsmi.Tag is CombinerTypes &&
                     ((((CombinerTypes)tsmi.Tag) == CombinerTypes.ArbCombiner && arb) ||
                     (((CombinerTypes)tsmi.Tag) == CombinerTypes.GLSLCombiner && glsl)))
+                {
                     tsmi.Enabled = false;
+                    tsmi.Checked = false;
+                }
             }
         }
 

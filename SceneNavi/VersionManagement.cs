@@ -26,23 +26,26 @@ namespace SceneNavi
             {
                 case 0:
                     /* Alpha build */
-                    sb.AppendFormat(" Alpha {0}", ver.Revision);
+                    sb.AppendFormat(" Alpha {0}", (ver.Revision & 0xFF));
                     break;
 
                 case 1:
                     /* Beta build */
-                    sb.AppendFormat(" Beta {0}", ver.Revision);
+                    sb.AppendFormat(" Beta {0}", (ver.Revision & 0xFF));
                     break;
 
                 case 2:
                     /* Final release */
-                    if (ver.Revision != 0) sb.AppendFormat(".{0}", ver.Revision);
+                    if (ver.Revision != 0) sb.AppendFormat(".{0}", (ver.Revision & 0xFF));
                     break;
 
                 default:
                     /* Invalid build type */
                     throw new Exception("Invalid Build value in given version");
             }
+
+            /* Check hotfix */
+            if ((ver.Revision >> 8) != 0) sb.AppendFormat("{0}", (char)('a' + ((ver.Revision >> 8) - 1) % 26));
 
             /* Return compiled string */
             return sb.ToString();
