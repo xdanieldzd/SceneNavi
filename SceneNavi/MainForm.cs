@@ -797,7 +797,6 @@ namespace SceneNavi
                 nudSceneMetaReverb.Enabled = nudSceneMetaNightSFX.Enabled = false;
             }
 
-            //DisplayListsDirty = true;
             collisionDirty = true;
             waterboxesDirty = true;
         }
@@ -1310,22 +1309,6 @@ namespace SceneNavi
                         currentRoomTriangle.Render(HeaderCommands.PickableObjectRenderType.Normal);
                     }
 
-                    /* BOUNDING BOX TEST */
-                    if (false)
-                    {
-                        if (currentScene != null && currentScene.ActiveCollision != null)
-                        {
-                            GL.PushAttrib(AttribMask.AllAttribBits);
-                            GL.Disable(EnableCap.Texture2D);
-                            GL.Disable(EnableCap.Lighting);
-                            if (supportsGenProgramsARB) GL.Disable((EnableCap)All.FragmentProgram);
-                            if (supportsCreateShader) GL.UseProgram(0);
-                            GL.Disable(EnableCap.CullFace);
-                            MiscDrawingHelpers.DrawBox(currentScene.ActiveCollision.AbsoluteMinimum, currentScene.ActiveCollision.AbsoluteMaximum, new Color4(0.5f, 0.0f, 0.0f, 0.25f), true);
-                            GL.PopAttrib();
-                        }
-                    }
-
                     /* 2D text overlay */
                     RenderTextOverlay();
                 }
@@ -1400,13 +1383,6 @@ namespace SceneNavi
 
             /* Render DLs */
             foreach (DisplayList gldl in mh.DLs) gldl.Render();
-
-            /* Render mesh type 2 bounds */
-            /*if (mh.Type != 2) return;
-            for (int i = 0; i < mh.MinClipBounds.Count; i++)
-            {
-                MiscDrawingHelpers.DrawBox(mh.MinClipBounds[i], mh.MaxClipBounds[i]);
-            }*/
         }
 
         private void RenderTextOverlay()
