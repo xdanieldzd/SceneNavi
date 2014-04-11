@@ -90,6 +90,7 @@ namespace SceneNavi
             set
             {
                 Configuration.CombinerType = internalCombinerType = (Enum.IsDefined(typeof(CombinerTypes), value) ? internalCombinerType = value : internalCombinerType = CombinerTypes.None);
+                if (rom != null) rom.Renderer.InitCombiner();
                 displayListsDirty = true;
             }
         }

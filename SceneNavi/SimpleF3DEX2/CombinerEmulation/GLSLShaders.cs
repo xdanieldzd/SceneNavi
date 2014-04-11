@@ -18,7 +18,7 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
             " * Lighting: {4}\n" +
             " */\n\n";
 
-        const string shaderVersion = "#version 110\n";
+        const string shaderVersion = "#version 120\n";
 
         const string vertexShaderVariables =
             "varying vec3 N;\n" +
@@ -114,7 +114,7 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
             for (int i = 0; i < 2; i++)
             {
                 StringBuilder calc = new StringBuilder();
-                calc.AppendFormat("{0} = (", (i == 0 ? "combColor" : "outColor"));
+                calc.AppendFormat("{0} = vec4((", (i == 0 ? "combColor" : "outColor"));
 
                 switch (Unpacked.cA[i])
                 {
@@ -309,9 +309,9 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
                         break;
                 }
 
-                calc.AppendLine(";");
+                calc.AppendLine(");");
 
-                calc.AppendFormat("{0} = (", (i == 0 ? "combAlpha" : "outAlpha"));
+                calc.AppendFormat("{0} = vec4((", (i == 0 ? "combAlpha" : "outAlpha"));
 
                 switch (Unpacked.aA[i])
                 {
@@ -431,7 +431,7 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
                         break;
                 }
 
-                calc.AppendLine(";");
+                calc.AppendLine(");");
                 calc.AppendLine("gl_FragColor.rgb = outColor.rgb;");
                 calc.AppendLine("gl_FragColor.a = outAlpha.a;");
 
