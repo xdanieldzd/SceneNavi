@@ -50,11 +50,11 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
                 fragcache.Clear();
             }
 
-            foreach (uint[] knownMux in KnownCombinerMuxes.Muxes)
+            /*foreach (uint[] knownMux in KnownCombinerMuxes.Muxes)
             {
                 BindCombiner(knownMux[0], knownMux[1], true);
                 BindCombiner(knownMux[0], knownMux[1], false);
-            }
+            }*/
         }
     }
 }

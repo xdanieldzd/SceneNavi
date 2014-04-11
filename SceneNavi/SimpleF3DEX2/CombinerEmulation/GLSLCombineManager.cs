@@ -21,11 +21,11 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
             F3DEX2 = f3dex2;
             shaderCache = new List<GLSLShaders>();
 
-            foreach (uint[] knownMux in KnownCombinerMuxes.Muxes)
+            /*foreach (uint[] knownMux in KnownCombinerMuxes.Muxes)
             {
                 BindCombiner(knownMux[0], knownMux[1], true);
                 BindCombiner(knownMux[0], knownMux[1], false);
-            }
+            }*/
         }
 
         public void BindCombiner(uint m0, uint m1, bool tex)
