@@ -32,6 +32,9 @@ namespace SceneNavi.ROMHandler
          */
         #endregion
 
+        [ReadOnly(true)]
+        public ushort Number { get; set; }
+
         [Browsable(false)]
         public string DMAFilename { get; private set; }
         [ReadOnly(true)]
@@ -46,9 +49,9 @@ namespace SceneNavi.ROMHandler
         [Browsable(false)]
         public uint SceneEndAddress { get; private set; }
 
-        [DisplayName("Label start address")]
+        [DisplayName("Title start"), Description("test")]
         public uint LabelStartAddress { get; set; }
-        [DisplayName("Label end address")]
+        [DisplayName("Title end")]
         public uint LabelEndAddress { get; set; }
 
         [DisplayName("Unknown 1")]

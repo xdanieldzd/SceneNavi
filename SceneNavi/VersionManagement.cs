@@ -45,7 +45,7 @@ namespace SceneNavi
             }
 
             /* Check hotfix */
-            if ((ver.Revision >> 8) != 0) sb.AppendFormat("{0}", (char)('a' + ((ver.Revision & 0xFF) - 1) % 26));
+            if ((ver.Revision & 0xFF) != 0) sb.AppendFormat("{0}", (char)('a' + ((ver.Revision & 0xFF) - 1) % 26));
 
             /* Return compiled string */
             return sb.ToString();

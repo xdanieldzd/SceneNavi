@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvExitTable = new System.Windows.Forms.DataGridView();
+            this.dgvEntranceTable = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpExitTable = new System.Windows.Forms.TabPage();
             this.tpSceneTable = new System.Windows.Forms.TabPage();
             this.dgvSceneTable = new System.Windows.Forms.DataGridView();
             this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvExitTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEntranceTable)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tpExitTable.SuspendLayout();
             this.tpSceneTable.SuspendLayout();
@@ -44,23 +44,23 @@
             // 
             // dgvExitTable
             // 
-            this.dgvExitTable.AllowUserToAddRows = false;
-            this.dgvExitTable.AllowUserToDeleteRows = false;
-            this.dgvExitTable.AllowUserToResizeColumns = false;
-            this.dgvExitTable.AllowUserToResizeRows = false;
-            this.dgvExitTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvExitTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvExitTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvExitTable.Location = new System.Drawing.Point(0, 0);
-            this.dgvExitTable.MultiSelect = false;
-            this.dgvExitTable.Name = "dgvExitTable";
-            this.dgvExitTable.RowHeadersVisible = false;
-            this.dgvExitTable.Size = new System.Drawing.Size(562, 390);
-            this.dgvExitTable.TabIndex = 0;
-            this.dgvExitTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvExitTable_CellFormatting);
-            this.dgvExitTable.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvExitTable_CellParsing);
-            this.dgvExitTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvExitTable_DataError);
-            this.dgvExitTable.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvExitTable_EditingControlShowing);
+            this.dgvEntranceTable.AllowUserToAddRows = false;
+            this.dgvEntranceTable.AllowUserToDeleteRows = false;
+            this.dgvEntranceTable.AllowUserToResizeColumns = false;
+            this.dgvEntranceTable.AllowUserToResizeRows = false;
+            this.dgvEntranceTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvEntranceTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEntranceTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEntranceTable.Location = new System.Drawing.Point(0, 0);
+            this.dgvEntranceTable.MultiSelect = false;
+            this.dgvEntranceTable.Name = "dgvExitTable";
+            this.dgvEntranceTable.RowHeadersVisible = false;
+            this.dgvEntranceTable.Size = new System.Drawing.Size(562, 390);
+            this.dgvEntranceTable.TabIndex = 0;
+            this.dgvEntranceTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEntranceTable_CellFormatting);
+            this.dgvEntranceTable.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvEntranceTable_CellParsing);
+            this.dgvEntranceTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvEntranceTable_DataError);
+            this.dgvEntranceTable.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvEntranceTable_EditingControlShowing);
             // 
             // tabControl1
             // 
@@ -77,12 +77,12 @@
             // 
             // tpExitTable
             // 
-            this.tpExitTable.Controls.Add(this.dgvExitTable);
+            this.tpExitTable.Controls.Add(this.dgvEntranceTable);
             this.tpExitTable.Location = new System.Drawing.Point(4, 22);
             this.tpExitTable.Name = "tpExitTable";
             this.tpExitTable.Size = new System.Drawing.Size(562, 390);
             this.tpExitTable.TabIndex = 0;
-            this.tpExitTable.Text = "Exit Table";
+            this.tpExitTable.Text = "Entrance Table";
             this.tpExitTable.UseVisualStyleBackColor = true;
             // 
             // tpSceneTable
@@ -90,7 +90,7 @@
             this.tpSceneTable.Controls.Add(this.dgvSceneTable);
             this.tpSceneTable.Location = new System.Drawing.Point(4, 22);
             this.tpSceneTable.Name = "tpSceneTable";
-            this.tpSceneTable.Size = new System.Drawing.Size(562, 404);
+            this.tpSceneTable.Size = new System.Drawing.Size(562, 390);
             this.tpSceneTable.TabIndex = 1;
             this.tpSceneTable.Text = "Scene Table";
             this.tpSceneTable.UseVisualStyleBackColor = true;
@@ -108,7 +108,7 @@
             this.dgvSceneTable.MultiSelect = false;
             this.dgvSceneTable.Name = "dgvSceneTable";
             this.dgvSceneTable.RowHeadersVisible = false;
-            this.dgvSceneTable.Size = new System.Drawing.Size(562, 404);
+            this.dgvSceneTable.Size = new System.Drawing.Size(562, 390);
             this.dgvSceneTable.TabIndex = 1;
             this.dgvSceneTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSceneTable_CellFormatting);
             this.dgvSceneTable.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvSceneTable_CellParsing);
@@ -154,7 +154,7 @@
             this.Name = "TableEditorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Data Tables";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvExitTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEntranceTable)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tpExitTable.ResumeLayout(false);
             this.tpSceneTable.ResumeLayout(false);
@@ -165,7 +165,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvExitTable;
+        private System.Windows.Forms.DataGridView dgvEntranceTable;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tpExitTable;
         private System.Windows.Forms.Button btnClose;

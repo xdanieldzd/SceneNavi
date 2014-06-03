@@ -535,8 +535,8 @@ namespace SceneNavi
                     ParseStoreHeaders(ste.SceneHeaders, rom.Data, (int)ste.SceneStartAddress);
                 }
 
-                /* Store exit table entries */
-                foreach (ExitTableEntry ete in rom.Exits) ete.SaveTableEntry();
+                /* Store entrance table entries */
+                foreach (EntranceTableEntry ete in rom.Entrances) ete.SaveTableEntry();
 
                 /* Copy code data */
                 Buffer.BlockCopy(rom.CodeData, 0, rom.Data, (int)rom.Code.PStart, rom.CodeData.Length);
@@ -2361,14 +2361,14 @@ namespace SceneNavi
         {
             string info = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                 "{0} ({1}, v1.{2}), {3} MB ({4} Mbit)\n{5}\nCreated by {6}, built on {7:F}\n\nCode file at 0x{8:X} - 0x{9:X} ({10})\n- DMA table address: 0x{11:X}\n- File name table address: {12}\n" +
-                "- Scene table address: {13}\n- Actor table address: {14}\n- Object table address: {15}\n- Exit table address: {16}",
+                "- Scene table address: {13}\n- Actor table address: {14}\n- Object table address: {15}\n- Entrance table address: {16}",
                 rom.Title, rom.GameID, rom.Version, (rom.Size / 0x100000), (rom.Size / 0x20000), (rom.HasZ64TablesHack ? "(uses 'z64tables' extended tables)\n" : ""),
                 rom.Creator, rom.BuildDate, rom.Code.PStart, (rom.Code.IsCompressed ? rom.Code.PEnd : rom.Code.VEnd),
                 (rom.Code.IsCompressed ? "compressed" : "uncompressed"), rom.DMATableAddress, (rom.HasFileNameTable ? ("0x" + rom.FileNameTableAddress.ToString("X")) : "none"),
                 (rom.HasZ64TablesHack ? ("0x" + rom.SceneTableAddress.ToString("X") + " (in ROM)") : ("0x" + rom.SceneTableAddress.ToString("X"))),
                 (rom.HasZ64TablesHack ? ("0x" + rom.ActorTableAddress.ToString("X") + " (in ROM)") : ("0x" + rom.ActorTableAddress.ToString("X"))),
                 (rom.HasZ64TablesHack ? ("0x" + rom.ObjectTableAddress.ToString("X") + " (in ROM)") : ("0x" + rom.ObjectTableAddress.ToString("X"))),
-                (rom.HasZ64TablesHack ? ("0x" + rom.ExitTableAddress.ToString("X") + " (in ROM)") : ("0x" + rom.ExitTableAddress.ToString("X"))));
+                (rom.HasZ64TablesHack ? ("0x" + rom.EntranceTableAddress.ToString("X") + " (in ROM)") : ("0x" + rom.EntranceTableAddress.ToString("X"))));
 
             MessageBox.Show(info, "ROM Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

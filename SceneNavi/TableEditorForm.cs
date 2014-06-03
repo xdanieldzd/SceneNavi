@@ -20,62 +20,76 @@ namespace SceneNavi
             ROM = rom;
 
             InitializeDataGridViews();
-            dgvExitTable.Select();
+            dgvEntranceTable.Select();
         }
 
         private void InitializeDataGridViews()
         {
             /* Enable double-buffering to prevent scroll flicker */
-            dgvExitTable.DoubleBuffered(true);
+            dgvEntranceTable.DoubleBuffered(true);
             dgvSceneTable.DoubleBuffered(true);
 
-            /* Bind data & configure exit table */
-            dgvExitTable.DataSource = new BindingSource() { DataSource = ROM.Exits };
-            dgvExitTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvExitTable.Columns["SceneNumber"].DefaultCellStyle.Format = "X2";
-            dgvExitTable.Columns["SceneNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvExitTable.Columns["EntranceNumber"].DefaultCellStyle.Format = "X2";
-            dgvExitTable.Columns["EntranceNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvExitTable.Columns["Variable"].DefaultCellStyle.Format = "X2";
-            dgvExitTable.Columns["Variable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvExitTable.Columns["Fade"].DefaultCellStyle.Format = "X2";
-            dgvExitTable.Columns["Fade"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvExitTable.Columns["SceneName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            foreach (DataGridViewColumn dcc in dgvExitTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
+            /* Bind data & configure entrance table */
+            dgvEntranceTable.DataSource = new BindingSource() { DataSource = ROM.Entrances };
+            dgvEntranceTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvEntranceTable.Columns["Number"].DefaultCellStyle.Format = "X4";
+            dgvEntranceTable.Columns["Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvEntranceTable.Columns["SceneNumber"].DefaultCellStyle.Format = "X2";
+            dgvEntranceTable.Columns["SceneNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvEntranceTable.Columns["SceneNumber"].ToolTipText = "Scene number to load";
+            dgvEntranceTable.Columns["EntranceNumber"].DefaultCellStyle.Format = "X2";
+            dgvEntranceTable.Columns["EntranceNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvEntranceTable.Columns["EntranceNumber"].ToolTipText = "Entrance within scene to spawn at";
+            dgvEntranceTable.Columns["Variable"].DefaultCellStyle.Format = "X2";
+            dgvEntranceTable.Columns["Variable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvEntranceTable.Columns["Variable"].ToolTipText = "Controls certain behaviors when transitioning, ex. stopping music";
+            dgvEntranceTable.Columns["Fade"].DefaultCellStyle.Format = "X2";
+            dgvEntranceTable.Columns["Fade"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvEntranceTable.Columns["Fade"].ToolTipText = "Animation used when transitioning";
+            dgvEntranceTable.Columns["SceneName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            foreach (DataGridViewColumn dcc in dgvEntranceTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
 
             /* Bind data & configure scene table */
             dgvSceneTable.DataSource = new BindingSource() { DataSource = ROM.Scenes };
             dgvSceneTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvSceneTable.Columns["Number"].DefaultCellStyle.Format = "X4";
+            dgvSceneTable.Columns["Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvSceneTable.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgvSceneTable.Columns["LabelStartAddress"].DefaultCellStyle.Format = "X8";
             dgvSceneTable.Columns["LabelStartAddress"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvSceneTable.Columns["LabelStartAddress"].ToolTipText = "Start address of area title card";
             dgvSceneTable.Columns["LabelEndAddress"].DefaultCellStyle.Format = "X8";
             dgvSceneTable.Columns["LabelEndAddress"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvSceneTable.Columns["LabelEndAddress"].ToolTipText = "End address of area title card";
             dgvSceneTable.Columns["Unknown1"].DefaultCellStyle.Format = "X2";
             dgvSceneTable.Columns["Unknown1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvSceneTable.Columns["Unknown1"].ToolTipText = "Unknown; either 0x01 or 0x02 for some dungeons, otherwise 0x00";
             dgvSceneTable.Columns["ConfigurationNo"].DefaultCellStyle.Format = "X2";
             dgvSceneTable.Columns["ConfigurationNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSceneTable.Columns["ConfigurationNo"].ToolTipText = "Configuration specifies ex. camera effects, dynamic textures, etc.";
+            dgvSceneTable.Columns["ConfigurationNo"].ToolTipText = "Specifies ex. camera effects, dynamic textures, etc.";
             dgvSceneTable.Columns["Unknown3"].DefaultCellStyle.Format = "X2";
             dgvSceneTable.Columns["Unknown3"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvSceneTable.Columns["Unknown3"].ToolTipText = "Unknown; unique value between 0x02 and 0x0A for some dungeons";
             dgvSceneTable.Columns["Unknown4"].DefaultCellStyle.Format = "X2";
             dgvSceneTable.Columns["Unknown4"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvSceneTable.Columns["Unknown4"].ToolTipText = "Unknown; always 0x00, unused or padding?";
             foreach (DataGridViewColumn dcc in dgvSceneTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
         }
 
-        #region DGV Exit table events
+        #region DGV Entrance table events
 
-        private void dgvExitTable_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvEntranceTable_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridView dgv = (sender as DataGridView);
 
-            if (dgv.Columns[e.ColumnIndex].Name == "SceneNumber" || dgv.Columns[e.ColumnIndex].Name == "EntranceNumber" || dgv.Columns[e.ColumnIndex].Name == "Variable" || dgv.Columns[e.ColumnIndex].Name == "Fade")
+            if (dgv.Columns[e.ColumnIndex].Name == "Number" || dgv.Columns[e.ColumnIndex].Name == "SceneNumber" || dgv.Columns[e.ColumnIndex].Name == "EntranceNumber" ||
+                dgv.Columns[e.ColumnIndex].Name == "Variable" || dgv.Columns[e.ColumnIndex].Name == "Fade")
             {
                 if (e != null && e.Value != null && e.DesiredType.Equals(typeof(string)))
                 {
                     try
                     {
-                        e.Value = string.Format("0x{0:X2}", e.Value);
+                        e.Value = (dgv.Columns[e.ColumnIndex].Name == "Number" ? string.Format("0x{0:X4}", e.Value) : string.Format("0x{0:X2}", e.Value));
                         e.FormattingApplied = true;
                     }
                     catch
@@ -86,7 +100,7 @@ namespace SceneNavi
             }
         }
 
-        private void dgvExitTable_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        private void dgvEntranceTable_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             DataGridView dgv = (sender as DataGridView);
 
@@ -108,7 +122,7 @@ namespace SceneNavi
             }
         }
 
-        private void dgvExitTable_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void dgvEntranceTable_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             DataGridView dgv = (sender as DataGridView);
 
@@ -124,7 +138,7 @@ namespace SceneNavi
             }
         }
 
-        private void dgvExitTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void dgvEntranceTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             if (e.Exception is FormatException) System.Media.SystemSounds.Hand.Play();
         }
@@ -137,7 +151,7 @@ namespace SceneNavi
         {
             DataGridView dgv = (sender as DataGridView);
 
-            if (dgv.Columns[e.ColumnIndex].Name == "LabelStartAddress" || dgv.Columns[e.ColumnIndex].Name == "LabelEndAddress" ||
+            if (dgv.Columns[e.ColumnIndex].Name == "Number" || dgv.Columns[e.ColumnIndex].Name == "LabelStartAddress" || dgv.Columns[e.ColumnIndex].Name == "LabelEndAddress" ||
                 dgv.Columns[e.ColumnIndex].Name == "Unknown1" || dgv.Columns[e.ColumnIndex].Name == "ConfigurationNo" || dgv.Columns[e.ColumnIndex].Name == "Unknown3" || dgv.Columns[e.ColumnIndex].Name == "Unknown4")
             {
                 if (e != null && e.Value != null && e.DesiredType.Equals(typeof(string)))
@@ -146,6 +160,8 @@ namespace SceneNavi
                     {
                         if (dgv.Columns[e.ColumnIndex].ValueType == typeof(byte))
                             e.Value = string.Format("0x{0:X2}", e.Value);
+                        else if (dgv.Columns[e.ColumnIndex].ValueType == typeof(ushort))
+                            e.Value = string.Format("0x{0:X4}", e.Value);
                         else if (dgv.Columns[e.ColumnIndex].ValueType == typeof(uint))
                             e.Value = string.Format("0x{0:X8}", e.Value);
                         else

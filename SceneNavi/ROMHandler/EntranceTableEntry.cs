@@ -6,8 +6,11 @@ using System.ComponentModel;
 
 namespace SceneNavi.ROMHandler
 {
-    public class ExitTableEntry
+    public class EntranceTableEntry
     {
+        [ReadOnly(true)]
+        public ushort Number { get; set; }
+
         [Browsable(false)]
         public int Offset { get; private set; }
         [Browsable(false)]
@@ -42,7 +45,7 @@ namespace SceneNavi.ROMHandler
 
         ROMHandler ROM;
 
-        public ExitTableEntry(ROMHandler rom, int ofs, bool isrel)
+        public EntranceTableEntry(ROMHandler rom, int ofs, bool isrel)
         {
             ROM = rom;
             Offset = ofs;

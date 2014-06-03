@@ -76,8 +76,8 @@ namespace SceneNavi.ROMHandler
         public ushort ObjectCount { get; private set; }
         public System.Windows.Forms.AutoCompleteStringCollection ObjectNameACStrings { get; private set; }
 
-        public List<ExitTableEntry> Exits { get; private set; }
-        public int ExitTableAddress { get; private set; }
+        public List<EntranceTableEntry> Entrances { get; private set; }
+        public int EntranceTableAddress { get; private set; }
 
         public Hashtable SegmentMapping { get; set; }
 
@@ -209,7 +209,7 @@ namespace SceneNavi.ROMHandler
                         FindActorTable();
                         FindObjectTable();
                         FindSceneTable();
-                        ReadExitTable();
+                        ReadEntranceTable();
 
                         /* Some sanity checking & exception handling*/
                         if (Scenes == null || Scenes.Count == 0) throw new ROMHandlerException("No valid scenes could be recognized in the ROM.");
@@ -359,7 +359,7 @@ namespace SceneNavi.ROMHandler
             if (!HasZ64TablesHack)
             {
                 int inc = 16;
-                for (int i = 0; i < CodeData.Length - (16 * 16); i += inc)
+                for (int i = 0, j = 0; i < CodeData.Length - (16 * 16); i += inc)
                 {
                     SceneTableEntry scn1 = new SceneTableEntry(this, i, true);
                     SceneTableEntry scn2 = new SceneTableEntry(this, i + 20, true);
@@ -368,7 +368,13 @@ namespace SceneNavi.ROMHandler
                     {
                         SceneTableAddress = i;
                     }
-                    if (scn1.IsValid == true && (scn2.IsValid == true || Scenes.Count > 0)) { inc = 20; Scenes.Add(scn1); }
+                    if (scn1.IsValid == true && (scn2.IsValid == true || Scenes.Count > 0))
+                    {
+                        inc = 20;
+                        scn1.Number = (ushort)j;
+                        Scenes.Add(scn1);
+                        j++;
+                    }
                 }
             }
             else
@@ -462,7 +468,7 @@ namespace SceneNavi.ROMHandler
                         j++;
                     }
 
-                    ExitTableAddress = i + (i % 16);
+                    EntranceTableAddress = i + (i % 16);
                 }
             }
             else
@@ -482,26 +488,26 @@ namespace SceneNavi.ROMHandler
             }
         }
 
-        private void ReadExitTable()
+        private void ReadEntranceTable()
         {
-            Exits = new List<ExitTableEntry>();
+            Entrances = new List<EntranceTableEntry>();
 
             if (!HasZ64TablesHack)
             {
-                int i = ExitTableAddress;
+                int i = EntranceTableAddress, cnt = 0;
                 while (i < SceneTableAddress)
                 {
-                    Exits.Add(new ExitTableEntry(this, i, true));
+                    Entrances.Add(new EntranceTableEntry(this, i, true) { Number = (ushort)cnt++ });
                     i += 4;
                 }
             }
             else
             {
-                ExitTableAddress = Endian.SwapInt32(BitConverter.ToInt32(Data, Z64TablesAdrOffset + 16));
+                EntranceTableAddress = Endian.SwapInt32(BitConverter.ToInt32(Data, Z64TablesAdrOffset + 16));
                 int cnt = Endian.SwapInt32(BitConverter.ToInt32(Data, Z64TablesAdrOffset + 20));
                 for (int i = 0; i < cnt; i++)
                 {
-                    Exits.Add(new ExitTableEntry(this, ExitTableAddress + i * 4, false));
+                    Entrances.Add(new EntranceTableEntry(this, EntranceTableAddress + i * 4, false) { Number = (ushort)i });
                 }
             }
         }
