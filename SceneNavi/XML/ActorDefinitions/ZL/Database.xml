@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ActorDatabase ProgramVersion="1.0.1.2306">
+<ActorDatabase ProgramVersion="1.0.1.2560">
   <Definition IsDefault="RoomActor, SpawnPoint">
     <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
     <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
