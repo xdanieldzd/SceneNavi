@@ -37,7 +37,7 @@ namespace SceneNavi.OpenGLHelpers
                 if (rendertype == HeaderCommands.PickableObjectRenderType.Picking)
                 {
                     GL.Color3(PickColor);
-                    GL.Begin(BeginMode.Triangles);
+                    GL.Begin(PrimitiveType.Triangles);
                     foreach (SimpleF3DEX2.Vertex v in Vertices) GL.Vertex3(v.Position);
                     GL.End();
                 }
@@ -55,20 +55,20 @@ namespace SceneNavi.OpenGLHelpers
 
                     /* White poly */
                     GL.Color4(1.0, 1.0, 1.0, 0.25);
-                    GL.Begin(BeginMode.Triangles);
+                    GL.Begin(PrimitiveType.Triangles);
                     foreach (SimpleF3DEX2.Vertex v in Vertices) GL.Vertex3(v.Position);
                     GL.End();
                     /* Black outlines */
                     GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
                     GL.LineWidth(2.0f);
                     GL.Color4(Color4.Black);
-                    GL.Begin(BeginMode.Triangles);
+                    GL.Begin(PrimitiveType.Triangles);
                     foreach (SimpleF3DEX2.Vertex v in Vertices) GL.Vertex3(v.Position);
                     GL.End();
                     /* Vertex points */
                     GL.DepthRange(0.0, 0.999);
                     GL.PointSize(25.0f);
-                    GL.Begin(BeginMode.Points);
+                    GL.Begin(PrimitiveType.Points);
                     foreach (SimpleF3DEX2.Vertex v in Vertices)
                     {
                         if (SelectedVertex == v) GL.Color4(Color4.LimeGreen);

@@ -468,7 +468,7 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 
             GL.Arb.GenProgram(1, out gl);
             GL.Arb.BindProgram(AssemblyProgramTargetArb.FragmentProgram, gl);
-            GL.Arb.ProgramString(AssemblyProgramTargetArb.FragmentProgram, ArbVertexProgram.ProgramFormatAsciiArb, bytes.Length, bytes);
+            GL.Arb.ProgramString(AssemblyProgramTargetArb.FragmentProgram, All.ProgramFormatAsciiArb, bytes.Length, bytes);
 
             GLID = gl;
         }

@@ -406,7 +406,7 @@ namespace SceneNavi.HeaderCommands
                 if (rendertype == PickableObjectRenderType.Picking)
                 {
                     GL.Color3(PickColor);
-                    GL.Begin(BeginMode.Triangles);
+                    GL.Begin(PrimitiveType.Triangles);
                     foreach (Vector3d v in Vertices) GL.Vertex3(v);
                     GL.End();
                 }
@@ -505,7 +505,7 @@ namespace SceneNavi.HeaderCommands
                 if (rendertype == PickableObjectRenderType.Picking)
                 {
                     GL.Color3(PickColor);
-                    GL.Begin(BeginMode.Quads);
+                    GL.Begin(PrimitiveType.Quads);
                     RenderVertices();
                     GL.End();
                 }

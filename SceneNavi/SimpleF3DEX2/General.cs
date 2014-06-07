@@ -248,7 +248,7 @@ namespace SceneNavi.SimpleF3DEX2
 
         internal static void RenderTriangles(F3DEX2Interpreter f3dex2, int[] idx)
         {
-            GL.Begin(BeginMode.Triangles);
+            GL.Begin(PrimitiveType.Triangles);
 
             foreach (int i in idx)
             {

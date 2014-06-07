@@ -133,7 +133,7 @@ namespace SceneNavi.HeaderCommands
             GL.Disable(EnableCap.Lighting);
             GL.Disable(EnableCap.Texture2D);
             if (OpenGLHelpers.Initialization.SupportsFunction("glGenProgramsARB")) GL.Disable((EnableCap)All.FragmentProgram);
-            GL.Begin(BeginMode.Triangles);
+            GL.Begin(PrimitiveType.Triangles);
             foreach (SimpleF3DEX2.SimpleTriangle st in TriangleList)
             {
                 GL.Vertex3(st.Vertices[0]);

@@ -34,7 +34,7 @@ namespace SceneNavi.OpenGLHelpers
 
             double radius = 12.0;
             GL.LineWidth(4.0f);
-            GL.Begin(BeginMode.Lines);
+            GL.Begin(PrimitiveType.Lines);
             GL.Color3(1.0, 0.0, 0.0);
             GL.Vertex3(radius, 0.0, 0.0);
             GL.Vertex3(-radius, 0.0, 0.0);
@@ -59,7 +59,7 @@ namespace SceneNavi.OpenGLHelpers
             GL.DepthRange(0.0, 0.99999);
 
             GL.LineWidth(4.0f);
-            GL.Begin(BeginMode.Lines);
+            GL.Begin(PrimitiveType.Lines);
             GL.Color3(1.0, 0.0, 0.0);
             GL.Vertex3(radius, 0.0, 0.0);
             GL.Vertex3(-radius, 0.0, 0.0);
@@ -93,14 +93,14 @@ namespace SceneNavi.OpenGLHelpers
             /* Down arrow */
             DownArrow = new DisplayList(ListMode.Compile);
             // Top
-            GL.Begin(BeginMode.Quads);
+            GL.Begin(PrimitiveType.Quads);
             GL.Vertex3(1.0, 2.0, -1.0);
             GL.Vertex3(-1.0, 2.0, -1.0);
             GL.Vertex3(-1.0, 2.0, 1.0);
             GL.Vertex3(1.0, 2.0, 1.0);
             GL.End();
 
-            GL.Begin(BeginMode.Triangles);
+            GL.Begin(PrimitiveType.Triangles);
             // Left
             GL.Vertex3(-1.0, 2.0, 1.0);
             GL.Vertex3(-1.0, 2.0, -1.0);

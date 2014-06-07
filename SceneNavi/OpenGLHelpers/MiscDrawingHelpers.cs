@@ -41,7 +41,7 @@ namespace SceneNavi.OpenGLHelpers
             Vector2d yvec = new Vector2d(dimensions.Y + offset.Y, -dimensions.Y + offset.Y);
             Vector2d zvec = new Vector2d(dimensions.Z + offset.Z, -dimensions.Z + offset.Z);
 
-            GL.Begin(BeginMode.Quads);
+            GL.Begin(PrimitiveType.Quads);
             // Top
             if (color) GL.Color3(1.0, 1.0, 1.0);
             GL.Vertex3(xvec.X, yvec.X, zvec.Y);
@@ -92,7 +92,7 @@ namespace SceneNavi.OpenGLHelpers
             double x = r;
             double y = 0;
 
-            GL.Begin(BeginMode.LineLoop);
+            GL.Begin(PrimitiveType.LineLoop);
             for (int ii = 0; ii < segments; ii++)
             {
                 if (ii == segments / 4)
@@ -117,7 +117,7 @@ namespace SceneNavi.OpenGLHelpers
 
             if (n < 4 || r <= 0)
             {
-                GL.Begin(BeginMode.Points);
+                GL.Begin(PrimitiveType.Points);
                 GL.Vertex3(c);
                 GL.End();
                 return;
@@ -131,7 +131,7 @@ namespace SceneNavi.OpenGLHelpers
                 theta1 = j * TWOPI / n - PID2;
                 theta2 = (j + 1) * TWOPI / n - PID2;
 
-                GL.Begin(BeginMode.QuadStrip);
+                GL.Begin(PrimitiveType.QuadStrip);
                 for (i = n; i >= 0; i--)
                 {
                     theta3 = i * TWOPI / n;
@@ -171,7 +171,7 @@ namespace SceneNavi.OpenGLHelpers
             GL.PushAttrib(AttribMask.AllAttribBits);
             GL.Disable(EnableCap.Lighting);
             GL.Color4(Color4.Red);
-            GL.Begin(BeginMode.Lines);
+            GL.Begin(PrimitiveType.Lines);
             GL.Vertex3(v[0]); GL.Vertex3(v[1]);
             GL.Vertex3(v[1]); GL.Vertex3(v[2]);
             GL.Vertex3(v[2]); GL.Vertex3(v[3]);
@@ -206,8 +206,8 @@ namespace SceneNavi.OpenGLHelpers
             for (int it = 0; it < 2; it++)
             {
                 // TODO  fix loop thingy; some quads don't render!
-                BeginMode loop = (it == 1 ? BeginMode.LineLoop : BeginMode.Quads);
-                BeginMode norm = (it == 1 ? BeginMode.Lines : BeginMode.QuadStrip);
+                PrimitiveType loop = (it == 1 ? PrimitiveType.LineLoop : PrimitiveType.Quads);
+                PrimitiveType norm = (it == 1 ? PrimitiveType.Lines : PrimitiveType.QuadStrip);
                 Color4 col = (it == 1 ? Color4.Black : Color);
 
                 GL.Color4(col);

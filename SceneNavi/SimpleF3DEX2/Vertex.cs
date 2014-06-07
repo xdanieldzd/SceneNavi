@@ -75,7 +75,7 @@ namespace SceneNavi.SimpleF3DEX2
                 GL.DepthRange(0.0, 0.999);
                 GL.PointSize(50.0f);
                 GL.Color3(PickColor);
-                GL.Begin(BeginMode.Points);
+                GL.Begin(PrimitiveType.Points);
                 GL.Vertex3(Position);
                 GL.End();
 

@@ -695,7 +695,7 @@ namespace SceneNavi.ActorRendering
             if (pnumber != -1)
             {
                 GL.LineWidth(8.0f);
-                GL.Begin(BeginMode.Lines);
+                GL.Begin(PrimitiveType.Lines);
                 GL.Color3(1.0, 1.0, 1.0);
                 GL.Vertex3(Vector3d.Zero);
                 GL.Vertex3(Hierarchies[hnumber][bnumber].Translation);
@@ -703,12 +703,12 @@ namespace SceneNavi.ActorRendering
                 GL.DepthRange(0.0, -0.5);
             }
             GL.PointSize(10.0f);
-            GL.Begin(BeginMode.Points);
+            GL.Begin(PrimitiveType.Points);
             GL.Color3(0.0, 0.0, 0.0);
             GL.Vertex3(Hierarchies[hnumber][bnumber].Translation);
             GL.End();
             GL.PointSize(7.0f);
-            GL.Begin(BeginMode.Points);
+            GL.Begin(PrimitiveType.Points);
             GL.Color3(1.0, 0.0, 0.0);
             GL.Vertex3(Hierarchies[hnumber][bnumber].Translation);
             GL.End();

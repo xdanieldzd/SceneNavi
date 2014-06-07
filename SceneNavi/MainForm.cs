@@ -1180,7 +1180,7 @@ namespace SceneNavi
                                 GL.LineWidth(4.0f);
                                 GL.Color3(0.25, 0.5, 1.0);
 
-                                GL.Begin(BeginMode.LineStrip);
+                                GL.Begin(PrimitiveType.LineStrip);
                                 foreach (HeaderCommands.Waypoints.Waypoint wp in activePathHeader.Points) GL.Vertex3(wp.X, wp.Y, wp.Z);
                                 GL.End();
                             }
@@ -1215,7 +1215,7 @@ namespace SceneNavi
 
                             if (Configuration.RenderCollisionAsWhite) GL.Color4(1.0, 1.0, 1.0, 0.5);
 
-                            GL.Begin(BeginMode.Triangles);
+                            GL.Begin(PrimitiveType.Triangles);
                             foreach (HeaderCommands.Collision.Polygon poly in currentScene.ActiveCollision.Polygons)
                             {
                                 if (poly == currentCollisionPolygon && cbCollisionPolys.Visible)
@@ -1238,7 +1238,7 @@ namespace SceneNavi
                             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
                             GL.LineWidth(2.0f);
                             GL.Color3(Color.Black);
-                            GL.Begin(BeginMode.Triangles);
+                            GL.Begin(PrimitiveType.Triangles);
                             foreach (HeaderCommands.Collision.Polygon poly in currentScene.ActiveCollision.Polygons) poly.Render(HeaderCommands.PickableObjectRenderType.NoColor);
                             GL.End();
 
@@ -1269,7 +1269,7 @@ namespace SceneNavi
                             if (supportsCreateShader) GL.UseProgram(0);
                             GL.Disable(EnableCap.CullFace);
 
-                            GL.Begin(BeginMode.Quads);
+                            GL.Begin(PrimitiveType.Quads);
                             foreach (HeaderCommands.Collision.Waterbox wb in currentScene.ActiveCollision.Waterboxes)
                             {
                                 double alpha = ((Configuration.ShowWaterboxesPerRoom && currentRoom != null && (wb.RoomNumber != currentRoom.Number && wb.RoomNumber != 0x3F)) ? 0.1 : 0.5);
@@ -1285,7 +1285,7 @@ namespace SceneNavi
 
                             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
                             GL.LineWidth(2.0f);
-                            GL.Begin(BeginMode.Quads);
+                            GL.Begin(PrimitiveType.Quads);
                             foreach (HeaderCommands.Collision.Waterbox wb in currentScene.ActiveCollision.Waterboxes)
                             {
                                 double alpha = ((Configuration.ShowWaterboxesPerRoom && currentRoom != null && (wb.RoomNumber != currentRoom.Number && wb.RoomNumber != 0x3F)) ? 0.1 : 0.5);
