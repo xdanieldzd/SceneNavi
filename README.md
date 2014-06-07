@@ -7,6 +7,6 @@ Requirements
 ============
 
 * .NET Framework 4
-* OpenTK (currently uses opentk-2012-03-15)
+* OpenTK 1.1 (currently uses stable-3, 2014-05-19)
 * QuickFont
 * Nini 1.1.0
