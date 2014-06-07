@@ -107,7 +107,7 @@
     <Compile Include="HeaderCommands\SettingsSoundScene.cs" />
     <Compile Include="HeaderCommands\Waypoints.cs" />
     <Compile Include="HeaderCommands\SpecialObjects.cs" />
-    <Compile Include="NImage.cs" />
+    <Compile Include="SimpleF3DEX2\ImageHelper.cs" />
     <Compile Include="OpenGLHelpers\DisplayList.cs" />
     <Compile Include="OpenGLHelpers\DisplayListEx.cs" />
     <Compile Include="OpenGLHelpers\MiscDrawingHelpers.cs" />

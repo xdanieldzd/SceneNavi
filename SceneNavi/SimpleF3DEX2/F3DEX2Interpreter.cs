@@ -671,7 +671,7 @@ namespace SceneNavi.SimpleF3DEX2
             if (segdata == null)
                 texbuf.Fill(new byte[] { 0xFF, 0xFF, 0x00, 0xFF });
             else
-                NImage.NImageUtil.ConvertTexture(
+                ImageHelper.Convert(
                     Textures[tx].Format,
                     segdata,
                     (int)adr,

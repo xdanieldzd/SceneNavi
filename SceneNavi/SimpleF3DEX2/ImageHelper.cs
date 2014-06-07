@@ -5,9 +5,9 @@ using System.Text;
 
 using OpenTK.Graphics;
 
-namespace NImage
+namespace SceneNavi.SimpleF3DEX2
 {
-    public static class NImageUtil
+    public static class ImageHelper
     {
         #region RGBA
 
@@ -237,7 +237,7 @@ namespace NImage
 
         #region Main Function
 
-        public static void ConvertTexture(int Format, byte[] Source, int SourceOffset, ref byte[] Target, int Width, int Height, int LineSize, int Palette, Color4[] PalColors)
+        public static void Convert(int Format, byte[] Source, int SourceOffset, ref byte[] Target, int Width, int Height, int LineSize, int Palette, Color4[] PalColors)
         {
             try
             {
@@ -294,43 +294,4 @@ namespace NImage
 
         #endregion
     }
-
-    #region Extensions
-
-    public static class ArrayExtensions
-    {
-        public static void Init<T>(this T[] array, T defaultValue)
-        {
-            if (array == null)
-                return;
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = defaultValue;
-            }
-        }
-
-        public static void Fill<T>(this T[] array, T[] data)
-        {
-            if (array == null)
-                return;
-
-            for (int i = 0; i < array.Length; i += data.Length)
-            {
-                for (int j = 0; j < data.Length; j++)
-                {
-                    try
-                    {
-                        array[i + j] = data[j];
-                    }
-                    catch
-                    {
-                        return;
-                    }
-                }
-            }
-        }
-    }
-
-    #endregion
 }
