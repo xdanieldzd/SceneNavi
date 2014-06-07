@@ -31,8 +31,8 @@ namespace SceneNavi.HeaderCommands
             public Color Diffuse2Color { get; set; }
             public Vector4 Diffuse2Direction { get; set; }
             public Color FogColor { get; set; }
-            public short ForFarDistance { get; set; }
-            public short FogNearDistance { get; set; }
+            public ushort DrawDistance { get; set; }
+            public ushort FogStart { get; set; }
 
             ROMHandler.ROMHandler ROM;
 
@@ -54,8 +54,8 @@ namespace SceneNavi.HeaderCommands
                 Diffuse2Direction = new Vector4(((sbyte)segdata[adr + 9] / 255.0f), ((sbyte)segdata[adr + 10] / 255.0f), ((sbyte)segdata[adr + 11] / 255.0f), 0.0f);
                 Diffuse2Color = Color.FromArgb(segdata[adr + 12], segdata[adr + 13], segdata[adr + 14]);
                 FogColor = Color.FromArgb(segdata[adr + 15], segdata[adr + 16], segdata[adr + 17]);
-                FogNearDistance = Endian.SwapInt16(BitConverter.ToInt16(segdata, (int)(adr + 18)));
-                ForFarDistance = Endian.SwapInt16(BitConverter.ToInt16(segdata, (int)(adr + 20)));
+                FogStart = (ushort)(Endian.SwapUInt16(BitConverter.ToUInt16(segdata, (int)(adr + 18))) & 0x3FF);
+                DrawDistance = Endian.SwapUInt16(BitConverter.ToUInt16(segdata, (int)(adr + 20)));
             }
 
             public void CreateLighting()
@@ -74,17 +74,13 @@ namespace SceneNavi.HeaderCommands
                 GL.Enable(EnableCap.Light0);
                 GL.Enable(EnableCap.Light1);
                 GL.Enable(EnableCap.Light2);
-                /*
+
                 GL.Fog(FogParameter.FogMode, (int)FogMode.Linear);
                 GL.Hint(HintTarget.FogHint, HintMode.Nicest);
                 GL.Fog(FogParameter.FogColor, new float[] { FogColor.R / 255.0f, FogColor.G / 255.0f, FogColor.B / 255.0f });
 
-                float fstart = (float)Near * 0.02f;
-                float fend = (float)Far * 0.02f;
-                GL.Fog(FogParameter.FogStart, fstart);
-                GL.Fog(FogParameter.FogEnd, fend);
-
-                GL.Enable(EnableCap.Fog);*/
+                GL.Fog(FogParameter.FogStart, (float)FogStart / 100.0f);
+                GL.Fog(FogParameter.FogEnd, 150.0f);
             }
         }
     }

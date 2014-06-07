@@ -118,14 +118,14 @@ namespace SceneNavi.OpenGLHelpers
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
         }
 
-        public static void SetViewport(int Width, int Height)
+        public static void SetViewport(int Width, int Height, float Far)
         {
             if (Width == 0 || Height == 0) return;
 
             GL.Viewport(0, 0, Width, Height);
 
             double aspect = Width / (double)Height;
-            Matrix4 PerspMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)aspect, 0.1f, 15000);
+            Matrix4 PerspMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)aspect, 0.1f, Far);
 
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();

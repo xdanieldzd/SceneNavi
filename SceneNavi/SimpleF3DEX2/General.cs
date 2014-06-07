@@ -174,6 +174,12 @@ namespace SceneNavi.SimpleF3DEX2
                 GL.Disable(EnableCap.Normalize);
             }
 
+            /* Fog */
+            if (Convert.ToBoolean(f3dex2.GeometryMode & (uint)General.GeometryMode.FOG))
+                GL.Enable(EnableCap.Fog);
+            else
+                GL.Disable(EnableCap.Fog);
+
             /* Decal */
             if (f3dex2.OtherModeL.ZModeDec)
             {

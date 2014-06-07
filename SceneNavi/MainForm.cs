@@ -107,6 +107,7 @@ namespace SceneNavi
         HeaderCommands.Collision.Waterbox currentWaterbox;
         OpenGLHelpers.DisplayListEx.Triangle currentRoomTriangle;
         SimpleF3DEX2.Vertex currentRoomVertex;
+        HeaderCommands.EnvironmentSettings.Entry currentEnvSettings;
 
         SceneTableEntry tempScene;
         HeaderCommands.Rooms tempRooms;
@@ -574,6 +575,7 @@ namespace SceneNavi
             currentRoom = null;
             currentRoomTriangle = null;
             currentRoomVertex = null;
+            currentEnvSettings = null;
 
             if (!norefresh) RefreshCurrentData();
         }
@@ -909,6 +911,7 @@ namespace SceneNavi
                 {
                     currentScene = (e.Node.Tag as SceneTableEntry);
                     currentScene.CurrentSceneHeader = currentScene.SceneHeaders[0];
+                    currentEnvSettings = currentScene.ActiveEnvSettings.EnvSettingList.First();
                 }
                 currentRoom = null;
                 currentRoomTriangle = null;
@@ -920,6 +923,7 @@ namespace SceneNavi
 
                 if (hp.SceneHeader.Parent != currentScene) currentScene = (hp.SceneHeader.Parent as SceneTableEntry);
                 currentScene.CurrentSceneHeader = hp.SceneHeader;
+                currentEnvSettings = currentScene.ActiveEnvSettings.EnvSettingList.First();
 
                 currentRoom = null;
                 currentRoomTriangle = null;
@@ -931,6 +935,7 @@ namespace SceneNavi
 
                 if (hp.SceneHeader.Parent != currentScene) currentScene = (hp.SceneHeader.Parent as SceneTableEntry);
                 currentScene.CurrentSceneHeader = hp.SceneHeader;
+                currentEnvSettings = currentScene.ActiveEnvSettings.EnvSettingList.First();
 
                 currentRoom = (e.Node.Tag as HeaderCommands.Rooms.RoomInfoClass);
                 if (hp.SceneHeader.Number < currentRoom.Headers.Count)
@@ -1325,7 +1330,7 @@ namespace SceneNavi
         {
             GL.ClearColor(System.Drawing.Color.LightBlue);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Initialization.SetViewport(width, height);
+            Initialization.SetViewport(width, height, (currentEnvSettings != null ? ((float)currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
             camera.Position();
             GL.Scale(0.02, 0.02, 0.02);
         }
@@ -1334,7 +1339,7 @@ namespace SceneNavi
         {
             GL.PushAttrib(AttribMask.AllAttribBits);
 
-            //if (CurrentScene != null && CurrentScene.CurrentSceneHeader != null) CurrentScene.ActiveEnvSettings.EnvSettingList[0].CreateLighting();
+            if (currentScene != null && currentEnvSettings != null) currentEnvSettings.CreateLighting();
 
             if (currentRoom != null && currentRoom.ActiveMeshHeader != null)
             {
