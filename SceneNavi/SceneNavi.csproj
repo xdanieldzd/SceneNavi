@@ -66,6 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CameraPositionForm.resx">
+      <DependentUpon>CameraPositionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TitleCardForm.resx">
       <DependentUpon>TitleCardForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +79,12 @@
     <Compile Include="ActorRendering\MIPS.cs" />
     <Compile Include="ActorRendering\MIPSEvaluator.cs" />
     <Compile Include="AssemblyHelpers.cs" />
+    <Compile Include="CameraPositionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CameraPositionForm.Designer.cs">
+      <DependentUpon>CameraPositionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ColorPickerDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +116,10 @@
     <Compile Include="HeaderCommands\SettingsSoundScene.cs" />
     <Compile Include="HeaderCommands\Waypoints.cs" />
     <Compile Include="HeaderCommands\SpecialObjects.cs" />
+    <Compile Include="OpenGLHelpers\GLSL.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulation\CombinerException.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulation\GLSLCombiner.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulation\ICombiner.cs" />
     <Compile Include="SimpleF3DEX2\ImageHelper.cs" />
     <Compile Include="OpenGLHelpers\DisplayList.cs" />
     <Compile Include="OpenGLHelpers\DisplayListEx.cs" />
@@ -146,11 +159,11 @@
     <Compile Include="ROMHandler\EntranceTableEntry.cs" />
     <Compile Include="ROMHandler\ObjectTableEntry.cs" />
     <Compile Include="ROMHandler\SceneTableEntry.cs" />
-    <Compile Include="SimpleF3DEX2\CombinerEmulation\ArbCombineProgram.cs" />
-    <Compile Include="SimpleF3DEX2\CombinerEmulation\ArbCombineManager.cs" />
-    <Compile Include="SimpleF3DEX2\CombinerEmulation\GLSLCombineManager.cs" />
-    <Compile Include="SimpleF3DEX2\CombinerEmulation\GLSLShaders.cs" />
-    <Compile Include="SimpleF3DEX2\CombinerEmulation\KnownCombinerMuxes.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulationOld\ArbCombineProgram.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulationOld\ArbCombineManager.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulationOld\GLSLCombineManager.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulationOld\GLSLShaders.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulationOld\KnownCombinerMuxes.cs" />
     <Compile Include="SimpleF3DEX2\F3DEX2Interpreter.cs" />
     <Compile Include="ROMHandler\ROMHandler.cs" />
     <Compile Include="SimpleF3DEX2\General.cs" />

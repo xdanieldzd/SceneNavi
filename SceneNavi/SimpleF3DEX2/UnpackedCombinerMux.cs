@@ -82,6 +82,8 @@ namespace SceneNavi.SimpleF3DEX2
         public ComponentsA8[] aC { get; set; }
         public ComponentsA8[] aD { get; set; }
 
+        public UnpackedCombinerMux(ulong mux) : this((uint)(mux >> 16), (uint)(mux & 0xFFFFFFFF)) { }
+
         public UnpackedCombinerMux(uint m0, uint m1)
         {
             cA = new ComponentsC16[2];

@@ -27,6 +27,9 @@ namespace SceneNavi.OpenGLHelpers
         {
             Pos = new Vector3d(0.0, 0.0, -15.0);
             Rot = new Vector3d(0.0, 0.0, 0.0);
+            /*
+            Pos = new Vector3d(0.0, -(10.0 * 0.02), -(1090.0 * 0.02));
+            Rot = new Vector3d(0.0, 180.0, 0.0);*/
         }
 
         public void MouseCenter(Vector2d NewMouseCoord)
