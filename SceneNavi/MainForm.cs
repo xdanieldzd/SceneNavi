@@ -66,6 +66,8 @@ namespace SceneNavi
         Camera camera;
         FPSMonitor fpsMonitor;
 
+        double oglSceneScale;
+
         bool supportsCreateShader, supportsGenProgramsARB;
 
         ToolModes internalToolMode;
@@ -638,7 +640,7 @@ namespace SceneNavi
 
             if (currentScene != null)
             {
-                editAreaTitleCardToolStripMenuItem.Enabled = (currentScene.LabelStartAddress != 0 && currentScene.LabelEndAddress != 0);
+                editAreaTitleCardToolStripMenuItem.Enabled = (!rom.IsMajora && currentScene.LabelStartAddress != 0 && currentScene.LabelEndAddress != 0);
 
                 HeaderCommands.Rooms rooms = (currentScene.CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Rooms) as HeaderCommands.Rooms);
                 if (rooms != null)
@@ -1133,6 +1135,8 @@ namespace SceneNavi
             camera = new Camera();
             fpsMonitor = new FPSMonitor();
 
+            oglSceneScale = 0.02;
+
             ready = true;
         }
 
@@ -1332,7 +1336,7 @@ namespace SceneNavi
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             Initialization.SetViewport(width, height, (currentEnvSettings != null ? ((float)currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
             camera.Position();
-            GL.Scale(0.02, 0.02, 0.02);
+            GL.Scale(oglSceneScale, oglSceneScale, oglSceneScale);
         }
 
         private void RenderScene()

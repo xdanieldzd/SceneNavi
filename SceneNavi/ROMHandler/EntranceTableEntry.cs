@@ -16,13 +16,13 @@ namespace SceneNavi.ROMHandler
         [Browsable(false)]
         public bool IsOffsetRelative { get; private set; }
 
-        [DisplayName("Scene #")]
+        [DisplayName("Scene #"), Description("Scene number to load")]
         public byte SceneNumber { get; set; }
-        [DisplayName("Entrance #")]
+        [DisplayName("Entrance #"), Description("Entrance within scene to spawn at")]
         public byte EntranceNumber { get; set; }
-        [DisplayName("Variable")]
+        [DisplayName("Variable"), Description("Controls certain behaviors when transitioning, ex. stopping music")]
         public byte Variable { get; set; }
-        [DisplayName("Fade")]
+        [DisplayName("Fade"), Description("Animation used when transitioning")]
         public byte Fade { get; set; }
 
         [DisplayName("Scene Name")]

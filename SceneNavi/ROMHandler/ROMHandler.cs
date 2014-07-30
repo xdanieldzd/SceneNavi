@@ -54,13 +54,7 @@ namespace SceneNavi.ROMHandler
         public List<DMATableEntry> Files { get; private set; }
 
         public int FileNameTableAddress { get; private set; }
-        public bool HasFileNameTable
-        {
-            get
-            {
-                return FileNameTableAddress != -1;
-            }
-        }
+        public bool HasFileNameTable { get { return FileNameTableAddress != -1; } }
 
         public DMATableEntry Code { get; private set; }
         public byte[] CodeData { get; private set; }
@@ -450,6 +444,8 @@ namespace SceneNavi.ROMHandler
             ObjectTableAddress = 0;
             ObjectCount = 0;
 
+            EntranceTableAddress = 0;
+
             if (!HasZ64TablesHack)
             {
                 int inc = 8;
@@ -478,7 +474,8 @@ namespace SceneNavi.ROMHandler
                         j++;
                     }
 
-                    EntranceTableAddress = i + (i % 16);
+                    if (!IsMajora)
+                        EntranceTableAddress = i + (i % 16);
                 }
             }
             else
@@ -504,6 +501,8 @@ namespace SceneNavi.ROMHandler
 
             if (!HasZ64TablesHack)
             {
+                if (EntranceTableAddress == 0) return;
+
                 int i = EntranceTableAddress, cnt = 0;
                 while (i < SceneTableAddress)
                 {

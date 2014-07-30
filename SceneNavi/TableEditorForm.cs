@@ -36,44 +36,51 @@ namespace SceneNavi
             dgvEntranceTable.Columns["Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvEntranceTable.Columns["SceneNumber"].DefaultCellStyle.Format = "X2";
             dgvEntranceTable.Columns["SceneNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvEntranceTable.Columns["SceneNumber"].ToolTipText = "Scene number to load";
+            dgvEntranceTable.Columns["SceneNumber"].ToolTipText = typeof(ROMHandler.EntranceTableEntry).GetDescription("SceneNumber");
             dgvEntranceTable.Columns["EntranceNumber"].DefaultCellStyle.Format = "X2";
             dgvEntranceTable.Columns["EntranceNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvEntranceTable.Columns["EntranceNumber"].ToolTipText = "Entrance within scene to spawn at";
+            dgvEntranceTable.Columns["EntranceNumber"].ToolTipText = typeof(ROMHandler.EntranceTableEntry).GetDescription("EntranceNumber");
             dgvEntranceTable.Columns["Variable"].DefaultCellStyle.Format = "X2";
             dgvEntranceTable.Columns["Variable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvEntranceTable.Columns["Variable"].ToolTipText = "Controls certain behaviors when transitioning, ex. stopping music";
+            dgvEntranceTable.Columns["Variable"].ToolTipText = typeof(ROMHandler.EntranceTableEntry).GetDescription("Variable");
             dgvEntranceTable.Columns["Fade"].DefaultCellStyle.Format = "X2";
             dgvEntranceTable.Columns["Fade"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvEntranceTable.Columns["Fade"].ToolTipText = "Animation used when transitioning";
+            dgvEntranceTable.Columns["Fade"].ToolTipText = typeof(ROMHandler.EntranceTableEntry).GetDescription("Fade");
             dgvEntranceTable.Columns["SceneName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             foreach (DataGridViewColumn dcc in dgvEntranceTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
 
             /* Bind data & configure scene table */
             dgvSceneTable.DataSource = new BindingSource() { DataSource = ROM.Scenes };
-            dgvSceneTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvSceneTable.Columns["Number"].DefaultCellStyle.Format = "X4";
-            dgvSceneTable.Columns["Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSceneTable.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dgvSceneTable.Columns["LabelStartAddress"].DefaultCellStyle.Format = "X8";
-            dgvSceneTable.Columns["LabelStartAddress"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSceneTable.Columns["LabelStartAddress"].ToolTipText = "Start address of area title card";
-            dgvSceneTable.Columns["LabelEndAddress"].DefaultCellStyle.Format = "X8";
-            dgvSceneTable.Columns["LabelEndAddress"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSceneTable.Columns["LabelEndAddress"].ToolTipText = "End address of area title card";
-            dgvSceneTable.Columns["Unknown1"].DefaultCellStyle.Format = "X2";
-            dgvSceneTable.Columns["Unknown1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSceneTable.Columns["Unknown1"].ToolTipText = "Unknown; either 0x01 or 0x02 for some dungeons, otherwise 0x00";
-            dgvSceneTable.Columns["ConfigurationNo"].DefaultCellStyle.Format = "X2";
-            dgvSceneTable.Columns["ConfigurationNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSceneTable.Columns["ConfigurationNo"].ToolTipText = "Specifies ex. camera effects, dynamic textures, etc.";
-            dgvSceneTable.Columns["Unknown3"].DefaultCellStyle.Format = "X2";
-            dgvSceneTable.Columns["Unknown3"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSceneTable.Columns["Unknown3"].ToolTipText = "Unknown; unique value between 0x02 and 0x0A for some dungeons";
-            dgvSceneTable.Columns["Unknown4"].DefaultCellStyle.Format = "X2";
-            dgvSceneTable.Columns["Unknown4"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSceneTable.Columns["Unknown4"].ToolTipText = "Unknown; always 0x00, unused or padding?";
-            foreach (DataGridViewColumn dcc in dgvSceneTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
+            if (!ROM.IsMajora)
+            {
+                dgvSceneTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                dgvSceneTable.Columns["Number"].DefaultCellStyle.Format = "X4";
+                dgvSceneTable.Columns["Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvSceneTable.Columns["LabelStartAddress"].DefaultCellStyle.Format = "X8";
+                dgvSceneTable.Columns["LabelStartAddress"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["LabelStartAddress"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("LabelStartAddress");
+                dgvSceneTable.Columns["LabelEndAddress"].DefaultCellStyle.Format = "X8";
+                dgvSceneTable.Columns["LabelEndAddress"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["LabelEndAddress"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("LabelEndAddress");
+                dgvSceneTable.Columns["Unknown1"].DefaultCellStyle.Format = "X2";
+                dgvSceneTable.Columns["Unknown1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Unknown1"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("Unknown1");
+                dgvSceneTable.Columns["ConfigurationNo"].DefaultCellStyle.Format = "X2";
+                dgvSceneTable.Columns["ConfigurationNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["ConfigurationNo"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("ConfigurationNo");
+                dgvSceneTable.Columns["Unknown3"].DefaultCellStyle.Format = "X2";
+                dgvSceneTable.Columns["Unknown3"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Unknown3"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("Unknown3");
+                dgvSceneTable.Columns["Unknown4"].DefaultCellStyle.Format = "X2";
+                dgvSceneTable.Columns["Unknown4"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Unknown4"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("Unknown4");
+                foreach (DataGridViewColumn dcc in dgvSceneTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
+            }
+            else
+            {
+                //
+            }
         }
 
         #region DGV Entrance table events

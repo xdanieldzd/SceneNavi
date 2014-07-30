@@ -125,7 +125,7 @@ namespace SceneNavi.OpenGLHelpers
             GL.Viewport(0, 0, Width, Height);
 
             double aspect = Width / (double)Height;
-            Matrix4 PerspMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)aspect, 0.1f, Far);
+            Matrix4 PerspMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver3, (float)aspect, 0.1f, Far);
 
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();

@@ -49,18 +49,18 @@ namespace SceneNavi.ROMHandler
         [Browsable(false)]
         public uint SceneEndAddress { get; private set; }
 
-        [DisplayName("Title start"), Description("test")]
+        [DisplayName("Title start"), Description("Start address of area title card")]
         public uint LabelStartAddress { get; set; }
-        [DisplayName("Title end")]
+        [DisplayName("Title end"), Description("End address of area title card")]
         public uint LabelEndAddress { get; set; }
 
-        [DisplayName("Unknown 1")]
+        [DisplayName("Unknown 1"), Description("Unknown; either 0x01 or 0x02 for some dungeons, otherwise 0x00")]
         public byte Unknown1 { get; set; }
-        [DisplayName("Configuration #")]
+        [DisplayName("Configuration #"), Description("Specifies ex. camera effects, dynamic textures, etc.")]
         public byte ConfigurationNo { get; set; }
-        [DisplayName("Unknown 3")]
+        [DisplayName("Unknown 3"), Description("Unknown; unique value between 0x02 and 0x0A for some dungeons")]
         public byte Unknown3 { get; set; }
-        [DisplayName("Unknown 4")]
+        [DisplayName("Unknown 4"), Description("Unknown; always 0x00, unused or padding?")]
         public byte Unknown4 { get; set; }
 
         [Browsable(false)]

@@ -5,6 +5,7 @@ using System.Text;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using System.ComponentModel;
 
 namespace SceneNavi
 {
@@ -123,6 +124,19 @@ namespace SceneNavi
                 buffer[i] = buffer[i + 2];
                 buffer[i + 2] = red;
             }
+        }
+
+        public static string GetDescription(this Type objectType, string field)
+        {
+            PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(objectType)[field];
+            if (propertyDescriptor == null) return field;
+
+            AttributeCollection attributes = propertyDescriptor.Attributes;
+            DescriptionAttribute description = (DescriptionAttribute)attributes[typeof(DescriptionAttribute)];
+
+            if (description.Description == string.Empty) return field;
+
+            return description.Description;
         }
     }
 }
