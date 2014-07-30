@@ -66,8 +66,6 @@ namespace SceneNavi
         Camera camera;
         FPSMonitor fpsMonitor;
 
-        double oglSceneScale;
-
         bool supportsCreateShader, supportsGenProgramsARB;
 
         ToolModes internalToolMode;
@@ -1135,8 +1133,6 @@ namespace SceneNavi
             camera = new Camera();
             fpsMonitor = new FPSMonitor();
 
-            oglSceneScale = 0.02;
-
             ready = true;
         }
 
@@ -1336,7 +1332,7 @@ namespace SceneNavi
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             Initialization.SetViewport(width, height, (currentEnvSettings != null ? ((float)currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
             camera.Position();
-            GL.Scale(oglSceneScale, oglSceneScale, oglSceneScale);
+            GL.Scale(0.02, 0.02, 0.02);
         }
 
         private void RenderScene()
@@ -2246,25 +2242,7 @@ namespace SceneNavi
             MessageBox.Show(vertexInfo.ToString(), "Vertex Properties", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void bsiCamCoords_MouseUp(object sender, MouseEventArgs e)
-        {
-            Point senderPosition = new Point((sender as ToolStripItem).Bounds.Left, (sender as ToolStripItem).Bounds.Top);
-            Point senderParentPosition = new Point((sender as ToolStripItem).GetCurrentParent().Left, (sender as ToolStripItem).GetCurrentParent().Top);
-            Point senderScreenPosition = this.PointToScreen(new Point(senderPosition.X + senderParentPosition.X, senderPosition.Y + senderParentPosition.Y));
-            cmsCamera.Show(e.Location.X + senderScreenPosition.X, e.Location.Y + senderScreenPosition.Y);
-        }
-
-        private void setPositionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CameraPositionForm cpf = new CameraPositionForm(camera);
-
-            if (cpf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                //
-            }
-        }
-
-        private void resetCameraToolStripMenuItem_Click(object sender, EventArgs e)
+        private void bsiCamCoords_Click(object sender, EventArgs e)
         {
             camera.Reset();
         }

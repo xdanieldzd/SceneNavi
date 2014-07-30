@@ -161,14 +161,11 @@
             this.ofdOpenRoom = new System.Windows.Forms.OpenFileDialog();
             this.cmsSceneTree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.propertiesToolStripMenuItem = new SceneNavi.Controls.ToolStripHintMenuItem();
+            this.customGLControl = new SceneNavi.Controls.CustomGLControl();
             this.cmsVertexEdit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
             this.propertiesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsCamera = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.setPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetCameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customGLControl = new SceneNavi.Controls.CustomGLControl();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -194,7 +191,6 @@
             this.cmsMoveableObjectEdit.SuspendLayout();
             this.cmsSceneTree.SuspendLayout();
             this.cmsVertexEdit.SuspendLayout();
-            this.cmsCamera.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -640,7 +636,7 @@
             // tsslStatus
             // 
             this.tsslStatus.Name = "tsslStatus";
-            this.tsslStatus.Size = new System.Drawing.Size(501, 19);
+            this.tsslStatus.Size = new System.Drawing.Size(470, 19);
             this.tsslStatus.Spring = true;
             this.tsslStatus.Text = "---";
             this.tsslStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -660,7 +656,7 @@
             this.bsiCamCoords.Size = new System.Drawing.Size(270, 19);
             this.bsiCamCoords.Text = "---";
             this.bsiCamCoords.ToolTipText = "Click to reset the camera\'s position";
-            this.bsiCamCoords.MouseUp += new System.Windows.Forms.MouseEventHandler(this.bsiCamCoords_MouseUp);
+            this.bsiCamCoords.Click += new System.EventHandler(this.bsiCamCoords_Click);
             // 
             // tabControl1
             // 
@@ -1604,6 +1600,25 @@
             this.propertiesToolStripMenuItem.Text = "&Properties";
             this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
             // 
+            // customGLControl
+            // 
+            this.customGLControl.BackColor = System.Drawing.Color.Black;
+            this.customGLControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customGLControl.Enabled = false;
+            this.customGLControl.Location = new System.Drawing.Point(0, 24);
+            this.customGLControl.Name = "customGLControl";
+            this.customGLControl.Size = new System.Drawing.Size(640, 480);
+            this.customGLControl.TabIndex = 0;
+            this.customGLControl.VSync = false;
+            this.customGLControl.Load += new System.EventHandler(this.customGLControl_Load);
+            this.customGLControl.Paint += new System.Windows.Forms.PaintEventHandler(this.customGLControl_Paint);
+            this.customGLControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.customGLControl_KeyDown);
+            this.customGLControl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.customGLControl_KeyUp);
+            this.customGLControl.Leave += new System.EventHandler(this.customGLControl_Leave);
+            this.customGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.customGLControl_MouseDown);
+            this.customGLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.customGLControl_MouseMove);
+            this.customGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.customGLControl_MouseUp);
+            // 
             // cmsVertexEdit
             // 
             this.cmsVertexEdit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1631,47 +1646,6 @@
             this.propertiesToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
             this.propertiesToolStripMenuItem1.Text = "&Properties";
             this.propertiesToolStripMenuItem1.Click += new System.EventHandler(this.propertiesToolStripMenuItem1_Click);
-            // 
-            // cmsCamera
-            // 
-            this.cmsCamera.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setPositionToolStripMenuItem,
-            this.resetCameraToolStripMenuItem});
-            this.cmsCamera.Name = "cmsCamera";
-            this.cmsCamera.Size = new System.Drawing.Size(153, 70);
-            // 
-            // setPositionToolStripMenuItem
-            // 
-            this.setPositionToolStripMenuItem.Name = "setPositionToolStripMenuItem";
-            this.setPositionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.setPositionToolStripMenuItem.Text = "&Set Location";
-            this.setPositionToolStripMenuItem.Click += new System.EventHandler(this.setPositionToolStripMenuItem_Click);
-            // 
-            // resetCameraToolStripMenuItem
-            // 
-            this.resetCameraToolStripMenuItem.Name = "resetCameraToolStripMenuItem";
-            this.resetCameraToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetCameraToolStripMenuItem.Text = "&Reset Camera";
-            this.resetCameraToolStripMenuItem.Click += new System.EventHandler(this.resetCameraToolStripMenuItem_Click);
-            // 
-            // customGLControl
-            // 
-            this.customGLControl.BackColor = System.Drawing.Color.Black;
-            this.customGLControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customGLControl.Enabled = false;
-            this.customGLControl.Location = new System.Drawing.Point(0, 24);
-            this.customGLControl.Name = "customGLControl";
-            this.customGLControl.Size = new System.Drawing.Size(640, 480);
-            this.customGLControl.TabIndex = 0;
-            this.customGLControl.VSync = false;
-            this.customGLControl.Load += new System.EventHandler(this.customGLControl_Load);
-            this.customGLControl.Paint += new System.Windows.Forms.PaintEventHandler(this.customGLControl_Paint);
-            this.customGLControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.customGLControl_KeyDown);
-            this.customGLControl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.customGLControl_KeyUp);
-            this.customGLControl.Leave += new System.EventHandler(this.customGLControl_Leave);
-            this.customGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.customGLControl_MouseDown);
-            this.customGLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.customGLControl_MouseMove);
-            this.customGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.customGLControl_MouseUp);
             // 
             // MainForm
             // 
@@ -1720,7 +1694,6 @@
             this.cmsMoveableObjectEdit.ResumeLayout(false);
             this.cmsSceneTree.ResumeLayout(false);
             this.cmsVertexEdit.ResumeLayout(false);
-            this.cmsCamera.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1864,8 +1837,5 @@
         private System.Windows.Forms.ToolStripMenuItem changeColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
         private System.Windows.Forms.ToolStripMenuItem propertiesToolStripMenuItem1;
-        private System.Windows.Forms.ContextMenuStrip cmsCamera;
-        private System.Windows.Forms.ToolStripMenuItem setPositionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resetCameraToolStripMenuItem;
     }
 }
