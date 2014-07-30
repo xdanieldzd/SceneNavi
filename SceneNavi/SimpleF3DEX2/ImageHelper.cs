@@ -19,6 +19,8 @@ namespace SceneNavi.SimpleF3DEX2
             {
                 for (int i = 0; i < Width; i++)
                 {
+                    if (SourceOffset >= Source.Length) return;
+
                     UInt16 Raw = (UInt16)((Source[SourceOffset] << 8) | Source[SourceOffset + 1]);
                     Target[TargetOffset] = (byte)((Raw & 0xF800) >> 8);
                     Target[TargetOffset + 1] = (byte)(((Raw & 0x07C0) << 5) >> 8);
@@ -28,8 +30,6 @@ namespace SceneNavi.SimpleF3DEX2
 
                     SourceOffset += 2;
                     TargetOffset += 4;
-
-                    if (SourceOffset >= Source.Length) break;
                 }
                 SourceOffset += LineSize * 4 - Width;
             }
@@ -52,6 +52,8 @@ namespace SceneNavi.SimpleF3DEX2
             {
                 for (int i = 0; i < Width; i++)
                 {
+                    if (SourceOffset >= Source.Length) return;
+
                     byte CIIndex = (byte)((Source[SourceOffset]) + (Palette << 4));
 
                     Target[TargetOffset] = (byte)PalColors[CIIndex].R;
@@ -61,8 +63,6 @@ namespace SceneNavi.SimpleF3DEX2
 
                     SourceOffset++;
                     TargetOffset += 4;
-
-                    if (SourceOffset >= Source.Length) break;
                 }
                 SourceOffset += LineSize * 8 - Width;
             }
@@ -76,6 +76,8 @@ namespace SceneNavi.SimpleF3DEX2
             {
                 for (int i = 0; i < Width / 2; i++)
                 {
+                    if (SourceOffset >= Source.Length) return;
+
                     byte CIIndex1 = (byte)((Source[SourceOffset] & 0xF0) >> 4);
                     byte CIIndex2 = (byte)(Source[SourceOffset] & 0x0F);
 
@@ -91,8 +93,6 @@ namespace SceneNavi.SimpleF3DEX2
 
                     SourceOffset++;
                     TargetOffset += 8;
-
-                    if (SourceOffset >= Source.Length) break;
                 }
                 SourceOffset += LineSize * 8 - (Width / 2);
             }
@@ -110,6 +110,8 @@ namespace SceneNavi.SimpleF3DEX2
             {
                 for (int i = 0; i < Width / 2; i++)
                 {
+                    if (SourceOffset >= Source.Length) return;
+
                     byte Raw = (byte)((Source[SourceOffset] & 0xF0) >> 4);
                     Target[TargetOffset] = (byte)((Raw & 0x0E) << 4);
                     Target[TargetOffset + 1] = (byte)((Raw & 0x0E) << 4);
@@ -126,8 +128,6 @@ namespace SceneNavi.SimpleF3DEX2
 
                     SourceOffset++;
                     TargetOffset += 8;
-
-                    if (SourceOffset >= Source.Length) break;
                 }
                 SourceOffset += LineSize * 8 - (Width / 2);
             }
@@ -141,6 +141,8 @@ namespace SceneNavi.SimpleF3DEX2
             {
                 for (int i = 0; i < Width; i++)
                 {
+                    if (SourceOffset >= Source.Length) return;
+
                     byte Raw = (byte)(Source[SourceOffset]);
                     Target[TargetOffset] = (byte)((Raw & 0xF0) + 0x0F);
                     Target[TargetOffset + 1] = (byte)((Raw & 0xF0) + 0x0F);
@@ -149,8 +151,6 @@ namespace SceneNavi.SimpleF3DEX2
 
                     SourceOffset++;
                     TargetOffset += 4;
-
-                    if (SourceOffset >= Source.Length) break;
                 }
                 SourceOffset += LineSize * 8 - Width;
             }
@@ -164,6 +164,8 @@ namespace SceneNavi.SimpleF3DEX2
             {
                 for (int i = 0; i < Width; i++)
                 {
+                    if (SourceOffset >= Source.Length) return;
+
                     Target[TargetOffset] = Source[SourceOffset];
                     Target[TargetOffset + 1] = Source[SourceOffset];
                     Target[TargetOffset + 2] = Source[SourceOffset];
@@ -171,8 +173,6 @@ namespace SceneNavi.SimpleF3DEX2
 
                     SourceOffset += 2;
                     TargetOffset += 4;
-
-                    if (SourceOffset >= Source.Length) break;
                 }
                 SourceOffset += LineSize * 4 - Width;
             }
@@ -190,6 +190,8 @@ namespace SceneNavi.SimpleF3DEX2
             {
                 for (int i = 0; i < Width / 2; i++)
                 {
+                    if (SourceOffset >= Source.Length) return;
+
                     byte Raw = (byte)((Source[SourceOffset] & 0xF0) >> 4);
                     Target[TargetOffset] = (byte)((Raw & 0x0E) << 4);
                     Target[TargetOffset + 1] = (byte)((Raw & 0x0E) << 4);
@@ -204,8 +206,6 @@ namespace SceneNavi.SimpleF3DEX2
 
                     SourceOffset++;
                     TargetOffset += 8;
-
-                    if (SourceOffset >= Source.Length) break;
                 }
                 SourceOffset += LineSize * 8 - (Width / 2);
             }
@@ -219,6 +219,8 @@ namespace SceneNavi.SimpleF3DEX2
             {
                 for (int i = 0; i < Width; i++)
                 {
+                    if (SourceOffset >= Source.Length) return;
+
                     Target[TargetOffset] = Source[SourceOffset];
                     Target[TargetOffset + 1] = Source[SourceOffset];
                     Target[TargetOffset + 2] = Source[SourceOffset];
@@ -226,8 +228,6 @@ namespace SceneNavi.SimpleF3DEX2
 
                     SourceOffset++;
                     TargetOffset += 4;
-
-                    if (SourceOffset >= Source.Length) break;
                 }
                 SourceOffset += LineSize * 8 - Width;
             }

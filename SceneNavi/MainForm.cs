@@ -601,7 +601,7 @@ namespace SceneNavi
             else
             {
                 infostrs.Add(string.Format("Ready{0}", ((Configuration.ShownIntelWarning || Configuration.ShownExtensionWarning) ? " (limited combiner)" : string.Empty)));
-                if (rom != null) infostrs.Add(string.Format("{0} ({1}, v1.{2}; {3} scenes)", rom.Title, rom.GameID, rom.Version, rom.Scenes.Count));
+                if (rom != null && rom.Scenes != null) infostrs.Add(string.Format("{0} ({1}, v1.{2}; {3} scenes)", rom.Title, rom.GameID, rom.Version, rom.Scenes.Count));
             }
 
             if (currentRoom != null && currentRoom.ActiveRoomActorData != null)

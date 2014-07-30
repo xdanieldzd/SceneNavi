@@ -41,6 +41,7 @@ namespace SceneNavi.ROMHandler
         public int Size { get { return Data.Length; } }
 
         public bool HasZ64TablesHack { get; private set; }
+        public bool IsMajora { get; private set; }
 
         public string Creator { get; private set; }
         public string BuildDateString { get; private set; }
@@ -258,7 +259,7 @@ namespace SceneNavi.ROMHandler
             GameID = Encoding.ASCII.GetString(Data, 0x3B, 0x4).TrimEnd(new char[] { '\0' });
             Version = Data[0x3F];
 
-            if (Title.Contains("MAJORA") || Title.Contains("MUJURA")) throw new ROMHandlerException("Majora's Mask is not supported.");
+            IsMajora = (Title.Contains("MAJORA") || Title.Contains("MUJURA"));
         }
 
         private void FindBuildInfo()
@@ -356,23 +357,32 @@ namespace SceneNavi.ROMHandler
         {
             Scenes = new List<SceneTableEntry>();
 
-            if (!HasZ64TablesHack)
+            if (IsMajora || !HasZ64TablesHack)
             {
-                int inc = 16;
-                for (int i = 0, j = 0; i < CodeData.Length - (16 * 16); i += inc)
+                int increment = (IsMajora ? 16 : 20);
+
+                DMATableEntry dma = Files.OrderBy(x => x.VStart).FirstOrDefault(x => x.FileType == DMATableEntry.FileTypes.Scene);
+
+                for (int i = CodeData.Length - (increment * 2); i > 0; i -= 4)
                 {
-                    SceneTableEntry scn1 = new SceneTableEntry(this, i, true);
-                    SceneTableEntry scn2 = new SceneTableEntry(this, i + 20, true);
-                    if (scn1.IsValid == false && scn2.IsValid == false && Scenes.Count > 0) break;
-                    if (scn1.IsValid == true && scn2.IsValid == true && Scenes.Count == 0)
+                    SceneTableEntry entry = new SceneTableEntry(this, i, true);
+                    if (entry.SceneStartAddress == dma.VStart && entry.SceneEndAddress == dma.VEnd)
                     {
                         SceneTableAddress = i;
+                        break;
                     }
-                    if (scn1.IsValid == true && (scn2.IsValid == true || Scenes.Count > 0))
+                }
+
+                if (SceneTableAddress != -1)
+                {
+                    for (int i = SceneTableAddress, j = 0; i < CodeData.Length - (16 * 16); i += increment)
                     {
-                        inc = 20;
+                        SceneTableEntry scn1 = new SceneTableEntry(this, i, true);
+
+                        if (!scn1.IsValid && !scn1.IsAllZero) break;
+
                         scn1.Number = (ushort)j;
-                        Scenes.Add(scn1);
+                        if (!scn1.IsAllZero) Scenes.Add(scn1);
                         j++;
                     }
                 }

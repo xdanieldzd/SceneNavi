@@ -8,7 +8,7 @@ namespace SceneNavi.ROMHandler
 {
     public class SceneTableEntry : IHeaderParent
     {
-        #region Pseudo-code for validity
+        #region Pseudo-code for validity - ONLY FOR OOT
         /*
          * xxxxxxxx yyyyyyyy aaaaaaaa bbbbbbbb cc dd ee ff
          * 
@@ -65,6 +65,8 @@ namespace SceneNavi.ROMHandler
 
         [Browsable(false)]
         public bool IsValid { get; private set; }
+        [Browsable(false)]
+        public bool IsAllZero { get; private set; }
         [Browsable(false)]
         public byte[] Data { get; private set; }
 
@@ -128,6 +130,7 @@ namespace SceneNavi.ROMHandler
             Unknown1 = ConfigurationNo = Unknown3 = Unknown4 = 0;
 
             IsValid = true;
+            IsAllZero = false;
 
             System.IO.FileStream fs = new System.IO.FileStream(fn, System.IO.FileMode.Open);
             Data = new byte[fs.Length];
@@ -154,16 +157,26 @@ namespace SceneNavi.ROMHandler
             Unknown3 = (IsOffsetRelative ? rom.CodeData : rom.Data)[ofs + 18];
             Unknown4 = (IsOffsetRelative ? rom.CodeData : rom.Data)[ofs + 19];
 
-            IsValid =
-                /*(SceneStartAddress > rom.Code.VStart) &&*/
-                (SceneStartAddress < rom.Size) && (SceneEndAddress < rom.Size) && (LabelStartAddress < rom.Size) && (LabelEndAddress < rom.Size) &&
-                ((SceneStartAddress & 0xF) == 0) && ((SceneEndAddress & 0xF) == 0) && ((LabelStartAddress & 0xF) == 0) && ((LabelEndAddress & 0xF) == 0) &&
-                (SceneEndAddress > SceneStartAddress) &&
-                (((LabelStartAddress != 0) && (LabelEndAddress != 0) && (LabelEndAddress > LabelStartAddress) &&
-                    (LabelEndAddress == LabelStartAddress + 0x2880 || LabelEndAddress == LabelStartAddress + 0x1B00)) || (LabelStartAddress == 0 && LabelEndAddress == 0))/* &&
+            if (!rom.IsMajora)
+            {
+                IsValid =
+                    /*(SceneStartAddress > rom.Code.VStart) &&*/
+                    (SceneStartAddress < rom.Size) && (SceneEndAddress < rom.Size) && (LabelStartAddress < rom.Size) && (LabelEndAddress < rom.Size) &&
+                    ((SceneStartAddress & 0xF) == 0) && ((SceneEndAddress & 0xF) == 0) && ((LabelStartAddress & 0xF) == 0) && ((LabelEndAddress & 0xF) == 0) &&
+                    (SceneEndAddress > SceneStartAddress) &&
+                    (((LabelStartAddress != 0) && (LabelEndAddress != 0) && (LabelEndAddress > LabelStartAddress) &&
+                        (LabelEndAddress == LabelStartAddress + 0x2880 || LabelEndAddress == LabelStartAddress + 0x1B00)) || (LabelStartAddress == 0 && LabelEndAddress == 0))/* &&
                 ((Unknown1 & 0xF0) == 0) && ((Unknown3 & 0xF0) == 0) && (Unknown4 == 0)*/;
+            }
+            else
+            {
+                IsValid = ((SceneStartAddress < rom.Size) && (SceneEndAddress < rom.Size) && ((SceneStartAddress & 0xF) == 0) && ((SceneEndAddress & 0xF) == 0) &&
+                    (SceneEndAddress > SceneStartAddress) && (LabelEndAddress == 0));
+            }
 
-            if (IsValid == true)
+            IsAllZero = (SceneStartAddress == 0) && (SceneEndAddress == 0) && (LabelStartAddress == 0) && (LabelEndAddress == 0);
+
+            if (IsValid && !IsAllZero)
             {
                 DMATableEntry dma = rom.Files.Find(x => x.PStart == SceneStartAddress);
                 if (dma != null) DMAFilename = dma.Name;

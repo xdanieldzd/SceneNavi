@@ -216,6 +216,12 @@
   <ItemGroup>
     <Content Include="Bottled Fairy.ico" />
     <None Include="UpdateData\sn-update.htm" />
+    <Content Include="XML\ActorDefinitions\DL\Database.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML\ActorDefinitions\ZS\Database.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="XML\GameDataSpecific\CZLE0\StageDescriptions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ActorDatabase ProgramVersion="1.0.1.2560">
+  <Definition IsDefault="RoomActor, SpawnPoint">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+  <Definition IsDefault="TransitionActor">
+    <Item Index="4" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="0" ValueType="System.Byte" Usage="NextRoomFront" Description="Next Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="1" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Next)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Byte" Usage="NextRoomBack" Description="Previous Room" Mask="0xFF" ControlType="System.Windows.Forms.ComboBox"></Item>
+    <Item Index="3" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Camera (Previous)" Mask="0xFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
+</ActorDatabase>
