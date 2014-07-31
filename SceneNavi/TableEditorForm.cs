@@ -50,36 +50,56 @@ namespace SceneNavi
             foreach (DataGridViewColumn dcc in dgvEntranceTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
 
             /* Bind data & configure scene table */
-            dgvSceneTable.DataSource = new BindingSource() { DataSource = ROM.Scenes };
             if (!ROM.IsMajora)
             {
+                dgvSceneTable.DataSource = new BindingSource() { DataSource = ROM.Scenes.ConvertAll(x => (ROMHandler.SceneTableEntryOcarina)x) };
                 dgvSceneTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
                 dgvSceneTable.Columns["Number"].DefaultCellStyle.Format = "X4";
                 dgvSceneTable.Columns["Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                 dgvSceneTable.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgvSceneTable.Columns["LabelStartAddress"].DefaultCellStyle.Format = "X8";
                 dgvSceneTable.Columns["LabelStartAddress"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                dgvSceneTable.Columns["LabelStartAddress"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("LabelStartAddress");
+                dgvSceneTable.Columns["LabelStartAddress"].ToolTipText = typeof(ROMHandler.SceneTableEntryOcarina).GetDescription("LabelStartAddress");
                 dgvSceneTable.Columns["LabelEndAddress"].DefaultCellStyle.Format = "X8";
                 dgvSceneTable.Columns["LabelEndAddress"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                dgvSceneTable.Columns["LabelEndAddress"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("LabelEndAddress");
+                dgvSceneTable.Columns["LabelEndAddress"].ToolTipText = typeof(ROMHandler.SceneTableEntryOcarina).GetDescription("LabelEndAddress");
                 dgvSceneTable.Columns["Unknown1"].DefaultCellStyle.Format = "X2";
                 dgvSceneTable.Columns["Unknown1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                dgvSceneTable.Columns["Unknown1"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("Unknown1");
+                dgvSceneTable.Columns["Unknown1"].ToolTipText = typeof(ROMHandler.SceneTableEntryOcarina).GetDescription("Unknown1");
                 dgvSceneTable.Columns["ConfigurationNo"].DefaultCellStyle.Format = "X2";
                 dgvSceneTable.Columns["ConfigurationNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                dgvSceneTable.Columns["ConfigurationNo"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("ConfigurationNo");
+                dgvSceneTable.Columns["ConfigurationNo"].ToolTipText = typeof(ROMHandler.SceneTableEntryOcarina).GetDescription("ConfigurationNo");
                 dgvSceneTable.Columns["Unknown3"].DefaultCellStyle.Format = "X2";
                 dgvSceneTable.Columns["Unknown3"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                dgvSceneTable.Columns["Unknown3"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("Unknown3");
+                dgvSceneTable.Columns["Unknown3"].ToolTipText = typeof(ROMHandler.SceneTableEntryOcarina).GetDescription("Unknown3");
                 dgvSceneTable.Columns["Unknown4"].DefaultCellStyle.Format = "X2";
                 dgvSceneTable.Columns["Unknown4"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                dgvSceneTable.Columns["Unknown4"].ToolTipText = typeof(ROMHandler.SceneTableEntry).GetDescription("Unknown4");
+                dgvSceneTable.Columns["Unknown4"].ToolTipText = typeof(ROMHandler.SceneTableEntryOcarina).GetDescription("Unknown4");
                 foreach (DataGridViewColumn dcc in dgvSceneTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
             }
             else
             {
-                //
+                dgvSceneTable.DataSource = new BindingSource() { DataSource = ROM.Scenes.ConvertAll(x => (ROMHandler.SceneTableEntryMajora)x) };
+                dgvSceneTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                dgvSceneTable.Columns["Number"].DefaultCellStyle.Format = "X4";
+                dgvSceneTable.Columns["Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvSceneTable.Columns["Unknown1"].DefaultCellStyle.Format = "X2";
+                dgvSceneTable.Columns["Unknown1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Unknown1"].ToolTipText = typeof(ROMHandler.SceneTableEntryMajora).GetDescription("Unknown1");
+                dgvSceneTable.Columns["Unknown2"].DefaultCellStyle.Format = "X2";
+                dgvSceneTable.Columns["Unknown2"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Unknown2"].ToolTipText = typeof(ROMHandler.SceneTableEntryMajora).GetDescription("Unknown2");
+                dgvSceneTable.Columns["Unknown3"].DefaultCellStyle.Format = "X2";
+                dgvSceneTable.Columns["Unknown3"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Unknown3"].ToolTipText = typeof(ROMHandler.SceneTableEntryMajora).GetDescription("Unknown3");
+                dgvSceneTable.Columns["Unknown4"].DefaultCellStyle.Format = "X2";
+                dgvSceneTable.Columns["Unknown4"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["Unknown4"].ToolTipText = typeof(ROMHandler.SceneTableEntryMajora).GetDescription("Unknown4");
+                dgvSceneTable.Columns["PresumedPadding"].DefaultCellStyle.Format = "X8";
+                dgvSceneTable.Columns["PresumedPadding"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvSceneTable.Columns["PresumedPadding"].ToolTipText = typeof(ROMHandler.SceneTableEntryMajora).GetDescription("PresumedPadding");
+                foreach (DataGridViewColumn dcc in dgvSceneTable.Columns) if (dcc.ReadOnly) dcc.DefaultCellStyle.ForeColor = SystemColors.GrayText;
             }
         }
 
@@ -159,7 +179,9 @@ namespace SceneNavi
             DataGridView dgv = (sender as DataGridView);
 
             if (dgv.Columns[e.ColumnIndex].Name == "Number" || dgv.Columns[e.ColumnIndex].Name == "LabelStartAddress" || dgv.Columns[e.ColumnIndex].Name == "LabelEndAddress" ||
-                dgv.Columns[e.ColumnIndex].Name == "Unknown1" || dgv.Columns[e.ColumnIndex].Name == "ConfigurationNo" || dgv.Columns[e.ColumnIndex].Name == "Unknown3" || dgv.Columns[e.ColumnIndex].Name == "Unknown4")
+                dgv.Columns[e.ColumnIndex].Name == "Unknown1" || dgv.Columns[e.ColumnIndex].Name == "ConfigurationNo" ||
+                dgv.Columns[e.ColumnIndex].Name == "Unknown3" || dgv.Columns[e.ColumnIndex].Name == "Unknown4" ||
+                dgv.Columns[e.ColumnIndex].Name == "Unknown2" || dgv.Columns[e.ColumnIndex].Name == "PresumedPadding")
             {
                 if (e != null && e.Value != null && e.DesiredType.Equals(typeof(string)))
                 {
@@ -189,7 +211,9 @@ namespace SceneNavi
             DataGridView dgv = (sender as DataGridView);
 
             if (dgv.Columns[e.ColumnIndex].Name == "LabelStartAddress" || dgv.Columns[e.ColumnIndex].Name == "LabelEndAddress" ||
-                dgv.Columns[e.ColumnIndex].Name == "Unknown1" || dgv.Columns[e.ColumnIndex].Name == "ConfigurationNo" || dgv.Columns[e.ColumnIndex].Name == "Unknown3" || dgv.Columns[e.ColumnIndex].Name == "Unknown4")
+                dgv.Columns[e.ColumnIndex].Name == "Unknown1" || dgv.Columns[e.ColumnIndex].Name == "ConfigurationNo" ||
+                dgv.Columns[e.ColumnIndex].Name == "Unknown3" || dgv.Columns[e.ColumnIndex].Name == "Unknown4" ||
+                dgv.Columns[e.ColumnIndex].Name == "Unknown2" || dgv.Columns[e.ColumnIndex].Name == "PresumedPadding")
             {
                 if (e != null && e.Value != null)
                 {

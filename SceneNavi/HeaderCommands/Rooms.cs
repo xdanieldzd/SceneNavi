@@ -59,8 +59,8 @@ namespace SceneNavi.HeaderCommands
 
                     if ((Description = (ROM.XMLRoomNames.Names[Start] as string)) == null)
                     {
-                        ROMHandler.SceneTableEntry parentste = (parent as ROMHandler.SceneTableEntry);
-                        if (parentste.IsNameExternal)
+                        ROMHandler.ISceneTableEntry parentste = (parent as ROMHandler.ISceneTableEntry);
+                        if (parentste.IsNameExternal())
                         {
                             Description = string.Format("Room {0}", (Number + 1));
                         }

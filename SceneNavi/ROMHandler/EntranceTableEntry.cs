@@ -30,12 +30,12 @@ namespace SceneNavi.ROMHandler
         {
             get
             {
-                return (SceneNumber < ROM.Scenes.Count ? ROM.Scenes[SceneNumber].Name : "(invalid?)");
+                return (SceneNumber < ROM.Scenes.Count ? ROM.Scenes[SceneNumber].GetName() : "(invalid?)");
             }
 
             set
             {
-                int scnidx = ROM.Scenes.FindIndex(x => x.Name.ToLowerInvariant() == value.ToLowerInvariant());
+                int scnidx = ROM.Scenes.FindIndex(x => x.GetName().ToLowerInvariant() == value.ToLowerInvariant());
                 if (scnidx != -1)
                     SceneNumber = (byte)scnidx;
                 else

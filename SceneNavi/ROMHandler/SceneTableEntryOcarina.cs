@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace SceneNavi.ROMHandler
 {
-    public class SceneTableEntry : IHeaderParent
+    public class SceneTableEntryOcarina : ISceneTableEntry
     {
         #region Pseudo-code for validity - ONLY FOR OOT
         /*
@@ -34,20 +34,26 @@ namespace SceneNavi.ROMHandler
 
         [ReadOnly(true)]
         public ushort Number { get; set; }
+        public ushort GetNumber() { return Number; }
+        public void SetNumber(ushort number) { this.Number = number; }
 
         [Browsable(false)]
-        public string DMAFilename { get; private set; }
+        string dmaFilename;
+        public string GetDMAFilename() { return dmaFilename; }
+
         [ReadOnly(true)]
         public string Name { get; private set; }
+        public string GetName() { return Name; }
+
         [Browsable(false)]
         public int Offset { get; private set; }
         [Browsable(false)]
         public bool IsOffsetRelative { get; private set; }
 
         [Browsable(false)]
-        public uint SceneStartAddress { get; private set; }
-        [Browsable(false)]
-        public uint SceneEndAddress { get; private set; }
+        uint sceneStartAddress, sceneEndAddress;
+        public uint GetSceneStartAddress() { return sceneStartAddress; }
+        public uint GetSceneEndAddress() { return sceneEndAddress; }
 
         [DisplayName("Title start"), Description("Start address of area title card")]
         public uint LabelStartAddress { get; set; }
@@ -63,62 +69,79 @@ namespace SceneNavi.ROMHandler
         [DisplayName("Unknown 4"), Description("Unknown; always 0x00, unused or padding?")]
         public byte Unknown4 { get; set; }
 
-        [Browsable(false)]
-        public bool IsValid { get; private set; }
-        [Browsable(false)]
-        public bool IsAllZero { get; private set; }
-        [Browsable(false)]
-        public byte[] Data { get; private set; }
+        public bool IsValid()
+        {
+            return
+                (sceneStartAddress < ROM.Size) && (sceneEndAddress < ROM.Size) && (LabelStartAddress < ROM.Size) && (LabelEndAddress < ROM.Size) &&
+                ((sceneStartAddress & 0xF) == 0) && ((sceneEndAddress & 0xF) == 0) && ((LabelStartAddress & 0xF) == 0) && ((LabelEndAddress & 0xF) == 0) &&
+                (sceneEndAddress > sceneStartAddress) &&
+                (((LabelStartAddress != 0) && (LabelEndAddress != 0) && (LabelEndAddress > LabelStartAddress) &&
+                (LabelEndAddress == LabelStartAddress + 0x2880 || LabelEndAddress == LabelStartAddress + 0x1B00)) || (LabelStartAddress == 0 && LabelEndAddress == 0));
+        }
+
+        public bool IsAllZero()
+        {
+            return (sceneStartAddress == 0) && (sceneEndAddress == 0) && (LabelStartAddress == 0) && (LabelEndAddress == 0);
+        }
 
         [Browsable(false)]
-        public List<HeaderLoader> SceneHeaders { get; private set; }
+        byte[] data;
+        public byte[] GetData() { return data; }
+
+        [Browsable(false)]
+        List<HeaderLoader> sceneHeaders;
+        public List<HeaderLoader> GetSceneHeaders() { return sceneHeaders; }
 
         [Browsable(false)]
         public bool InROM { get; private set; }
-        [Browsable(false)]
-        public bool IsNameExternal { get; private set; }
 
         [Browsable(false)]
-        public HeaderLoader CurrentSceneHeader { get; set; }
+        bool isNameExternal;
+        public bool IsNameExternal() { return isNameExternal; }
+
         [Browsable(false)]
-        public HeaderCommands.Actors ActiveTransitionData
+        HeaderLoader currentSceneHeader;
+        public HeaderLoader GetCurrentSceneHeader() { return currentSceneHeader; }
+        public void SetCurrentSceneHeader(HeaderLoader header) { currentSceneHeader = header; }
+
+        public HeaderCommands.Actors GetActiveTransitionData()
         {
-            get { return (CurrentSceneHeader == null ? null : CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Transitions) as HeaderCommands.Actors); }
+            return (currentSceneHeader == null ? null : currentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Transitions) as HeaderCommands.Actors);
         }
-        [Browsable(false)]
-        public HeaderCommands.Actors ActiveSpawnPointData
+
+        public HeaderCommands.Actors GetActiveSpawnPointData()
         {
-            get { return (CurrentSceneHeader == null ? null : CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Spawns) as HeaderCommands.Actors); }
+            return (currentSceneHeader == null ? null : currentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Spawns) as HeaderCommands.Actors);
         }
-        [Browsable(false)]
-        public HeaderCommands.SpecialObjects ActiveSpecialObjs
+
+        public HeaderCommands.SpecialObjects GetActiveSpecialObjs()
         {
-            get { return (CurrentSceneHeader == null ? null : CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.SpecialObjects) as HeaderCommands.SpecialObjects); }
+            return (currentSceneHeader == null ? null : currentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.SpecialObjects) as HeaderCommands.SpecialObjects);
         }
-        [Browsable(false)]
-        public HeaderCommands.Waypoints ActiveWaypoints
+
+        public HeaderCommands.Waypoints GetActiveWaypoints()
         {
-            get { return (CurrentSceneHeader == null ? null : CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Waypoints) as HeaderCommands.Waypoints); }
+            return (currentSceneHeader == null ? null : currentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Waypoints) as HeaderCommands.Waypoints);
         }
-        [Browsable(false)]
-        public HeaderCommands.Collision ActiveCollision
+
+        public HeaderCommands.Collision GetActiveCollision()
         {
-            get { return (CurrentSceneHeader == null ? null : CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Collision) as HeaderCommands.Collision); }
+            return (currentSceneHeader == null ? null : currentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Collision) as HeaderCommands.Collision);
         }
-        [Browsable(false)]
-        public HeaderCommands.SettingsSoundScene ActiveSettingsSoundScene
+
+        public HeaderCommands.SettingsSoundScene GetActiveSettingsSoundScene()
         {
-            get { return (CurrentSceneHeader == null ? null : CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.SettingsSoundScene) as HeaderCommands.SettingsSoundScene); }
+            return (currentSceneHeader == null ? null : currentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.SettingsSoundScene) as HeaderCommands.SettingsSoundScene);
         }
-        [Browsable(false)]
-        public HeaderCommands.EnvironmentSettings ActiveEnvSettings
+
+        public HeaderCommands.EnvironmentSettings GetActiveEnvSettings()
         {
-            get { return (CurrentSceneHeader == null ? null : CurrentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.EnvironmentSettings) as HeaderCommands.EnvironmentSettings); }
+            return (currentSceneHeader == null ? null : currentSceneHeader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.EnvironmentSettings) as HeaderCommands.EnvironmentSettings);
         }
 
         ROMHandler ROM;
 
-        public SceneTableEntry(ROMHandler rom, string fn)
+        public SceneTableEntryOcarina(ROMHandler rom, string fn)
         {
             ROM = rom;
             InROM = false;
@@ -126,21 +149,20 @@ namespace SceneNavi.ROMHandler
             Offset = -1;
             IsOffsetRelative = false;
 
-            SceneStartAddress = SceneEndAddress = LabelStartAddress = LabelEndAddress = 0;
+            sceneStartAddress = sceneEndAddress = 0;
+
+            LabelStartAddress = LabelEndAddress = 0;
             Unknown1 = ConfigurationNo = Unknown3 = Unknown4 = 0;
 
-            IsValid = true;
-            IsAllZero = false;
-
             System.IO.FileStream fs = new System.IO.FileStream(fn, System.IO.FileMode.Open);
-            Data = new byte[fs.Length];
-            fs.Read(Data, 0, (int)fs.Length);
+            data = new byte[fs.Length];
+            fs.Read(data, 0, (int)fs.Length);
             fs.Close();
 
             Name = System.IO.Path.GetFileNameWithoutExtension(fn);
         }
 
-        public SceneTableEntry(ROMHandler rom, int ofs, bool isrel)
+        public SceneTableEntryOcarina(ROMHandler rom, int ofs, bool isrel)
         {
             ROM = rom;
             InROM = true;
@@ -148,8 +170,9 @@ namespace SceneNavi.ROMHandler
             Offset = ofs;
             IsOffsetRelative = isrel;
 
-            SceneStartAddress = Endian.SwapUInt32(BitConverter.ToUInt32(IsOffsetRelative ? rom.CodeData : rom.Data, ofs));
-            SceneEndAddress = Endian.SwapUInt32(BitConverter.ToUInt32(IsOffsetRelative ? rom.CodeData : rom.Data, ofs + 4));
+            sceneStartAddress = Endian.SwapUInt32(BitConverter.ToUInt32(IsOffsetRelative ? rom.CodeData : rom.Data, ofs));
+            sceneEndAddress = Endian.SwapUInt32(BitConverter.ToUInt32(IsOffsetRelative ? rom.CodeData : rom.Data, ofs + 4));
+
             LabelStartAddress = Endian.SwapUInt32(BitConverter.ToUInt32(IsOffsetRelative ? rom.CodeData : rom.Data, ofs + 8));
             LabelEndAddress = Endian.SwapUInt32(BitConverter.ToUInt32(IsOffsetRelative ? rom.CodeData : rom.Data, ofs + 12));
             Unknown1 = (IsOffsetRelative ? rom.CodeData : rom.Data)[ofs + 16];
@@ -157,44 +180,25 @@ namespace SceneNavi.ROMHandler
             Unknown3 = (IsOffsetRelative ? rom.CodeData : rom.Data)[ofs + 18];
             Unknown4 = (IsOffsetRelative ? rom.CodeData : rom.Data)[ofs + 19];
 
-            if (!rom.IsMajora)
+            if (IsValid() && !IsAllZero())
             {
-                IsValid =
-                    /*(SceneStartAddress > rom.Code.VStart) &&*/
-                    (SceneStartAddress < rom.Size) && (SceneEndAddress < rom.Size) && (LabelStartAddress < rom.Size) && (LabelEndAddress < rom.Size) &&
-                    ((SceneStartAddress & 0xF) == 0) && ((SceneEndAddress & 0xF) == 0) && ((LabelStartAddress & 0xF) == 0) && ((LabelEndAddress & 0xF) == 0) &&
-                    (SceneEndAddress > SceneStartAddress) &&
-                    (((LabelStartAddress != 0) && (LabelEndAddress != 0) && (LabelEndAddress > LabelStartAddress) &&
-                        (LabelEndAddress == LabelStartAddress + 0x2880 || LabelEndAddress == LabelStartAddress + 0x1B00)) || (LabelStartAddress == 0 && LabelEndAddress == 0))/* &&
-                ((Unknown1 & 0xF0) == 0) && ((Unknown3 & 0xF0) == 0) && (Unknown4 == 0)*/;
-            }
-            else
-            {
-                IsValid = ((SceneStartAddress < rom.Size) && (SceneEndAddress < rom.Size) && ((SceneStartAddress & 0xF) == 0) && ((SceneEndAddress & 0xF) == 0) &&
-                    (SceneEndAddress > SceneStartAddress) && (LabelEndAddress == 0));
-            }
+                DMATableEntry dma = rom.Files.Find(x => x.PStart == sceneStartAddress);
+                if (dma != null) dmaFilename = dma.Name;
 
-            IsAllZero = (SceneStartAddress == 0) && (SceneEndAddress == 0) && (LabelStartAddress == 0) && (LabelEndAddress == 0);
-
-            if (IsValid && !IsAllZero)
-            {
-                DMATableEntry dma = rom.Files.Find(x => x.PStart == SceneStartAddress);
-                if (dma != null) DMAFilename = dma.Name;
-
-                if ((Name = (ROM.XMLSceneNames.Names[SceneStartAddress] as string)) == null)
+                if ((Name = (ROM.XMLSceneNames.Names[sceneStartAddress] as string)) == null)
                 {
-                    IsNameExternal = false;
+                    isNameExternal = false;
 
                     if (dma != null)
-                        Name = DMAFilename;
+                        Name = dmaFilename;
                     else
-                        Name = string.Format("S{0:X}_L{1:X}", SceneStartAddress, LabelStartAddress);
+                        Name = string.Format("S{0:X}_L{1:X}", sceneStartAddress, LabelStartAddress);
                 }
                 else
-                    IsNameExternal = true;
+                    isNameExternal = true;
 
-                Data = new byte[SceneEndAddress - SceneStartAddress];
-                Array.Copy(ROM.Data, SceneStartAddress, Data, 0, SceneEndAddress - SceneStartAddress);
+                data = new byte[sceneEndAddress - sceneStartAddress];
+                Array.Copy(ROM.Data, sceneStartAddress, data, 0, sceneEndAddress - sceneStartAddress);
             }
         }
 
@@ -204,10 +208,10 @@ namespace SceneNavi.ROMHandler
 
             byte[] tmpbuf = null;
 
-            tmpbuf = BitConverter.GetBytes(Endian.SwapUInt32(SceneStartAddress));
+            tmpbuf = BitConverter.GetBytes(Endian.SwapUInt32(sceneStartAddress));
             Buffer.BlockCopy(tmpbuf, 0, (IsOffsetRelative ? ROM.CodeData : ROM.Data), Offset, tmpbuf.Length);
 
-            tmpbuf = BitConverter.GetBytes(Endian.SwapUInt32(SceneEndAddress));
+            tmpbuf = BitConverter.GetBytes(Endian.SwapUInt32(sceneEndAddress));
             Buffer.BlockCopy(tmpbuf, 0, (IsOffsetRelative ? ROM.CodeData : ROM.Data), Offset + 4, tmpbuf.Length);
 
             tmpbuf = BitConverter.GetBytes(Endian.SwapUInt32(LabelStartAddress));
@@ -227,16 +231,16 @@ namespace SceneNavi.ROMHandler
             Program.Status.Message = string.Format("Reading scene '{0}'...", this.Name);
 
             ROM.SegmentMapping.Remove((byte)0x02);
-            ROM.SegmentMapping.Add((byte)0x02, Data);
+            ROM.SegmentMapping.Add((byte)0x02, data);
 
-            SceneHeaders = new List<HeaderLoader>();
+            sceneHeaders = new List<HeaderLoader>();
 
             HeaderLoader newheader = null;
             HeaderCommands.Rooms rooms = null;
             HeaderCommands.Collision coll = null;
 
-            if (Data[0] == (byte)HeaderLoader.CommandTypeIDs.SettingsSoundScene || Data[0] == (byte)HeaderLoader.CommandTypeIDs.Rooms ||
-                BitConverter.ToUInt32(Data, 0) == (byte)HeaderLoader.CommandTypeIDs.SubHeaders)
+            if (data[0] == (byte)HeaderLoader.CommandTypeIDs.SettingsSoundScene || data[0] == (byte)HeaderLoader.CommandTypeIDs.Rooms ||
+                BitConverter.ToUInt32(data, 0) == (byte)HeaderLoader.CommandTypeIDs.SubHeaders)
             {
                 /* Get rooms & collision command from first header */
                 newheader = new HeaderLoader(ROM, this, (byte)0x02, 0, 0);
@@ -250,7 +254,7 @@ namespace SceneNavi.ROMHandler
 
                 rooms = newheader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Rooms) as HeaderCommands.Rooms;
                 coll = newheader.Commands.FirstOrDefault(x => x.Command == HeaderLoader.CommandTypeIDs.Collision) as HeaderCommands.Collision;
-                SceneHeaders.Add(newheader);
+                sceneHeaders.Add(newheader);
 
                 if (BitConverter.ToUInt32(((byte[])ROM.SegmentMapping[(byte)0x02]), 0) == 0x18)
                 {
@@ -277,13 +281,13 @@ namespace SceneNavi.ROMHandler
                             int collidx = newheader.Commands.FindIndex(x => x.Command == HeaderLoader.CommandTypeIDs.Collision);
                             if (collidx != -1 && coll != null) newheader.Commands[collidx] = coll;
 
-                            SceneHeaders.Add(newheader);
+                            sceneHeaders.Add(newheader);
                         }
                         aofs += 4;
                     }
                 }
 
-                CurrentSceneHeader = SceneHeaders[0];
+                currentSceneHeader = sceneHeaders[0];
             }
         }
     }

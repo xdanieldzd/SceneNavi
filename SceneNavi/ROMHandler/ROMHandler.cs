@@ -59,7 +59,7 @@ namespace SceneNavi.ROMHandler
         public DMATableEntry Code { get; private set; }
         public byte[] CodeData { get; private set; }
 
-        public List<SceneTableEntry> Scenes { get; private set; }
+        public List<ISceneTableEntry> Scenes { get; private set; }
         public int SceneTableAddress { get; private set; }
         public System.Windows.Forms.AutoCompleteStringCollection SceneNameACStrings { get; private set; }
 
@@ -349,7 +349,7 @@ namespace SceneNavi.ROMHandler
 
         private void FindSceneTable()
         {
-            Scenes = new List<SceneTableEntry>();
+            Scenes = new List<ISceneTableEntry>();
 
             if (IsMajora || !HasZ64TablesHack)
             {
@@ -359,8 +359,8 @@ namespace SceneNavi.ROMHandler
 
                 for (int i = CodeData.Length - (increment * 2); i > 0; i -= 4)
                 {
-                    SceneTableEntry entry = new SceneTableEntry(this, i, true);
-                    if (entry.SceneStartAddress == dma.VStart && entry.SceneEndAddress == dma.VEnd)
+                    ISceneTableEntry entry = (!IsMajora ? (ISceneTableEntry)new SceneTableEntryOcarina(this, i, true) : (ISceneTableEntry)new SceneTableEntryMajora(this, i, true));
+                    if (entry.GetSceneStartAddress() == dma.VStart && entry.GetSceneEndAddress() == dma.VEnd)
                     {
                         SceneTableAddress = i;
                         break;
@@ -371,12 +371,12 @@ namespace SceneNavi.ROMHandler
                 {
                     for (int i = SceneTableAddress, j = 0; i < CodeData.Length - (16 * 16); i += increment)
                     {
-                        SceneTableEntry scn1 = new SceneTableEntry(this, i, true);
+                        ISceneTableEntry scn1 = (!IsMajora ? (ISceneTableEntry)new SceneTableEntryOcarina(this, i, true) : (ISceneTableEntry)new SceneTableEntryMajora(this, i, true));
 
-                        if (!scn1.IsValid && !scn1.IsAllZero) break;
+                        if (!scn1.IsValid() && !scn1.IsAllZero()) break;
 
-                        scn1.Number = (ushort)j;
-                        if (!scn1.IsAllZero) Scenes.Add(scn1);
+                        scn1.SetNumber((ushort)j);
+                        if (!scn1.IsAllZero()) Scenes.Add(scn1);
                         j++;
                     }
                 }
@@ -387,15 +387,15 @@ namespace SceneNavi.ROMHandler
                 int cnt = Endian.SwapInt32(BitConverter.ToInt32(Data, Z64TablesAdrOffset + 4));
                 for (int i = 0; i < cnt; i++)
                 {
-                    Scenes.Add(new SceneTableEntry(this, SceneTableAddress + (i * 20), false));
+                    Scenes.Add(new SceneTableEntryOcarina(this, SceneTableAddress + (i * 20), false));
                 }
             }
 
             SceneNameACStrings = new System.Windows.Forms.AutoCompleteStringCollection();
-            foreach (SceneTableEntry ste in Scenes)
+            foreach (ISceneTableEntry ste in Scenes)
             {
                 ste.ReadScene();
-                SceneNameACStrings.Add(ste.Name);
+                SceneNameACStrings.Add(ste.GetName());
             }
         }
 

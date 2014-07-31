@@ -107,6 +107,8 @@
     <Compile Include="HeaderCommands\SettingsSoundScene.cs" />
     <Compile Include="HeaderCommands\Waypoints.cs" />
     <Compile Include="HeaderCommands\SpecialObjects.cs" />
+    <Compile Include="ROMHandler\ISceneTableEntry.cs" />
+    <Compile Include="ROMHandler\SceneTableEntryMajora.cs" />
     <Compile Include="SimpleF3DEX2\ImageHelper.cs" />
     <Compile Include="OpenGLHelpers\DisplayList.cs" />
     <Compile Include="OpenGLHelpers\DisplayListEx.cs" />
@@ -145,7 +147,7 @@
     <Compile Include="ROMHandler\DMATableEntry.cs" />
     <Compile Include="ROMHandler\EntranceTableEntry.cs" />
     <Compile Include="ROMHandler\ObjectTableEntry.cs" />
-    <Compile Include="ROMHandler\SceneTableEntry.cs" />
+    <Compile Include="ROMHandler\SceneTableEntryOcarina.cs" />
     <Compile Include="SimpleF3DEX2\CombinerEmulation\ArbCombineProgram.cs" />
     <Compile Include="SimpleF3DEX2\CombinerEmulation\ArbCombineManager.cs" />
     <Compile Include="SimpleF3DEX2\CombinerEmulation\GLSLCombineManager.cs" />
@@ -220,6 +222,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="XML\ActorDefinitions\ZS\Database.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML\GameDataGeneric\DL\ActorNames.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML\GameDataGeneric\DL\ObjectNames.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML\GameDataGeneric\DL\SongNames.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML\GameDataGeneric\ZS\ActorNames.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML\GameDataGeneric\ZS\ObjectNames.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML\GameDataGeneric\ZS\SongNames.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="XML\GameDataSpecific\CZLE0\StageDescriptions.xml">

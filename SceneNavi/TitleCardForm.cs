@@ -16,12 +16,12 @@ namespace SceneNavi
         int titleCardHeight = 0;
 
         ROMHandler.ROMHandler ROM;
-        ROMHandler.SceneTableEntry Scene;
+        ROMHandler.SceneTableEntryOcarina Scene;
 
         Bitmap output;
         Rectangle outputRect;
 
-        public TitleCardForm(ROMHandler.ROMHandler rom, ROMHandler.SceneTableEntry ste)
+        public TitleCardForm(ROMHandler.ROMHandler rom, ROMHandler.SceneTableEntryOcarina ste)
         {
             InitializeComponent();
 

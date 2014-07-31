@@ -20,7 +20,10 @@ namespace SceneNavi
             Names = new Hashtable();
 
             string path = Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), defdir);
-            if (Directory.Exists(path) == false) return;
+            if (!Directory.Exists(path)) return;
+
+            string file = Path.Combine(path, fn);
+            if (!File.Exists(file)) return;
 
             /* Load XDocument */
             XDocument xdoc = XDocument.Load(Path.Combine(path, fn));

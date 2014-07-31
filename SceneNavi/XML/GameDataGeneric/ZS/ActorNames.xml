@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Table KeyType="System.UInt16" ValueType="System.String">
+  <Element Key="0x0000">Link / Spawn point</Element>
+</Table>
