@@ -58,12 +58,12 @@ namespace SceneNavi.HeaderCommands
 
             if (parent is HeaderCommands.Rooms.RoomInfoClass && (parent as HeaderCommands.Rooms.RoomInfoClass).Parent is SceneTableEntryOcarina)
             {
-                SceneTableEntryOcarina ste = ((parent as HeaderCommands.Rooms.RoomInfoClass).Parent as SceneTableEntryOcarina);
-                InROM = ste.InROM;
+                ISceneTableEntry ste = ((parent as HeaderCommands.Rooms.RoomInfoClass).Parent as ISceneTableEntry);
+                InROM = ste.IsInROM();
             }
-            else if (parent is SceneTableEntryOcarina)
+            else if (parent is ISceneTableEntry)
             {
-                InROM = (parent as SceneTableEntryOcarina).InROM;
+                InROM = (parent as ISceneTableEntry).IsInROM();
             }
         }
 

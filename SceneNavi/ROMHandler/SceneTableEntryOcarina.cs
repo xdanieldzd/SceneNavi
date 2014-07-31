@@ -93,7 +93,8 @@ namespace SceneNavi.ROMHandler
         public List<HeaderLoader> GetSceneHeaders() { return sceneHeaders; }
 
         [Browsable(false)]
-        public bool InROM { get; private set; }
+        bool inROM;
+        public bool IsInROM() { return inROM; }
 
         [Browsable(false)]
         bool isNameExternal;
@@ -144,7 +145,7 @@ namespace SceneNavi.ROMHandler
         public SceneTableEntryOcarina(ROMHandler rom, string fn)
         {
             ROM = rom;
-            InROM = false;
+            inROM = false;
 
             Offset = -1;
             IsOffsetRelative = false;
@@ -165,7 +166,7 @@ namespace SceneNavi.ROMHandler
         public SceneTableEntryOcarina(ROMHandler rom, int ofs, bool isrel)
         {
             ROM = rom;
-            InROM = true;
+            inROM = true;
 
             Offset = ofs;
             IsOffsetRelative = isrel;
@@ -204,7 +205,7 @@ namespace SceneNavi.ROMHandler
 
         public void SaveTableEntry()
         {
-            if (!InROM) throw new Exception("Trying to save scene table entry for external scene file");
+            if (!inROM) throw new Exception("Trying to save scene table entry for external scene file");
 
             byte[] tmpbuf = null;
 

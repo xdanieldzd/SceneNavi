@@ -21,6 +21,7 @@ namespace SceneNavi.ROMHandler
 
         byte[] GetData();
         List<HeaderLoader> GetSceneHeaders();
+        bool IsInROM();
         bool IsNameExternal();
         HeaderLoader GetCurrentSceneHeader();
         void SetCurrentSceneHeader(HeaderLoader header);
