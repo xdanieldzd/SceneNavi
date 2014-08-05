@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 using OpenTK;
 using OpenTK.Graphics;
@@ -11,6 +12,8 @@ namespace SceneNavi.OpenGLHelpers
 {
     static class Initialization
     {
+        public enum ProjectionTypes { Perspective, Orthographic };
+
         public static string RendererString
         {
             get { return GL.GetString(StringName.Renderer) ?? "[null]"; }
@@ -118,18 +121,29 @@ namespace SceneNavi.OpenGLHelpers
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
         }
 
-        public static void SetViewport(int Width, int Height, float Far)
+        public static void CreateViewportAndProjection(ProjectionTypes projectionType, Rectangle clientRectangle, float near, float far)
         {
-            if (Width == 0 || Height == 0) return;
+            if (clientRectangle.Width <= 0 || clientRectangle.Height <= 0) return;
 
-            GL.Viewport(0, 0, Width, Height);
+            GL.Viewport(0, 0, clientRectangle.Width, clientRectangle.Height);
 
-            double aspect = Width / (double)Height;
-            Matrix4 PerspMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver3, (float)aspect, 0.1f, Far);
+            Matrix4 projectionMatrix = Matrix4.Identity;
+
+            switch (projectionType)
+            {
+                case ProjectionTypes.Perspective:
+                    double aspect = clientRectangle.Width / (double)clientRectangle.Height;
+                    projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver3, (float)aspect, near, far);
+                    break;
+
+                case ProjectionTypes.Orthographic:
+                    projectionMatrix = Matrix4.CreateOrthographicOffCenter(clientRectangle.Left, clientRectangle.Right, clientRectangle.Bottom, clientRectangle.Top, near, far);
+                    break;
+            }
 
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            GL.MultMatrix(ref PerspMatrix);
+            GL.MultMatrix(ref projectionMatrix);
 
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadIdentity();

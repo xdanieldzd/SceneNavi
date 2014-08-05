@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace SceneNavi
 {
@@ -137,6 +138,20 @@ namespace SceneNavi
             if (description.Description == string.Empty) return field;
 
             return description.Description;
+        }
+
+        public static SizeF MeasureString(this string s, Font font, StringFormat strFormat)
+        {
+            SizeF result;
+            using (var image = new Bitmap(1, 1))
+            {
+                using (var g = Graphics.FromImage(image))
+                {
+                    result = g.MeasureString(s, font, int.MaxValue, strFormat);
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -62,7 +62,7 @@ namespace SceneNavi
 
         bool ready, busy;
         bool[] keysDown = new bool[ushort.MaxValue];
-        QuickFontWrapper glText;
+        TextPrinter glText;
         Camera camera;
         FPSMonitor fpsMonitor;
 
@@ -137,7 +137,7 @@ namespace SceneNavi
             InitializeComponent();
 
             Application.Idle += new EventHandler(Application_Idle);
-
+            Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
             Program.Status.MessageChanged += new StatusMessageHandler.MessageChangedEvent(StatusMsg_OnStatusMessageChanged);
 
             dgvObjects.DoubleBuffered(true);
@@ -168,6 +168,11 @@ namespace SceneNavi
 
                 bsiCamCoords.Text = string.Format(System.Globalization.CultureInfo.InvariantCulture, "Cam X: {0:00.000}, Y: {1:00.000}, Z: {2:00.000}", camera.Pos.X, camera.Pos.Y, camera.Pos.Z);
             }
+        }
+
+        private void Application_ApplicationExit(object sender, EventArgs e)
+        {
+            if (glText != null) glText.Dispose();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -1136,7 +1141,7 @@ namespace SceneNavi
 
             Initialization.SetDefaults();
 
-            glText = new QuickFontWrapper(new Font("Verdana", 10.0f, FontStyle.Bold));
+            glText = new TextPrinter(new Font("Verdana", 9.0f, FontStyle.Bold));
             camera = new Camera();
             fpsMonitor = new FPSMonitor();
 
@@ -1153,7 +1158,7 @@ namespace SceneNavi
             {
                 fpsMonitor.Update();
 
-                RenderInit(((GLControl)sender).Width, ((GLControl)sender).Height);
+                RenderInit(((GLControl)sender).ClientRectangle);
 
                 if (rom != null && rom.Loaded)
                 {
@@ -1335,11 +1340,11 @@ namespace SceneNavi
             }
         }
 
-        private void RenderInit(int width, int height)
+        private void RenderInit(Rectangle rect)
         {
             GL.ClearColor(System.Drawing.Color.LightBlue);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Initialization.SetViewport(width, height, (currentEnvSettings != null ? ((float)currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
+            Initialization.CreateViewportAndProjection(Initialization.ProjectionTypes.Perspective, rect, 0.1f, (currentEnvSettings != null ? ((float)currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
             camera.Position();
             GL.Scale(oglSceneScale, oglSceneScale, oglSceneScale);
         }
@@ -1401,9 +1406,9 @@ namespace SceneNavi
 
         private void RenderTextOverlay()
         {
-            glText.Begin();
-            if (!Configuration.OGLVSync) glText.Print(string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:0.00} FPS", fpsMonitor.Value), new Vector2d(10.0, 10.0));
-            glText.End();
+            glText.Begin(customGLControl);
+            if (!Configuration.OGLVSync) glText.Print(string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:0.00} FPS", fpsMonitor.Value), new Vector2d(10.0, 10.0), Color.FromArgb(128, Color.Black));
+            glText.Flush();
         }
 
         private HeaderCommands.IPickableObject TryPickObject(int x, int y, bool moveable)
