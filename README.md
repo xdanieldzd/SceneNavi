@@ -3,6 +3,8 @@ SceneNavi
 
 A level editor for The Legend of Zelda: Ocarina of Time and Majora's Mask, written in C#.
 
+![SceneNavi](http://i.imgur.com/0jP2P9b.png)
+
 Requirements
 ============
 
