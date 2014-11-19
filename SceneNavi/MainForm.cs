@@ -1158,7 +1158,7 @@ namespace SceneNavi
             {
                 fpsMonitor.Update();
 
-                RenderInit(((GLControl)sender).ClientRectangle);
+                RenderInit(((GLControl)sender).ClientRectangle, Color.LightBlue);
 
                 if (rom != null && rom.Loaded)
                 {
@@ -1340,9 +1340,9 @@ namespace SceneNavi
             }
         }
 
-        private void RenderInit(Rectangle rect)
+        private void RenderInit(Rectangle rect, Color clearColor)
         {
-            GL.ClearColor(System.Drawing.Color.LightBlue);
+            GL.ClearColor(clearColor);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             Initialization.CreateViewportAndProjection(Initialization.ProjectionTypes.Perspective, rect, 0.1f, (currentEnvSettings != null ? ((float)currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
             camera.Position();
@@ -1546,13 +1546,13 @@ namespace SceneNavi
             GL.PushAttrib(AttribMask.AllAttribBits);
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.Lighting);
+            GL.Disable(EnableCap.Fog);
             GL.Enable(EnableCap.Blend);
             if (supportsGenProgramsARB) GL.Disable((EnableCap)All.FragmentProgram);
             if (supportsCreateShader) GL.UseProgram(0);
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
-            GL.ClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            RenderInit(customGLControl.ClientRectangle, Color.Black);
             foreach (HeaderCommands.IPickableObject obj in objlist)
             {
                 if (obj is HeaderCommands.Collision.Polygon || obj is OpenGLHelpers.DisplayListEx.Triangle)
@@ -1565,14 +1565,14 @@ namespace SceneNavi
 
             GL.PopAttrib();
 
-            byte[] pixel = new byte[3];
+            byte[] pixel = new byte[4];
             int[] viewport = new int[4];
 
             GL.GetInteger(GetPName.Viewport, viewport);
-            GL.ReadPixels(x, viewport[3] - y, 1, 1, PixelFormat.Bgr, PixelType.UnsignedByte, pixel);
-            int argb = (int)pixel[0] + (((int)pixel[1]) << 8) + (((int)pixel[2]) << 16);
+            GL.ReadPixels(x, viewport[3] - y, 1, 1, PixelFormat.Rgba, PixelType.UnsignedByte, pixel);
+            uint argb = (uint)((pixel[3] << 24) | (pixel[0] << 16) | (pixel[1] << 8) | pixel[2]);
 
-            return objlist.FirstOrDefault(xx => (xx.PickColor.ToArgb() & 0xFFFFFF) == argb);
+            return objlist.FirstOrDefault(xx => (xx.PickColor.ToArgb() & 0xFFFFFF) == (int)(argb & 0xFFFFFF));
         }
 
         private void customGLControl_MouseDown(object sender, MouseEventArgs e)
