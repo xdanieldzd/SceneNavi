@@ -77,6 +77,8 @@ namespace SceneNavi.SimpleF3DEX2
             mtxstack.Push(Matrix4d.Identity);
 
             Textures = new Texture[2];
+            Textures[0] = new Texture();
+            Textures[1] = new Texture();
             palette = new Color4[256];
             texcache = new List<TextureCache>();
             activetex = 0;
@@ -234,8 +236,8 @@ namespace SceneNavi.SimpleF3DEX2
                         ucodecmds[cmd](Endian.SwapUInt32(BitConverter.ToUInt32(segdata, (int)adr)), Endian.SwapUInt32(BitConverter.ToUInt32(segdata, (int)adr + 4)));
                         adr += 8;
 
-                        /* Texture loading hack; if SetCombine command detected, try loading textures again (fixes Water Temple 1st room, borked walls) */
-                        if (Configuration.RenderTextures && cmd == (byte)General.UcodeCmds.SETCOMBINE && Textures[0] != null) LoadTextures();
+                        /* Texture loading hack; if SetCombine OR LoadBlock command detected, try loading textures again (fixes Water Temple 1st room, borked walls; SM64toZ64 conversions?) */
+                        if (Configuration.RenderTextures && (cmd == (byte)General.UcodeCmds.SETCOMBINE || cmd == (byte)General.UcodeCmds.LOADBLOCK) && Textures[0] != null) LoadTextures();
                     }
                 }
             }

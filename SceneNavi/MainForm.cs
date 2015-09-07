@@ -1344,7 +1344,7 @@ namespace SceneNavi
         {
             GL.ClearColor(clearColor);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Initialization.CreateViewportAndProjection(Initialization.ProjectionTypes.Perspective, rect, 0.1f, (currentEnvSettings != null ? ((float)currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
+            Initialization.CreateViewportAndProjection(Initialization.ProjectionTypes.Perspective, rect, 0.001f, (currentEnvSettings != null ? ((float)currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
             camera.Position();
             GL.Scale(oglSceneScale, oglSceneScale, oglSceneScale);
         }
@@ -1402,6 +1402,24 @@ namespace SceneNavi
 
             /* Render DLs */
             foreach (DisplayList gldl in mh.DLs) gldl.Render();
+
+            /* Bounds test */
+            /*GL.PushAttrib(AttribMask.AllAttribBits);
+            GL.UseProgram(0);
+            GL.Disable(EnableCap.Lighting);
+            GL.Disable(EnableCap.Fog);
+            if (supportsGenProgramsARB) GL.Disable((EnableCap)All.FragmentProgram);
+            if (supportsCreateShader) GL.UseProgram(0);
+            for (int i = 0; i < mh.MinClipBounds.Count; i++)
+            {
+                GL.Color4(Color.FromArgb((mh.GetHashCode() & 0xFFFFFF) | (0xFF << 24)));
+                GL.Begin(PrimitiveType.Lines);
+                GL.Vertex3(mh.MinClipBounds[i]);
+                GL.Vertex3(mh.MaxClipBounds[i]);
+                GL.End();
+                //OpenGLHelpers.MiscDrawingHelpers.DrawBox(mh.MinClipBounds[i], mh.MaxClipBounds[i]);
+            }
+            GL.PopAttrib();*/
         }
 
         private void RenderTextOverlay()
@@ -1684,9 +1702,14 @@ namespace SceneNavi
                         {
                             // TODO  make this not shitty; try to get the "new method" to work with anything that's not at (0,0,0)
 
+                            /* Speed modifiers */
+                            double movemod = 3.0;
+                            if (keysDown[(ushort)Keys.Space]) movemod = 8.0;
+                            else if (keysDown[(ushort)Keys.ShiftKey]) movemod = 1.0;
+
                             /* Determine mouse position and displacement */
                             pickObjPosition = new Vector2d(e.X, e.Y);
-                            pickObjDisplacement = (pickObjPosition - pickObjLastPosition);
+                            pickObjDisplacement = ((pickObjPosition - pickObjLastPosition) * movemod);
 
                             /* No displacement? Exit */
                             if (pickObjDisplacement == Vector2d.Zero) return;
@@ -1695,33 +1718,28 @@ namespace SceneNavi
                             double CamXRotd = camera.Rot.X * (double)(Math.PI / 180);
                             double CamYRotd = camera.Rot.Y * (double)(Math.PI / 180);
 
-                            /* Speed modifiers */
-                            double movemod = 3.0;
-                            if (keysDown[(ushort)Keys.Space]) movemod = 8.0;
-                            else if (keysDown[(ushort)Keys.ShiftKey]) movemod = 0.75;
-
                             /* WARNING: Cam position stuff below is "I dunno why it works, but it does!" */
                             Vector3d objpos = pickedObject.Position;
 
                             if (Convert.ToBoolean(e.Button & MouseButtons.Middle) || (Convert.ToBoolean(e.Button & MouseButtons.Left) && keysDown[(ushort)Keys.ControlKey]))
                             {
                                 /* Middle mouse button OR left button + Ctrl -> move forward/backward */
-                                objpos.X += ((Math.Sin(CamYRotd) * -pickObjDisplacement.Y) * movemod);
-                                objpos.Z -= ((Math.Cos(CamYRotd) * -pickObjDisplacement.Y) * movemod);
+                                objpos.X += ((Math.Sin(CamYRotd) * -pickObjDisplacement.Y));
+                                objpos.Z -= ((Math.Cos(CamYRotd) * -pickObjDisplacement.Y));
 
-                                camera.Pos.X -= ((Math.Sin(CamYRotd) * (-pickObjDisplacement.Y * camera.CameraCoeff * camera.Sensitivity) / 1.25) * movemod);
-                                camera.Pos.Z += ((Math.Cos(CamYRotd) * (-pickObjDisplacement.Y * camera.CameraCoeff * camera.Sensitivity) / 1.25) * movemod);
+                                camera.Pos.X -= ((Math.Sin(CamYRotd) * (-pickObjDisplacement.Y * camera.CameraCoeff * camera.Sensitivity) / 1.25));
+                                camera.Pos.Z += ((Math.Cos(CamYRotd) * (-pickObjDisplacement.Y * camera.CameraCoeff * camera.Sensitivity) / 1.25));
                             }
                             else if (Convert.ToBoolean(e.Button & MouseButtons.Left))
                             {
                                 /* Left mouse button -> move up/down/left/right */
-                                objpos.X += ((Math.Cos(CamYRotd) * pickObjDisplacement.X) * movemod);
-                                objpos.Y -= pickObjDisplacement.Y * movemod;
-                                objpos.Z += ((Math.Sin(CamYRotd) * pickObjDisplacement.X) * movemod);
+                                objpos.X += ((Math.Cos(CamYRotd) * pickObjDisplacement.X));
+                                objpos.Y -= (pickObjDisplacement.Y);
+                                objpos.Z += ((Math.Sin(CamYRotd) * pickObjDisplacement.X));
 
-                                camera.Pos.X -= ((Math.Cos(CamYRotd) * (pickObjDisplacement.X * camera.CameraCoeff * camera.Sensitivity) / 1.25) * movemod);
-                                camera.Pos.Y += ((pickObjDisplacement.Y * camera.CameraCoeff * camera.Sensitivity) / 1.25) * movemod;
-                                camera.Pos.Z -= ((Math.Sin(CamYRotd) * (pickObjDisplacement.X * camera.CameraCoeff * camera.Sensitivity) / 1.25) * movemod);
+                                camera.Pos.X -= ((Math.Cos(CamYRotd) * pickObjDisplacement.X)) * 0.02;
+                                camera.Pos.Y += (pickObjDisplacement.Y) * 0.02;
+                                camera.Pos.Z -= ((Math.Sin(CamYRotd) * pickObjDisplacement.X)) * 0.02;
                             }
 
                             /* Round away decimal places (mainly for waypoints) */

@@ -77,14 +77,13 @@ namespace SceneNavi.HeaderCommands
                     {
                         for (int i = 0; i < Count; i++)
                         {
-                            MaxClipBounds.Add(new Vector3d(
-                                Endian.SwapInt16(BitConverter.ToInt16(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16)))),
-                                0.0,
-                                Endian.SwapInt16(BitConverter.ToInt16(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16) + 2)))));
-                            MinClipBounds.Add(new Vector3d(
-                                Endian.SwapInt16(BitConverter.ToInt16(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16)) + 4)),
-                                0.0,
-                                Endian.SwapInt16(BitConverter.ToInt16(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16) + 6)))));
+                            short s1 = Endian.SwapInt16(BitConverter.ToInt16(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16))));
+                            short s2 = Endian.SwapInt16(BitConverter.ToInt16(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16) + 2)));
+                            short s3 = Endian.SwapInt16(BitConverter.ToInt16(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16) + 4)));
+                            short s4 = Endian.SwapInt16(BitConverter.ToInt16(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16) + 6)));
+
+                            MaxClipBounds.Add(new Vector3d(s1, 0.0, s2));
+                            MinClipBounds.Add(new Vector3d(s3, 0.0, s4));
 
                             opaqueDLs.Add(Endian.SwapUInt32(BitConverter.ToUInt32(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16) + 8))));
                             transparentDLs.Add(Endian.SwapUInt32(BitConverter.ToUInt32(((byte[])ROM.SegmentMapping[(byte)(DLTablePointer >> 24)]), (int)((DLTablePointer & 0xFFFFFF) + (i * 16) + 12))));
