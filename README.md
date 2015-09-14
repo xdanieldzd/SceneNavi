@@ -8,6 +8,8 @@ A level editor for The Legend of Zelda: Ocarina of Time and Majora's Mask, writt
 Requirements
 ============
 
+* Visual Studio w/ NuGet package manager, ex. VS Community 2013
 * .NET Framework 4
-* [OpenTK 1.1](http://www.opentk.com) (currently uses [stable-5, 2014-07-23](http://sourceforge.net/projects/opentk/files/opentk/opentk-1.1/stable-5/))
-* [Nini 1.1.0](http://nini.sourceforge.net/)
+* NuGet packages for:
+ * [OpenTK 1.1](http://www.opentk.com)
+ * [Nini 1.1.0](http://nini.sourceforge.net/)
