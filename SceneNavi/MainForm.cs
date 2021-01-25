@@ -1351,7 +1351,7 @@ namespace SceneNavi
 		{
 			GL.ClearColor(clearColor);
 			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-			Initialization.CreateViewportAndProjection(Initialization.ProjectionTypes.Perspective, rect, 0.01f, (currentEnvSettings != null && Configuration.LimitDrawDistance ? (currentEnvSettings.DrawDistance / 50.0f) : 300.0f));
+			Initialization.CreateViewportAndProjection(Initialization.ProjectionTypes.Perspective, rect, 0.01f, currentEnvSettings != null && Configuration.LimitDrawDistance ? (currentEnvSettings.DrawDistance / 50.0f) : 600.0f);
 			camera.Position();
 			GL.Scale(oglSceneScale, oglSceneScale, oglSceneScale);
 		}
