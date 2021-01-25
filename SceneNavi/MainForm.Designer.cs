@@ -196,11 +196,11 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.toolsToolStripMenuItem,
-            this.optionsToolStripMenuItem,
-            this.helpToolStripMenuItem});
+			this.fileToolStripMenuItem,
+			this.editToolStripMenuItem,
+			this.toolsToolStripMenuItem,
+			this.optionsToolStripMenuItem,
+			this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(970, 24);
@@ -210,15 +210,15 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openROMToolStripMenuItem,
-            this.openSceneToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.toolStripMenuItem9,
-            this.closeSceneToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.rOMInformationToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.exitToolStripMenuItem});
+			this.openROMToolStripMenuItem,
+			this.openSceneToolStripMenuItem,
+			this.saveToolStripMenuItem,
+			this.toolStripMenuItem9,
+			this.closeSceneToolStripMenuItem,
+			this.toolStripMenuItem1,
+			this.rOMInformationToolStripMenuItem,
+			this.toolStripMenuItem2,
+			this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.HelpText = null;
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -297,8 +297,8 @@
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editDataTablesToolStripMenuItem,
-            this.editAreaTitleCardToolStripMenuItem});
+			this.editDataTablesToolStripMenuItem,
+			this.editAreaTitleCardToolStripMenuItem});
 			this.editToolStripMenuItem.HelpText = null;
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
 			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
@@ -325,10 +325,10 @@
 			// toolsToolStripMenuItem
 			// 
 			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mouseModeToolStripMenuItem,
-            this.collisionHighlightToolStripMenuItem,
-            this.toolStripMenuItem7,
-            this.resetCameraPositionToolStripMenuItem});
+			this.mouseModeToolStripMenuItem,
+			this.collisionHighlightToolStripMenuItem,
+			this.toolStripMenuItem7,
+			this.resetCameraPositionToolStripMenuItem});
 			this.toolsToolStripMenuItem.HelpText = null;
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
 			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
@@ -344,8 +344,8 @@
 			// collisionHighlightToolStripMenuItem
 			// 
 			this.collisionHighlightToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.whiteToolStripMenuItem,
-            this.typebasedToolStripMenuItem});
+			this.whiteToolStripMenuItem,
+			this.typebasedToolStripMenuItem});
 			this.collisionHighlightToolStripMenuItem.HelpText = "Change collision highlighting behavior";
 			this.collisionHighlightToolStripMenuItem.Name = "collisionHighlightToolStripMenuItem";
 			this.collisionHighlightToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
@@ -385,13 +385,13 @@
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.renderElementsToolStripMenuItem,
-            this.toolStripMenuItem4,
-            this.enableTexturesToolStripMenuItem,
-            this.limitDrawDistanceToolStripMenuItem,
-            this.combinerTypeToolStripMenuItem,
-            this.toolStripMenuItem10,
-            this.openGLToolStripMenuItem});
+			this.renderElementsToolStripMenuItem,
+			this.toolStripMenuItem4,
+			this.enableTexturesToolStripMenuItem,
+			this.limitDrawDistanceToolStripMenuItem,
+			this.combinerTypeToolStripMenuItem,
+			this.toolStripMenuItem10,
+			this.openGLToolStripMenuItem});
 			this.optionsToolStripMenuItem.HelpText = null;
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -400,16 +400,16 @@
 			// renderElementsToolStripMenuItem
 			// 
 			this.renderElementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.renderCollisionToolStripMenuItem,
-            this.toolStripMenuItem3,
-            this.renderRoomActorsToolStripMenuItem,
-            this.renderSpawnPointsToolStripMenuItem,
-            this.renderTransitionsToolStripMenuItem,
-            this.renderPathWaypointsToolStripMenuItem,
-            this.renderWaterboxesToolStripMenuItem,
-            this.toolStripMenuItem5,
-            this.linkAllWaypointsInPathToolStripMenuItem,
-            this.showWaterboxesPerRoomToolStripMenuItem});
+			this.renderCollisionToolStripMenuItem,
+			this.toolStripMenuItem3,
+			this.renderRoomActorsToolStripMenuItem,
+			this.renderSpawnPointsToolStripMenuItem,
+			this.renderTransitionsToolStripMenuItem,
+			this.renderPathWaypointsToolStripMenuItem,
+			this.renderWaterboxesToolStripMenuItem,
+			this.toolStripMenuItem5,
+			this.linkAllWaypointsInPathToolStripMenuItem,
+			this.showWaterboxesPerRoomToolStripMenuItem});
 			this.renderElementsToolStripMenuItem.HelpText = "Select scene elements to render";
 			this.renderElementsToolStripMenuItem.Name = "renderElementsToolStripMenuItem";
 			this.renderElementsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
@@ -535,8 +535,8 @@
 			// openGLToolStripMenuItem
 			// 
 			this.openGLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enableVSyncToolStripMenuItem,
-            this.enableAntiAliasingToolStripMenuItem});
+			this.enableVSyncToolStripMenuItem,
+			this.enableAntiAliasingToolStripMenuItem});
 			this.openGLToolStripMenuItem.HelpText = "Toggle various OpenGL properties";
 			this.openGLToolStripMenuItem.Name = "openGLToolStripMenuItem";
 			this.openGLToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
@@ -563,10 +563,10 @@
 			// helpToolStripMenuItem
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.checkForUpdateToolStripMenuItem,
-            this.toolStripMenuItem8,
-            this.openGLInformationToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+			this.checkForUpdateToolStripMenuItem,
+			this.toolStripMenuItem8,
+			this.openGLInformationToolStripMenuItem,
+			this.aboutToolStripMenuItem});
 			this.helpToolStripMenuItem.HelpText = null;
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -606,11 +606,11 @@
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bsiToolMode,
-            this.separatorStripItem1,
-            this.tsslStatus,
-            this.separatorStripItem2,
-            this.bsiCamCoords});
+			this.bsiToolMode,
+			this.separatorStripItem1,
+			this.tsslStatus,
+			this.separatorStripItem2,
+			this.bsiCamCoords});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 504);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.ShowItemToolTips = true;
@@ -747,10 +747,10 @@
 			this.nudSceneMetaNightSFX.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.nudSceneMetaNightSFX.Location = new System.Drawing.Point(99, 30);
 			this.nudSceneMetaNightSFX.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
+			255,
+			0,
+			0,
+			0});
 			this.nudSceneMetaNightSFX.Name = "nudSceneMetaNightSFX";
 			this.nudSceneMetaNightSFX.Size = new System.Drawing.Size(58, 20);
 			this.nudSceneMetaNightSFX.TabIndex = 4;
@@ -794,10 +794,10 @@
 			this.nudSceneMetaReverb.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.nudSceneMetaReverb.Location = new System.Drawing.Point(99, 56);
 			this.nudSceneMetaReverb.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
+			255,
+			0,
+			0,
+			0});
 			this.nudSceneMetaReverb.Name = "nudSceneMetaReverb";
 			this.nudSceneMetaReverb.Size = new System.Drawing.Size(58, 20);
 			this.nudSceneMetaReverb.TabIndex = 3;
@@ -841,8 +841,8 @@
 			// 
 			this.tlpExRoomActors.AutoSize = true;
 			this.tlpExRoomActors.ColumnCount = 2;
-			this.tlpExRoomActors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-			this.tlpExRoomActors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+			this.tlpExRoomActors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tlpExRoomActors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
 			this.tlpExRoomActors.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tlpExRoomActors.Location = new System.Drawing.Point(3, 24);
 			this.tlpExRoomActors.Name = "tlpExRoomActors";
@@ -954,8 +954,8 @@
 			// 
 			this.tlpExSpawnPoints.AutoSize = true;
 			this.tlpExSpawnPoints.ColumnCount = 2;
-			this.tlpExSpawnPoints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-			this.tlpExSpawnPoints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+			this.tlpExSpawnPoints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tlpExSpawnPoints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
 			this.tlpExSpawnPoints.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tlpExSpawnPoints.Location = new System.Drawing.Point(3, 24);
 			this.tlpExSpawnPoints.Name = "tlpExSpawnPoints";
@@ -994,8 +994,8 @@
 			// 
 			this.tlpExTransitions.AutoSize = true;
 			this.tlpExTransitions.ColumnCount = 2;
-			this.tlpExTransitions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-			this.tlpExTransitions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+			this.tlpExTransitions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tlpExTransitions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
 			this.tlpExTransitions.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tlpExTransitions.Location = new System.Drawing.Point(3, 24);
 			this.tlpExTransitions.Name = "tlpExTransitions";
@@ -1279,8 +1279,8 @@
 			// 
 			this.tlpExWaterboxes.AutoSize = true;
 			this.tlpExWaterboxes.ColumnCount = 2;
-			this.tlpExWaterboxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-			this.tlpExWaterboxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+			this.tlpExWaterboxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tlpExWaterboxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
 			this.tlpExWaterboxes.Controls.Add(this.lblWaterboxProperties, 0, 7);
 			this.tlpExWaterboxes.Controls.Add(this.txtWaterboxProperties, 0, 7);
 			this.tlpExWaterboxes.Controls.Add(this.lblWaterboxPositionX, 0, 1);
@@ -1463,15 +1463,15 @@
 			// ofdOpenROM
 			// 
 			this.ofdOpenROM.Filter = "Nintendo 64 ROMs (*.z64;*.v64;*.n64;*.bin)|*.z64;*.v64;*.n64;*.bin|All Files (*.*" +
-    ")|*.*";
+	")|*.*";
 			this.ofdOpenROM.Title = "Open ROM File";
 			// 
 			// cmsMoveableObjectEdit
 			// 
 			this.cmsMoveableObjectEdit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deselectToolStripMenuItem,
-            this.toolStripMenuItem6,
-            this.rotateToolStripMenuItem});
+			this.deselectToolStripMenuItem,
+			this.toolStripMenuItem6,
+			this.rotateToolStripMenuItem});
 			this.cmsMoveableObjectEdit.Name = "cmsPickableObjectEdit";
 			this.cmsMoveableObjectEdit.Size = new System.Drawing.Size(119, 54);
 			// 
@@ -1491,9 +1491,9 @@
 			// rotateToolStripMenuItem
 			// 
 			this.rotateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xAxisToolStripMenuItem,
-            this.yAxisToolStripMenuItem,
-            this.zAxisToolStripMenuItem});
+			this.xAxisToolStripMenuItem,
+			this.yAxisToolStripMenuItem,
+			this.zAxisToolStripMenuItem});
 			this.rotateToolStripMenuItem.HelpText = null;
 			this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
 			this.rotateToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
@@ -1502,8 +1502,8 @@
 			// xAxisToolStripMenuItem
 			// 
 			this.xAxisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xPlus45DegreesToolStripMenuItem,
-            this.xMinus45DegreesToolStripMenuItem});
+			this.xPlus45DegreesToolStripMenuItem,
+			this.xMinus45DegreesToolStripMenuItem});
 			this.xAxisToolStripMenuItem.HelpText = null;
 			this.xAxisToolStripMenuItem.Name = "xAxisToolStripMenuItem";
 			this.xAxisToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
@@ -1528,8 +1528,8 @@
 			// yAxisToolStripMenuItem
 			// 
 			this.yAxisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.yPlus45DegreesToolStripMenuItem,
-            this.yMinus45DegreesToolStripMenuItem});
+			this.yPlus45DegreesToolStripMenuItem,
+			this.yMinus45DegreesToolStripMenuItem});
 			this.yAxisToolStripMenuItem.HelpText = null;
 			this.yAxisToolStripMenuItem.Name = "yAxisToolStripMenuItem";
 			this.yAxisToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
@@ -1554,8 +1554,8 @@
 			// zAxisToolStripMenuItem
 			// 
 			this.zAxisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zPlus45DegreesToolStripMenuItem,
-            this.zMinus45DegreesToolStripMenuItem});
+			this.zPlus45DegreesToolStripMenuItem,
+			this.zMinus45DegreesToolStripMenuItem});
 			this.zAxisToolStripMenuItem.HelpText = null;
 			this.zAxisToolStripMenuItem.Name = "zAxisToolStripMenuItem";
 			this.zAxisToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
@@ -1590,7 +1590,7 @@
 			// cmsSceneTree
 			// 
 			this.cmsSceneTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.propertiesToolStripMenuItem});
+			this.propertiesToolStripMenuItem});
 			this.cmsSceneTree.Name = "cmsSceneTree";
 			this.cmsSceneTree.Size = new System.Drawing.Size(128, 26);
 			// 
@@ -1624,9 +1624,9 @@
 			// cmsVertexEdit
 			// 
 			this.cmsVertexEdit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeColorToolStripMenuItem,
-            this.toolStripMenuItem11,
-            this.propertiesToolStripMenuItem1});
+			this.changeColorToolStripMenuItem,
+			this.toolStripMenuItem11,
+			this.propertiesToolStripMenuItem1});
 			this.cmsVertexEdit.Name = "cmsVertexEdit";
 			this.cmsVertexEdit.Size = new System.Drawing.Size(157, 54);
 			// 

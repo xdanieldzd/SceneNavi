@@ -32,7 +32,18 @@
     <Item Index="8" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
     <Item Index="10" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
     <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
-    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" Description="Door Type" Mask="0x0380" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0x0000" Description="Normal #1 (loads rooms)"></Option>
+      <Option Value="0x0080" Description="Locked (loads rooms)"></Option>
+      <Option Value="0x0100" Description="Normal #2 (loads rooms)"></Option>
+      <Option Value="0x0180" Description="Normal (does not load rooms)"></Option>
+      <Option Value="0x0200" Description="Slams shut, does not open"></Option>
+      <Option Value="0x0280" Description="Talking Door"></Option>
+      <Option Value="0x0300" Description="Wooden door, time-locked"></Option>
+      <Option Value="0x0380" Description="Normal #3 (loads rooms)"></Option>
+    </Item>
+    <Item Index="15" ValueType="System.Byte" Description="Is double door?" Mask="0x40" ControlType="System.Windows.Forms.CheckBox"></Item>
+    <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Switch or Message ID" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
   </Definition>
   <Definition Number="0x000A" DisplayModel="ColoredSlab" PickModel="Slab" FrontOffset="180.0">
     <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
@@ -225,7 +236,21 @@
     <Item Index="8" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
     <Item Index="10" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
     <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
-    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Generic variable" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" Description="Door Type" Mask="0x03C0" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0x0000" Description="Lifting #1"></Option>
+      <Option Value="0x0040" Description="Front attached to Room Clear"></Option>
+      <Option Value="0x0080" Description="Front attached to Switch"></Option>
+      <Option Value="0x00C0" Description="Back permanently locked"></Option>
+      <Option Value="0x0100" Description="Phantom Ganon bars"></Option>
+      <Option Value="0x0140" Description="Boss door"></Option>
+      <Option Value="0x0180" Description="Falling Gohma door"></Option>
+      <Option Value="0x01C0" Description="Front attached to Switch, back to Room Clear"></Option>
+      <Option Value="0x0200" Description="Lifting (Phantom Ganon bars?)"></Option>
+      <Option Value="0x0240" Description="Lifting #2"></Option>
+      <Option Value="0x0280" Description="Lifting #3"></Option>
+      <Option Value="0x02C0" Description="Locked (lock on back)"></Option>
+      <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Attached Switch" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
+    </Item>
   </Definition>
   <Definition Number="0x0037">
     <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
