@@ -55,7 +55,7 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 			"vec3 R = normalize(-reflect(L, N));\n" +
 			"vec4 Iamb = gl_FrontLightProduct[0].ambient;\n" +
 			"vec4 Idiff = gl_FrontLightProduct[0].diffuse * max(dot(N, L), 0.0);\n" +
-			"vec4 Ispec = gl_FrontLightProduct[0].specular * pow(max(dot(R, E), 0.0), 0.3 * gl_FrontMaterial.shininess);\n";
+			"vec4 Ispec = gl_FrontLightProduct[0].specular * pow(max(dot(R, E), 0.0), 0.3);\n";
 
 		public uint Mux0 { get; private set; }
 		public uint Mux1 { get; private set; }
@@ -140,13 +140,13 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 						calc.Append("vec4(1.0, 1.0, 1.0, 1.0)");
 						break;
 					case UnpackedCombinerMux.ComponentsC16.CCMUX_COMBINED_ALPHA:
-						calc.Append("vec4(comb.a, comb.a, comb.a, comb.a)");
+						calc.Append("comb.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC16.CCMUX_TEXEL0_ALPHA:
-						calc.Append("vec4(tex0color.a, tex0color.a, tex0color.a, tex0color.a)");
+						calc.Append("tex0color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC16.CCMUX_TEXEL1_ALPHA:
-						calc.Append("vec4(tex1color.a, tex1color.a, tex1color.a, tex1color.a)");
+						calc.Append("tex1color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC16.CCMUX_PRIMITIVE_ALPHA:
 						calc.Append("primColor.a");
@@ -194,13 +194,13 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 						calc.Append("vec4(1.0, 1.0, 1.0, 1.0)");
 						break;
 					case UnpackedCombinerMux.ComponentsC16.CCMUX_COMBINED_ALPHA:
-						calc.Append("vec4(comb.a, comb.a, comb.a, comb.a)");
+						calc.Append("comb.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC16.CCMUX_TEXEL0_ALPHA:
-						calc.Append("vec4(tex0color.a, tex0color.a, tex0color.a, tex0color.a)");
+						calc.Append("tex0color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC16.CCMUX_TEXEL1_ALPHA:
-						calc.Append("vec4(tex1color.a, tex1color.a, tex1color.a, tex1color.a)");
+						calc.Append("tex1color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC16.CCMUX_PRIMITIVE_ALPHA:
 						calc.Append("primColor.a");
@@ -248,22 +248,22 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 						calc.Append("vec4(1.0, 1.0, 1.0, 1.0)");
 						break;
 					case UnpackedCombinerMux.ComponentsC32.CCMUX_COMBINED_ALPHA:
-						calc.Append("vec4(comb.a, comb.a, comb.a, comb.a)");
+						calc.Append("comb.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC32.CCMUX_TEXEL0_ALPHA:
-						calc.Append("vec4(tex0color.a, tex0color.a, tex0color.a, tex0color.a)");
+						calc.Append("tex0color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC32.CCMUX_TEXEL1_ALPHA:
-						calc.Append("vec4(tex1color.a, tex1color.a, tex1color.a, tex1color.a)");
+						calc.Append("tex1color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC32.CCMUX_PRIMITIVE_ALPHA:
-						calc.Append("vec4(primColor.a, primColor.a, primColor.a, primColor.a)");
+						calc.Append("primColor.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC32.CCMUX_SHADE_ALPHA:
-						calc.Append("vec4(lightColor.a, lightColor.a, lightColor.a, lightColor.a)");
+						calc.Append("lightColor.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC32.CCMUX_ENV_ALPHA:
-						calc.Append("vec4(envColor.a, envColor.a, envColor.a, envColor.a)");
+						calc.Append("envColor.a");
 						break;
 					case UnpackedCombinerMux.ComponentsC32.CCMUX_LOD_FRACTION:
 						calc.Append("vec4(1.0, 1.0, 1.0, 1.0)");    //unemulated for now
@@ -319,10 +319,10 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 						calc.Append("combAlpha.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_TEXEL0:
-						calc.Append("vec4(tex0color.a, tex0color.a, tex0color.a, tex0color.a)");
+						calc.Append("tex0color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_TEXEL1:
-						calc.Append("vec4(tex1color.a, tex1color.a, tex1color.a, tex1color.a)");
+						calc.Append("tex1color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_PRIMITIVE:
 						calc.Append("primColor.a");
@@ -349,10 +349,10 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 						calc.Append("combAlpha.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_TEXEL0:
-						calc.Append("vec4(tex0color.a, tex0color.a, tex0color.a, tex0color.a)");
+						calc.Append("tex0color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_TEXEL1:
-						calc.Append("vec4(tex1color.a, tex1color.a, tex1color.a, tex1color.a)");
+						calc.Append("tex1color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_PRIMITIVE:
 						calc.Append("primColor.a");
@@ -379,10 +379,10 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 						calc.Append("combAlpha.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_TEXEL0:
-						calc.Append("vec4(tex0color.a, tex0color.a, tex0color.a, tex0color.a)");
+						calc.Append("tex0color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_TEXEL1:
-						calc.Append("vec4(tex1color.a, tex1color.a, tex1color.a, tex1color.a)");
+						calc.Append("tex1color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_PRIMITIVE:
 						calc.Append("primColor.a");
@@ -409,10 +409,10 @@ namespace SceneNavi.SimpleF3DEX2.CombinerEmulation
 						calc.Append("combAlpha.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_TEXEL0:
-						calc.Append("vec4(tex0color.a, tex0color.a, tex0color.a, tex0color.a)");
+						calc.Append("tex0color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_TEXEL1:
-						calc.Append("vec4(tex1color.a, tex1color.a, tex1color.a, tex1color.a)");
+						calc.Append("tex1color.a");
 						break;
 					case UnpackedCombinerMux.ComponentsA8.ACMUX_PRIMITIVE:
 						calc.Append("primColor.a");

@@ -109,6 +109,7 @@
     <Compile Include="OpenGLHelpers\TextPrinter.cs" />
     <Compile Include="ROMHandler\ISceneTableEntry.cs" />
     <Compile Include="ROMHandler\SceneTableEntryMajora.cs" />
+    <Compile Include="SimpleF3DEX2\CombinerEmulation\ICombinerManager.cs" />
     <Compile Include="SimpleF3DEX2\ImageHelper.cs" />
     <Compile Include="OpenGLHelpers\DisplayList.cs" />
     <Compile Include="OpenGLHelpers\DisplayListEx.cs" />

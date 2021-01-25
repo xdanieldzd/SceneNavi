@@ -1394,13 +1394,19 @@ namespace SceneNavi
 
 		private void RenderMeshHeader(HeaderCommands.MeshHeader mh)
 		{
-			if (mh.DLs == null || displayListsDirty || mh.CachedWithTextures != Configuration.RenderTextures || mh.CachedWithCombinerType != Configuration.CombinerType)
+			if (mh.OpaqueDLs == null || mh.TransparentDLs == null || displayListsDirty ||
+				mh.CachedWithTextures != Configuration.RenderTextures || mh.CachedWithCombinerType != Configuration.CombinerType)
 			{
 				/* Display lists aren't yet cached OR cached DLs are wrong */
-				if (mh.DLs != null)
+				if (mh.OpaqueDLs != null)
 				{
-					foreach (DisplayList gldl in mh.DLs) gldl.Dispose();
-					mh.DLs.Clear();
+					foreach (DisplayList gldl in mh.OpaqueDLs) gldl.Dispose();
+					mh.OpaqueDLs.Clear();
+				}
+				if (mh.TransparentDLs != null)
+				{
+					foreach (DisplayList gldl in mh.TransparentDLs) gldl.Dispose();
+					mh.TransparentDLs.Clear();
 				}
 
 				mh.CreateDisplayLists(Configuration.RenderTextures, Configuration.CombinerType);
@@ -1408,7 +1414,8 @@ namespace SceneNavi
 			}
 
 			/* Render DLs */
-			foreach (DisplayList gldl in mh.DLs) gldl.Render();
+			foreach (DisplayList gldl in mh.OpaqueDLs) gldl.Render();
+			foreach (DisplayList gldl in mh.TransparentDLs) gldl.Render();
 
 			/* Bounds test */
 			/*GL.PushAttrib(AttribMask.AllAttribBits);
@@ -1448,13 +1455,24 @@ namespace SceneNavi
 				pickobjs.AddRange(currentRoomTriangle.Vertices);
 
 			/* Room model triangles */
-			if (currentRoom != null && currentRoom.ActiveMeshHeader != null && !Configuration.RenderCollision &&
-				currentRoom.ActiveMeshHeader.DLs.Count > 0 && currentRoom.ActiveMeshHeader.DLs[0].Triangles.Count > 0)
+			if (currentRoom != null && currentRoom.ActiveMeshHeader != null && !Configuration.RenderCollision)
 			{
-				if (currentRoom.ActiveMeshHeader.DLs[0].Triangles[0].IsMoveable == moveable)
+				if (currentRoom.ActiveMeshHeader.OpaqueDLs.Count > 0 && currentRoom.ActiveMeshHeader.OpaqueDLs[0].Triangles.Count > 0)
 				{
-					foreach (DisplayListEx dlex in currentRoom.ActiveMeshHeader.DLs)
-						pickobjs.AddRange(dlex.Triangles);
+					if (currentRoom.ActiveMeshHeader.OpaqueDLs[0].Triangles[0].IsMoveable == moveable)
+					{
+						foreach (DisplayListEx dlex in currentRoom.ActiveMeshHeader.OpaqueDLs)
+							pickobjs.AddRange(dlex.Triangles);
+					}
+				}
+
+				if (currentRoom.ActiveMeshHeader.TransparentDLs.Count > 0 && currentRoom.ActiveMeshHeader.TransparentDLs[0].Triangles.Count > 0)
+				{
+					if (currentRoom.ActiveMeshHeader.TransparentDLs[0].Triangles[0].IsMoveable == moveable)
+					{
+						foreach (DisplayListEx dlex in currentRoom.ActiveMeshHeader.TransparentDLs)
+							pickobjs.AddRange(dlex.Triangles);
+					}
 				}
 			}
 

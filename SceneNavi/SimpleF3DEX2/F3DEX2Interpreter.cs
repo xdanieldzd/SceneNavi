@@ -46,15 +46,14 @@ namespace SceneNavi.SimpleF3DEX2
 		internal Color4 EnvColor { get; private set; }
 		Stack<Matrix4d> mtxstack;
 		internal Texture[] Textures { get; private set; }
-		Color4[] palette;
+		readonly Color4[] palette;
 		List<TextureCache> texcache;
 		int activetex;
 		bool multitex;
 		public float[] ScaleS { get; private set; }
 		public float[] ScaleT { get; private set; }
 
-		ArbCombineManager arbCombiner;
-		GLSLCombineManager glslCombiner;
+		ICombinerManager combinerManager;
 
 		ROMHandler.ROMHandler ROM;
 		Stack<OpenGLHelpers.DisplayListEx> ActiveGLDL;
@@ -90,15 +89,15 @@ namespace SceneNavi.SimpleF3DEX2
 
 		public void InitCombiner()
 		{
-			if (Configuration.CombinerType == CombinerTypes.ArbCombiner && arbCombiner == null)
+			if (Configuration.CombinerType == CombinerTypes.ArbCombiner)
 			{
 				Program.Status.Message = "Initializing ARB combiner...";
-				arbCombiner = new ArbCombineManager();
+				combinerManager = new ArbCombineManager();
 			}
-			else if (Configuration.CombinerType == CombinerTypes.GLSLCombiner && glslCombiner == null)
+			else if (Configuration.CombinerType == CombinerTypes.GLSLCombiner)
 			{
 				Program.Status.Message = "Initializing GLSL combiner...";
-				glslCombiner = new GLSLCombineManager(this);
+				combinerManager = new GLSLCombineManager(this);
 			}
 		}
 
@@ -106,7 +105,7 @@ namespace SceneNavi.SimpleF3DEX2
 		{
 			ResetTextureCache();
 
-			if (Configuration.CombinerType == CombinerTypes.ArbCombiner && arbCombiner != null) arbCombiner.ResetFragmentCache();
+			if (Configuration.CombinerType == CombinerTypes.ArbCombiner && combinerManager is ArbCombineManager arbCombiner) arbCombiner.ResetFragmentCache();
 
 			if (LastTriList != null) LastTriList.Clear();
 		}
@@ -370,7 +369,8 @@ namespace SceneNavi.SimpleF3DEX2
 			GeometryMode = (GeometryMode & ~clr) | w1;
 			General.PerformModeChanges(this);
 
-			if (Configuration.CombinerType == CombinerTypes.GLSLCombiner && glslCombiner != null) glslCombiner.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
+			if (Configuration.CombinerType != CombinerTypes.None)
+				combinerManager?.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
 		}
 
 		private void CommandMtx(uint w0, uint w1)
@@ -433,7 +433,8 @@ namespace SceneNavi.SimpleF3DEX2
 
 			General.PerformModeChanges(this);
 
-			if (Configuration.CombinerType == CombinerTypes.GLSLCombiner && glslCombiner != null) glslCombiner.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
+			if (Configuration.CombinerType != CombinerTypes.None)
+				combinerManager?.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
 		}
 
 		private void CommandSetOtherModeL(uint w0, uint w1)
@@ -447,7 +448,8 @@ namespace SceneNavi.SimpleF3DEX2
 				OtherModeL = new OtherModeL(data);
 				General.PerformModeChanges(this);
 
-				if (Configuration.CombinerType == CombinerTypes.GLSLCombiner && glslCombiner != null) glslCombiner.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
+				if (Configuration.CombinerType != CombinerTypes.None)
+					combinerManager?.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
 			}
 		}
 
@@ -520,14 +522,8 @@ namespace SceneNavi.SimpleF3DEX2
 			LastComb0 = w0 & 0xFFFFFF;
 			LastComb1 = w1;
 
-			if (Configuration.CombinerType == CombinerTypes.ArbCombiner && arbCombiner != null)
-			{
-				arbCombiner.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
-			}
-			else if (Configuration.CombinerType == CombinerTypes.GLSLCombiner && glslCombiner != null)
-			{
-				glslCombiner.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
-			}
+			if (Configuration.CombinerType != CombinerTypes.None)
+				combinerManager?.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
 		}
 
 		private void CommandSetPrimColor(uint w0, uint w1)
@@ -539,17 +535,15 @@ namespace SceneNavi.SimpleF3DEX2
 				General.ShiftR(w1, 8, 8) * 0.0039215689f,
 				General.ShiftR(w1, 0, 8) * 0.0039215689f);
 
-			if (Configuration.CombinerType == CombinerTypes.ArbCombiner)
+			if (Configuration.CombinerType == CombinerTypes.ArbCombiner || Configuration.CombinerType == CombinerTypes.GLSLCombiner)
 			{
 				float m = General.ShiftL(w0, 8, 8);
 				float l = General.ShiftL(w0, 0, 8) * 0.0039215689f;
 
 				GL.Arb.ProgramEnvParameter4(AssemblyProgramTargetArb.FragmentProgram, 0, PrimColor.R, PrimColor.G, PrimColor.B, PrimColor.A);
 				GL.Arb.ProgramEnvParameter4(AssemblyProgramTargetArb.FragmentProgram, 2, l, l, l, l);
-			}
-			else if (Configuration.CombinerType == CombinerTypes.GLSLCombiner && glslCombiner != null)
-			{
-				glslCombiner.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
+
+				combinerManager?.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
 			}
 			else
 			{
@@ -569,13 +563,10 @@ namespace SceneNavi.SimpleF3DEX2
 				General.ShiftR(w1, 0, 8) * 0.0039215689f);
 
 			if (Configuration.CombinerType == CombinerTypes.ArbCombiner)
-			{
 				GL.Arb.ProgramEnvParameter4(AssemblyProgramTargetArb.FragmentProgram, 1, EnvColor.R, EnvColor.G, EnvColor.B, EnvColor.A);
-			}
-			else if (Configuration.CombinerType == CombinerTypes.GLSLCombiner && glslCombiner != null)
-			{
-				glslCombiner.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
-			}
+
+			if (Configuration.CombinerType != CombinerTypes.None)
+				combinerManager?.BindCombiner(LastComb0, LastComb1, Configuration.RenderTextures);
 		}
 
 		#region Texturing functions

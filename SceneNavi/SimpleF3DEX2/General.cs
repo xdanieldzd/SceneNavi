@@ -190,7 +190,7 @@ namespace SceneNavi.SimpleF3DEX2
 				GL.Disable(EnableCap.PolygonOffsetFill);
 
 			/* Alpha test */
-			if ((f3dex2.OtherModeL.CvgXAlpha || f3dex2.OtherModeL.AlphaCvgSel))
+			if (f3dex2.OtherModeL.CvgXAlpha || f3dex2.OtherModeL.AlphaCvgSel)
 			{
 				GL.Enable(EnableCap.AlphaTest);
 				GL.Disable(EnableCap.Blend);
@@ -266,14 +266,14 @@ namespace SceneNavi.SimpleF3DEX2
 				{
 					if (f3dex2.Textures[j].MaskS != 0)
 						S[j] = (f3dex2.VertexBuffer[i].TexCoord.X * f3dex2.Textures[j].ShiftScaleS * f3dex2.ScaleS[j] -
-							((f3dex2.Textures[j].ULS * Fixed2Float[2]) % (1 << f3dex2.Textures[j].MaskS))) * f3dex2.Textures[j].ScaleS;
+							(f3dex2.Textures[j].ULS * Fixed2Float[2] % (1 << f3dex2.Textures[j].MaskS))) * f3dex2.Textures[j].ScaleS;
 					else
 						S[j] = (f3dex2.VertexBuffer[i].TexCoord.X * f3dex2.Textures[j].ShiftScaleS * f3dex2.ScaleS[j] -
 							(f3dex2.Textures[j].ULS * Fixed2Float[2])) * f3dex2.Textures[j].ScaleS;
 
 					if (f3dex2.Textures[j].MaskT != 0)
 						T[j] = (f3dex2.VertexBuffer[i].TexCoord.Y * f3dex2.Textures[j].ShiftScaleT * f3dex2.ScaleT[j] -
-							((f3dex2.Textures[j].ULT * Fixed2Float[2]) % (1 << f3dex2.Textures[j].MaskT))) * f3dex2.Textures[j].ScaleT;
+							(f3dex2.Textures[j].ULT * Fixed2Float[2] % (1 << f3dex2.Textures[j].MaskT))) * f3dex2.Textures[j].ScaleT;
 					else
 						T[j] = (f3dex2.VertexBuffer[i].TexCoord.Y * f3dex2.Textures[j].ShiftScaleT * f3dex2.ScaleT[j] -
 							(f3dex2.Textures[j].ULT * Fixed2Float[2])) * f3dex2.Textures[j].ScaleT;
