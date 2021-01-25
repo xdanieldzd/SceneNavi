@@ -296,6 +296,23 @@
       <Option Value="0x0015" Description="Cows"></Option>
     </Item>
   </Definition>
+  <Definition Number="0x005E">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" Description="Torch Type" Mask="0xF000" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0x0000" Description="Golden Torch"></Option>
+      <Option Value="0x1000" Description="Timed Torch"></Option>
+      <Option Value="0x2000" Description="Wooden Torch"></Option>
+    </Item>
+    <Item Index="14" ValueType="System.Byte" Description="Is lit?" Mask="0x04" ControlType="System.Windows.Forms.CheckBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Torches to Solve Puzzle" Mask="0x03C0" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Attached Switch" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
+  </Definition>
   <Definition Number="0x00F1">
     <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
     <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
