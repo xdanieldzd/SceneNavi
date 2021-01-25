@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SceneNavi")]
-[assembly: AssemblyCopyright("Written 2013 by xdaniel")]
+[assembly: AssemblyCopyright("Written 2013-2021 by xdaniel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.1.2561")]
-[assembly: AssemblyFileVersion("1.0.1.2561")]
+[assembly: AssemblyVersion("1.0.1.2816")]
+[assembly: AssemblyFileVersion("1.0.1.2816")]
