@@ -156,7 +156,6 @@
     <Compile Include="SimpleF3DEX2\CombinerEmulation\ArbCombineProgram.cs" />
     <Compile Include="SimpleF3DEX2\CombinerEmulation\ArbCombineManager.cs" />
     <Compile Include="SimpleF3DEX2\CombinerEmulation\GLSLCombineManager.cs" />
-    <Compile Include="SimpleF3DEX2\CombinerEmulation\GLSLShaders.cs" />
     <Compile Include="SimpleF3DEX2\CombinerEmulation\KnownCombinerMuxes.cs" />
     <Compile Include="SimpleF3DEX2\F3DEX2Interpreter.cs" />
     <Compile Include="ROMHandler\ROMHandler.cs" />
@@ -215,6 +214,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Resources\FragmentShader.glsl" />
+    <EmbeddedResource Include="Resources\VertexShader.glsl" />
     <None Include="UpdateData\sn-update.rtf" />
   </ItemGroup>
   <ItemGroup>
