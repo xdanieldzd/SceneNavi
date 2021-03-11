@@ -224,7 +224,18 @@
     <Item Index="8" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
     <Item Index="10" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
     <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" Mask="0xFFFF" ControlType="System.Windows.Forms.TextBox"></Item>
-    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox"></Item>
+    <Item Index="14" ValueType="System.Byte" Description="Unknown modifier" Mask="0x02" ControlType="System.Windows.Forms.CheckBox"></Item>
+    <Item Index="14" ValueType="System.UInt16" Description="Plane Type" Mask="0x01C0" ControlType="System.Windows.Forms.ComboBox">
+      <Option Value="0x0000" Description="Two-way vertical w/ fade"></Option>
+      <Option Value="0x0040" Description="One-way horizontal w/ fade"></Option>
+      <Option Value="0x0080" Description="Two-way horizontal, no fade"></Option>
+      <Option Value="0x00C0" Description="Two-way vertical w/ fade (switch flag)"></Option>
+      <Option Value="0x0100" Description="Two-way vertical, no fade"></Option>
+      <Option Value="0x0140" Description="Two-way horizontal w/ fade"></Option>
+      <Option Value="0x0180" Description="Two-way vertical, no fade (Water Temple)"></Option>
+      <Option Value="0x01C0" Description="0x01C0 (horizontal, unknown?)"></Option>
+    </Item>
+    <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Attached Switch" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
   </Definition>
   <Definition Number="0x002E" DisplayModel="ColoredDoor" PickModel="Door" FrontOffset="180.0">
     <Item Index="4" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
@@ -249,8 +260,8 @@
       <Option Value="0x0240" Description="Lifting #2"></Option>
       <Option Value="0x0280" Description="Lifting #3"></Option>
       <Option Value="0x02C0" Description="Locked (lock on back)"></Option>
-      <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Attached Switch" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
     </Item>
+    <Item Index="15" ValueType="System.Byte" DisplayStyle="Hexadecimal" Description="Attached Switch" Mask="0x3F" ControlType="System.Windows.Forms.TextBox"></Item>
   </Definition>
   <Definition Number="0x0037">
     <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox"></Item>
