@@ -63,9 +63,9 @@ namespace SceneNavi.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bg_empty_2 {
+        internal static System.Drawing.Bitmap BgEmpty_Large {
             get {
-                object obj = ResourceManager.GetObject("bg_empty_2", resourceCulture);
+                object obj = ResourceManager.GetObject("BgEmpty_Large", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace SceneNavi.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bg_empty_3 {
+        internal static System.Drawing.Bitmap BgEmpty_Small {
             get {
-                object obj = ResourceManager.GetObject("bg_empty_3", resourceCulture);
+                object obj = ResourceManager.GetObject("BgEmpty_Small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

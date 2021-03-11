@@ -107,6 +107,11 @@
     <Compile Include="HeaderCommands\Waypoints.cs" />
     <Compile Include="HeaderCommands\SpecialObjects.cs" />
     <Compile Include="OpenGLHelpers\TextPrinter.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ROMHandler\ISceneTableEntry.cs" />
     <Compile Include="ROMHandler\SceneTableEntryMajora.cs" />
     <Compile Include="SimpleF3DEX2\CombinerEmulation\ICombinerManager.cs" />
@@ -192,14 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="TableEditorForm.resx">
       <DependentUpon>TableEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,8 +251,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Resources\bg_empty_2.png" />
-    <None Include="Resources\bg_empty_3.png" />
+    <None Include="Resources\BgEmpty_Small.png" />
+    <None Include="Resources\BgEmpty_Large.png" />
     <None Include="UpdateData\SceneNavi.txt" />
     <Content Include="XML\ActorDefinitions\ZL\Database.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -50,7 +50,7 @@
             // 
             // pbTitleCard
             // 
-            this.pbTitleCard.BackgroundImage = global::SceneNavi.Properties.Resources.bg_empty_2;
+            this.pbTitleCard.BackgroundImage = global::SceneNavi.Properties.Resources.BgEmpty_Small;
             this.pbTitleCard.Location = new System.Drawing.Point(12, 12);
             this.pbTitleCard.Name = "pbTitleCard";
             this.pbTitleCard.Size = new System.Drawing.Size(288, 64);

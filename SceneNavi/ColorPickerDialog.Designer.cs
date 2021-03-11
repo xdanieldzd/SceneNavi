@@ -202,7 +202,7 @@
             // 
             this.pbColorGradientAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbColorGradientAlpha.BackgroundImage = global::SceneNavi.Properties.Resources.bg_empty_3;
+            this.pbColorGradientAlpha.BackgroundImage = global::SceneNavi.Properties.Resources.BgEmpty_Large;
             this.pbColorGradientAlpha.Location = new System.Drawing.Point(72, 87);
             this.pbColorGradientAlpha.Name = "pbColorGradientAlpha";
             this.pbColorGradientAlpha.Size = new System.Drawing.Size(311, 20);
@@ -216,7 +216,7 @@
             // 
             this.pbPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbPreview.BackgroundImage = global::SceneNavi.Properties.Resources.bg_empty_3;
+            this.pbPreview.BackgroundImage = global::SceneNavi.Properties.Resources.BgEmpty_Large;
             this.pbPreview.Location = new System.Drawing.Point(71, 116);
             this.pbPreview.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.pbPreview.Name = "pbPreview";
@@ -230,7 +230,7 @@
             // 
             this.pbColorGradientBlue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbColorGradientBlue.BackgroundImage = global::SceneNavi.Properties.Resources.bg_empty_3;
+            this.pbColorGradientBlue.BackgroundImage = global::SceneNavi.Properties.Resources.BgEmpty_Large;
             this.pbColorGradientBlue.Location = new System.Drawing.Point(72, 61);
             this.pbColorGradientBlue.Name = "pbColorGradientBlue";
             this.pbColorGradientBlue.Size = new System.Drawing.Size(311, 20);
@@ -244,7 +244,7 @@
             // 
             this.pbColorGradientGreen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbColorGradientGreen.BackgroundImage = global::SceneNavi.Properties.Resources.bg_empty_3;
+            this.pbColorGradientGreen.BackgroundImage = global::SceneNavi.Properties.Resources.BgEmpty_Large;
             this.pbColorGradientGreen.Location = new System.Drawing.Point(72, 35);
             this.pbColorGradientGreen.Name = "pbColorGradientGreen";
             this.pbColorGradientGreen.Size = new System.Drawing.Size(311, 20);
@@ -258,7 +258,7 @@
             // 
             this.pbColorGradientRed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbColorGradientRed.BackgroundImage = global::SceneNavi.Properties.Resources.bg_empty_3;
+            this.pbColorGradientRed.BackgroundImage = global::SceneNavi.Properties.Resources.BgEmpty_Large;
             this.pbColorGradientRed.Location = new System.Drawing.Point(72, 9);
             this.pbColorGradientRed.Name = "pbColorGradientRed";
             this.pbColorGradientRed.Size = new System.Drawing.Size(311, 20);
