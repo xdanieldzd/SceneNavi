@@ -153,10 +153,16 @@ namespace SceneNavi
 			set { source.Configs[ConfigName].Set("EnableAntiAliasing", value); }
 		}
 
-		public static bool LimitDrawDistance
+		public static bool EmulateDrawDistance
 		{
-			get { return source.Configs[ConfigName].GetBoolean("LimitDrawDistance", false); }
-			set { source.Configs[ConfigName].Set("LimitDrawDistance", value); }
+			get { return source.Configs[ConfigName].GetBoolean("EmulateDrawDistance", false); }
+			set { source.Configs[ConfigName].Set("EmulateDrawDistance", value); }
+		}
+
+		public static bool EmulateFog
+		{
+			get { return source.Configs[ConfigName].GetBoolean("EmulateFog", false); }
+			set { source.Configs[ConfigName].Set("EmulateFog", value); }
 		}
 
 		static Configuration()

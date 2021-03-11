@@ -66,7 +66,7 @@ namespace SceneNavi
 		Camera camera;
 		FPSMonitor fpsMonitor;
 
-		double oglSceneScale;
+		float oglSceneScale;
 
 		bool supportsCreateShader, supportsGenProgramsARB;
 
@@ -202,7 +202,8 @@ namespace SceneNavi
 
 			enableVSyncToolStripMenuItem.Checked = customGLControl.VSync = Configuration.OGLVSync;
 			enableAntiAliasingToolStripMenuItem.Checked = Configuration.EnableAntiAliasing;
-			limitDrawDistanceToolStripMenuItem.Checked = Configuration.LimitDrawDistance;
+			emulateDrawDistanceToolStripMenuItem.Checked = Configuration.EmulateDrawDistance;
+			emulateFogToolStripMenuItem.Checked = Configuration.EmulateFog;
 
 			currentToolMode = Configuration.LastToolMode;
 			currentCombinerType = Configuration.CombinerType;
@@ -1152,7 +1153,7 @@ namespace SceneNavi
 			camera = new Camera();
 			fpsMonitor = new FPSMonitor();
 
-			oglSceneScale = 0.02;
+			oglSceneScale = 0.02f;
 
 			ready = true;
 		}
@@ -1165,12 +1166,21 @@ namespace SceneNavi
 			{
 				fpsMonitor.Update();
 
-				RenderInit(((GLControl)sender).ClientRectangle, Color.LightBlue);
+				/* Clear various buffers */
+				ClearScreen(Color.LightBlue);
 
 				if (rom != null && rom.Loaded)
 				{
+					var rect = ((GLControl)sender).ClientRectangle;
+
+					/* Init projection; limit draw distance */
+					UpdateCameraAndProjection(rect, true);
+
 					/* Scene/rooms */
 					RenderScene();
+
+					/* Init projection; don't limit draw distance */
+					UpdateCameraAndProjection(rect, false);
 
 					/* Prepare for actors */
 					GL.PushAttrib(AttribMask.AllAttribBits);
@@ -1347,11 +1357,16 @@ namespace SceneNavi
 			}
 		}
 
-		private void RenderInit(Rectangle rect, Color clearColor)
+		private void ClearScreen(Color clearColor)
 		{
 			GL.ClearColor(clearColor);
 			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-			Initialization.CreateViewportAndProjection(Initialization.ProjectionTypes.Perspective, rect, 0.01f, currentEnvSettings != null && Configuration.LimitDrawDistance ? (currentEnvSettings.DrawDistance / 50.0f) : 600.0f);
+		}
+
+		private void UpdateCameraAndProjection(Rectangle rect, bool limitDrawDist)
+		{
+			var zFar = (limitDrawDist && currentEnvSettings != null && Configuration.EmulateDrawDistance ? currentEnvSettings.DrawDistance : 32768.0f) * oglSceneScale;
+			Initialization.CreateViewportAndProjection(Initialization.ProjectionTypes.Perspective, rect, 0.01f, zFar);
 			camera.Position();
 			GL.Scale(oglSceneScale, oglSceneScale, oglSceneScale);
 		}
@@ -1360,7 +1375,11 @@ namespace SceneNavi
 		{
 			GL.PushAttrib(AttribMask.AllAttribBits);
 
-			if (currentScene != null && currentEnvSettings != null) currentEnvSettings.CreateLighting();
+			if (currentScene != null && currentEnvSettings != null)
+			{
+				currentEnvSettings.InitializeLighting();
+				currentEnvSettings.InitializeFog(oglSceneScale);
+			}
 
 			if (currentRoom != null && currentRoom.ActiveMeshHeader != null)
 			{
@@ -1595,7 +1614,8 @@ namespace SceneNavi
 			if (supportsCreateShader) GL.UseProgram(0);
 			GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-			RenderInit(customGLControl.ClientRectangle, Color.Black);
+			ClearScreen(Color.Black);
+			UpdateCameraAndProjection(customGLControl.ClientRectangle, false);
 			foreach (HeaderCommands.IPickableObject obj in objlist)
 			{
 				if (obj is HeaderCommands.Collision.Polygon || obj is OpenGLHelpers.DisplayListEx.Triangle)
@@ -2361,9 +2381,15 @@ namespace SceneNavi
 			}
 		}
 
-		private void limitDrawDistanceToolStripMenuItem_Click(object sender, EventArgs e)
+		private void emulateDrawDistanceToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Configuration.LimitDrawDistance = ((ToolStripMenuItem)sender).Checked;
+			Configuration.EmulateDrawDistance = ((ToolStripMenuItem)sender).Checked;
+		}
+
+		private void emulateFogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Configuration.EmulateFog = ((ToolStripMenuItem)sender).Checked;
+			displayListsDirty = true;
 		}
 
 		private void renderCollisionToolStripMenuItem_Click(object sender, EventArgs e)

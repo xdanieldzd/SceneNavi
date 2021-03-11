@@ -65,7 +65,7 @@
 			this.showWaterboxesPerRoomToolStripMenuItem = new SceneNavi.Controls.ToolStripHintMenuItem();
 			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
 			this.enableTexturesToolStripMenuItem = new SceneNavi.Controls.ToolStripHintMenuItem();
-			this.limitDrawDistanceToolStripMenuItem = new SceneNavi.Controls.ToolStripHintMenuItem();
+			this.emulateDrawDistanceToolStripMenuItem = new SceneNavi.Controls.ToolStripHintMenuItem();
 			this.combinerTypeToolStripMenuItem = new SceneNavi.Controls.ToolStripHintMenuItem();
 			this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
 			this.openGLToolStripMenuItem = new SceneNavi.Controls.ToolStripHintMenuItem();
@@ -166,6 +166,7 @@
 			this.changeColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
 			this.propertiesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.emulateFogToolStripMenuItem = new SceneNavi.Controls.ToolStripHintMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
@@ -196,11 +197,11 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.fileToolStripMenuItem,
-			this.editToolStripMenuItem,
-			this.toolsToolStripMenuItem,
-			this.optionsToolStripMenuItem,
-			this.helpToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.optionsToolStripMenuItem,
+            this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(970, 24);
@@ -210,15 +211,15 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.openROMToolStripMenuItem,
-			this.openSceneToolStripMenuItem,
-			this.saveToolStripMenuItem,
-			this.toolStripMenuItem9,
-			this.closeSceneToolStripMenuItem,
-			this.toolStripMenuItem1,
-			this.rOMInformationToolStripMenuItem,
-			this.toolStripMenuItem2,
-			this.exitToolStripMenuItem});
+            this.openROMToolStripMenuItem,
+            this.openSceneToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.toolStripMenuItem9,
+            this.closeSceneToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.rOMInformationToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.HelpText = null;
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -297,8 +298,8 @@
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.editDataTablesToolStripMenuItem,
-			this.editAreaTitleCardToolStripMenuItem});
+            this.editDataTablesToolStripMenuItem,
+            this.editAreaTitleCardToolStripMenuItem});
 			this.editToolStripMenuItem.HelpText = null;
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
 			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
@@ -325,10 +326,10 @@
 			// toolsToolStripMenuItem
 			// 
 			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.mouseModeToolStripMenuItem,
-			this.collisionHighlightToolStripMenuItem,
-			this.toolStripMenuItem7,
-			this.resetCameraPositionToolStripMenuItem});
+            this.mouseModeToolStripMenuItem,
+            this.collisionHighlightToolStripMenuItem,
+            this.toolStripMenuItem7,
+            this.resetCameraPositionToolStripMenuItem});
 			this.toolsToolStripMenuItem.HelpText = null;
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
 			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
@@ -344,8 +345,8 @@
 			// collisionHighlightToolStripMenuItem
 			// 
 			this.collisionHighlightToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.whiteToolStripMenuItem,
-			this.typebasedToolStripMenuItem});
+            this.whiteToolStripMenuItem,
+            this.typebasedToolStripMenuItem});
 			this.collisionHighlightToolStripMenuItem.HelpText = "Change collision highlighting behavior";
 			this.collisionHighlightToolStripMenuItem.Name = "collisionHighlightToolStripMenuItem";
 			this.collisionHighlightToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
@@ -385,13 +386,14 @@
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.renderElementsToolStripMenuItem,
-			this.toolStripMenuItem4,
-			this.enableTexturesToolStripMenuItem,
-			this.limitDrawDistanceToolStripMenuItem,
-			this.combinerTypeToolStripMenuItem,
-			this.toolStripMenuItem10,
-			this.openGLToolStripMenuItem});
+            this.renderElementsToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.enableTexturesToolStripMenuItem,
+            this.emulateDrawDistanceToolStripMenuItem,
+            this.emulateFogToolStripMenuItem,
+            this.combinerTypeToolStripMenuItem,
+            this.toolStripMenuItem10,
+            this.openGLToolStripMenuItem});
 			this.optionsToolStripMenuItem.HelpText = null;
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -400,19 +402,19 @@
 			// renderElementsToolStripMenuItem
 			// 
 			this.renderElementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.renderCollisionToolStripMenuItem,
-			this.toolStripMenuItem3,
-			this.renderRoomActorsToolStripMenuItem,
-			this.renderSpawnPointsToolStripMenuItem,
-			this.renderTransitionsToolStripMenuItem,
-			this.renderPathWaypointsToolStripMenuItem,
-			this.renderWaterboxesToolStripMenuItem,
-			this.toolStripMenuItem5,
-			this.linkAllWaypointsInPathToolStripMenuItem,
-			this.showWaterboxesPerRoomToolStripMenuItem});
+            this.renderCollisionToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.renderRoomActorsToolStripMenuItem,
+            this.renderSpawnPointsToolStripMenuItem,
+            this.renderTransitionsToolStripMenuItem,
+            this.renderPathWaypointsToolStripMenuItem,
+            this.renderWaterboxesToolStripMenuItem,
+            this.toolStripMenuItem5,
+            this.linkAllWaypointsInPathToolStripMenuItem,
+            this.showWaterboxesPerRoomToolStripMenuItem});
 			this.renderElementsToolStripMenuItem.HelpText = "Select scene elements to render";
 			this.renderElementsToolStripMenuItem.Name = "renderElementsToolStripMenuItem";
-			this.renderElementsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+			this.renderElementsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.renderElementsToolStripMenuItem.Text = "&Render Elements";
 			// 
 			// renderCollisionToolStripMenuItem
@@ -500,46 +502,46 @@
 			// toolStripMenuItem4
 			// 
 			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-			this.toolStripMenuItem4.Size = new System.Drawing.Size(176, 6);
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(192, 6);
 			// 
 			// enableTexturesToolStripMenuItem
 			// 
 			this.enableTexturesToolStripMenuItem.CheckOnClick = true;
 			this.enableTexturesToolStripMenuItem.HelpText = "Enable rendering of textures";
 			this.enableTexturesToolStripMenuItem.Name = "enableTexturesToolStripMenuItem";
-			this.enableTexturesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+			this.enableTexturesToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.enableTexturesToolStripMenuItem.Text = "Enable &Textures";
 			this.enableTexturesToolStripMenuItem.Click += new System.EventHandler(this.enableTexturesToolStripMenuItem_Click);
 			// 
-			// limitDrawDistanceToolStripMenuItem
+			// emulateDrawDistanceToolStripMenuItem
 			// 
-			this.limitDrawDistanceToolStripMenuItem.CheckOnClick = true;
-			this.limitDrawDistanceToolStripMenuItem.HelpText = "Limit draw distance according to environment settings";
-			this.limitDrawDistanceToolStripMenuItem.Name = "limitDrawDistanceToolStripMenuItem";
-			this.limitDrawDistanceToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-			this.limitDrawDistanceToolStripMenuItem.Text = "Limit &Draw Distance";
-			this.limitDrawDistanceToolStripMenuItem.Click += new System.EventHandler(this.limitDrawDistanceToolStripMenuItem_Click);
+			this.emulateDrawDistanceToolStripMenuItem.CheckOnClick = true;
+			this.emulateDrawDistanceToolStripMenuItem.HelpText = "Limit draw distance according to environment settings";
+			this.emulateDrawDistanceToolStripMenuItem.Name = "emulateDrawDistanceToolStripMenuItem";
+			this.emulateDrawDistanceToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.emulateDrawDistanceToolStripMenuItem.Text = "Emulate &Draw Distance";
+			this.emulateDrawDistanceToolStripMenuItem.Click += new System.EventHandler(this.emulateDrawDistanceToolStripMenuItem_Click);
 			// 
 			// combinerTypeToolStripMenuItem
 			// 
 			this.combinerTypeToolStripMenuItem.HelpText = "Select color combiner emulator to use";
 			this.combinerTypeToolStripMenuItem.Name = "combinerTypeToolStripMenuItem";
-			this.combinerTypeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+			this.combinerTypeToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.combinerTypeToolStripMenuItem.Text = "&Combiner Type";
 			// 
 			// toolStripMenuItem10
 			// 
 			this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-			this.toolStripMenuItem10.Size = new System.Drawing.Size(176, 6);
+			this.toolStripMenuItem10.Size = new System.Drawing.Size(192, 6);
 			// 
 			// openGLToolStripMenuItem
 			// 
 			this.openGLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.enableVSyncToolStripMenuItem,
-			this.enableAntiAliasingToolStripMenuItem});
+            this.enableVSyncToolStripMenuItem,
+            this.enableAntiAliasingToolStripMenuItem});
 			this.openGLToolStripMenuItem.HelpText = "Toggle various OpenGL properties";
 			this.openGLToolStripMenuItem.Name = "openGLToolStripMenuItem";
-			this.openGLToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+			this.openGLToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.openGLToolStripMenuItem.Text = "&OpenGL";
 			// 
 			// enableVSyncToolStripMenuItem
@@ -563,10 +565,10 @@
 			// helpToolStripMenuItem
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.checkForUpdateToolStripMenuItem,
-			this.toolStripMenuItem8,
-			this.openGLInformationToolStripMenuItem,
-			this.aboutToolStripMenuItem});
+            this.checkForUpdateToolStripMenuItem,
+            this.toolStripMenuItem8,
+            this.openGLInformationToolStripMenuItem,
+            this.aboutToolStripMenuItem});
 			this.helpToolStripMenuItem.HelpText = null;
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -606,11 +608,11 @@
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.bsiToolMode,
-			this.separatorStripItem1,
-			this.tsslStatus,
-			this.separatorStripItem2,
-			this.bsiCamCoords});
+            this.bsiToolMode,
+            this.separatorStripItem1,
+            this.tsslStatus,
+            this.separatorStripItem2,
+            this.bsiCamCoords});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 504);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.ShowItemToolTips = true;
@@ -747,10 +749,10 @@
 			this.nudSceneMetaNightSFX.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.nudSceneMetaNightSFX.Location = new System.Drawing.Point(99, 30);
 			this.nudSceneMetaNightSFX.Maximum = new decimal(new int[] {
-			255,
-			0,
-			0,
-			0});
+            255,
+            0,
+            0,
+            0});
 			this.nudSceneMetaNightSFX.Name = "nudSceneMetaNightSFX";
 			this.nudSceneMetaNightSFX.Size = new System.Drawing.Size(58, 20);
 			this.nudSceneMetaNightSFX.TabIndex = 4;
@@ -794,10 +796,10 @@
 			this.nudSceneMetaReverb.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.nudSceneMetaReverb.Location = new System.Drawing.Point(99, 56);
 			this.nudSceneMetaReverb.Maximum = new decimal(new int[] {
-			255,
-			0,
-			0,
-			0});
+            255,
+            0,
+            0,
+            0});
 			this.nudSceneMetaReverb.Name = "nudSceneMetaReverb";
 			this.nudSceneMetaReverb.Size = new System.Drawing.Size(58, 20);
 			this.nudSceneMetaReverb.TabIndex = 3;
@@ -1316,7 +1318,7 @@
 			this.lblWaterboxProperties.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblWaterboxProperties.Location = new System.Drawing.Point(3, 163);
 			this.lblWaterboxProperties.Name = "lblWaterboxProperties";
-			this.lblWaterboxProperties.Size = new System.Drawing.Size(104, 26);
+			this.lblWaterboxProperties.Size = new System.Drawing.Size(120, 26);
 			this.lblWaterboxProperties.TabIndex = 13;
 			this.lblWaterboxProperties.Text = "Properties:";
 			this.lblWaterboxProperties.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1324,9 +1326,9 @@
 			// txtWaterboxProperties
 			// 
 			this.txtWaterboxProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtWaterboxProperties.Location = new System.Drawing.Point(113, 166);
+			this.txtWaterboxProperties.Location = new System.Drawing.Point(129, 166);
 			this.txtWaterboxProperties.Name = "txtWaterboxProperties";
-			this.txtWaterboxProperties.Size = new System.Drawing.Size(200, 20);
+			this.txtWaterboxProperties.Size = new System.Drawing.Size(184, 20);
 			this.txtWaterboxProperties.TabIndex = 14;
 			this.txtWaterboxProperties.TextChanged += new System.EventHandler(this.txtWaterboxProperties_TextChanged);
 			// 
@@ -1336,7 +1338,7 @@
 			this.lblWaterboxPositionX.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblWaterboxPositionX.Location = new System.Drawing.Point(3, 6);
 			this.lblWaterboxPositionX.Name = "lblWaterboxPositionX";
-			this.lblWaterboxPositionX.Size = new System.Drawing.Size(104, 26);
+			this.lblWaterboxPositionX.Size = new System.Drawing.Size(120, 26);
 			this.lblWaterboxPositionX.TabIndex = 5;
 			this.lblWaterboxPositionX.Text = "Position (X):";
 			this.lblWaterboxPositionX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1344,9 +1346,9 @@
 			// txtWaterboxPositionX
 			// 
 			this.txtWaterboxPositionX.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtWaterboxPositionX.Location = new System.Drawing.Point(113, 9);
+			this.txtWaterboxPositionX.Location = new System.Drawing.Point(129, 9);
 			this.txtWaterboxPositionX.Name = "txtWaterboxPositionX";
-			this.txtWaterboxPositionX.Size = new System.Drawing.Size(200, 20);
+			this.txtWaterboxPositionX.Size = new System.Drawing.Size(184, 20);
 			this.txtWaterboxPositionX.TabIndex = 6;
 			this.txtWaterboxPositionX.TextChanged += new System.EventHandler(this.txtWaterboxPositionX_TextChanged);
 			// 
@@ -1356,7 +1358,7 @@
 			this.lblWaterboxPositionY.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblWaterboxPositionY.Location = new System.Drawing.Point(3, 32);
 			this.lblWaterboxPositionY.Name = "lblWaterboxPositionY";
-			this.lblWaterboxPositionY.Size = new System.Drawing.Size(104, 26);
+			this.lblWaterboxPositionY.Size = new System.Drawing.Size(120, 26);
 			this.lblWaterboxPositionY.TabIndex = 5;
 			this.lblWaterboxPositionY.Text = "Position (Y):";
 			this.lblWaterboxPositionY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1364,9 +1366,9 @@
 			// txtWaterboxPositionY
 			// 
 			this.txtWaterboxPositionY.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtWaterboxPositionY.Location = new System.Drawing.Point(113, 35);
+			this.txtWaterboxPositionY.Location = new System.Drawing.Point(129, 35);
 			this.txtWaterboxPositionY.Name = "txtWaterboxPositionY";
-			this.txtWaterboxPositionY.Size = new System.Drawing.Size(200, 20);
+			this.txtWaterboxPositionY.Size = new System.Drawing.Size(184, 20);
 			this.txtWaterboxPositionY.TabIndex = 6;
 			this.txtWaterboxPositionY.TextChanged += new System.EventHandler(this.txtWaterboxPositionY_TextChanged);
 			// 
@@ -1376,7 +1378,7 @@
 			this.lblWaterboxPositionZ.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblWaterboxPositionZ.Location = new System.Drawing.Point(3, 58);
 			this.lblWaterboxPositionZ.Name = "lblWaterboxPositionZ";
-			this.lblWaterboxPositionZ.Size = new System.Drawing.Size(104, 26);
+			this.lblWaterboxPositionZ.Size = new System.Drawing.Size(120, 26);
 			this.lblWaterboxPositionZ.TabIndex = 5;
 			this.lblWaterboxPositionZ.Text = "Position (Z):";
 			this.lblWaterboxPositionZ.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1384,9 +1386,9 @@
 			// txtWaterboxPositionZ
 			// 
 			this.txtWaterboxPositionZ.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtWaterboxPositionZ.Location = new System.Drawing.Point(113, 61);
+			this.txtWaterboxPositionZ.Location = new System.Drawing.Point(129, 61);
 			this.txtWaterboxPositionZ.Name = "txtWaterboxPositionZ";
-			this.txtWaterboxPositionZ.Size = new System.Drawing.Size(200, 20);
+			this.txtWaterboxPositionZ.Size = new System.Drawing.Size(184, 20);
 			this.txtWaterboxPositionZ.TabIndex = 6;
 			this.txtWaterboxPositionZ.TextChanged += new System.EventHandler(this.txtWaterboxPositionZ_TextChanged);
 			// 
@@ -1395,7 +1397,7 @@
 			this.lblWaterboxSizeX.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblWaterboxSizeX.Location = new System.Drawing.Point(3, 84);
 			this.lblWaterboxSizeX.Name = "lblWaterboxSizeX";
-			this.lblWaterboxSizeX.Size = new System.Drawing.Size(104, 26);
+			this.lblWaterboxSizeX.Size = new System.Drawing.Size(120, 26);
 			this.lblWaterboxSizeX.TabIndex = 7;
 			this.lblWaterboxSizeX.Text = "Size (X):";
 			this.lblWaterboxSizeX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1403,9 +1405,9 @@
 			// txtWaterboxSizeX
 			// 
 			this.txtWaterboxSizeX.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtWaterboxSizeX.Location = new System.Drawing.Point(113, 87);
+			this.txtWaterboxSizeX.Location = new System.Drawing.Point(129, 87);
 			this.txtWaterboxSizeX.Name = "txtWaterboxSizeX";
-			this.txtWaterboxSizeX.Size = new System.Drawing.Size(200, 20);
+			this.txtWaterboxSizeX.Size = new System.Drawing.Size(184, 20);
 			this.txtWaterboxSizeX.TabIndex = 8;
 			this.txtWaterboxSizeX.TextChanged += new System.EventHandler(this.txtWaterboxSizeX_TextChanged);
 			// 
@@ -1414,7 +1416,7 @@
 			this.lblWaterboxSizeZ.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblWaterboxSizeZ.Location = new System.Drawing.Point(3, 110);
 			this.lblWaterboxSizeZ.Name = "lblWaterboxSizeZ";
-			this.lblWaterboxSizeZ.Size = new System.Drawing.Size(104, 26);
+			this.lblWaterboxSizeZ.Size = new System.Drawing.Size(120, 26);
 			this.lblWaterboxSizeZ.TabIndex = 9;
 			this.lblWaterboxSizeZ.Text = "Size (Z):";
 			this.lblWaterboxSizeZ.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1422,9 +1424,9 @@
 			// txtWaterboxSizeZ
 			// 
 			this.txtWaterboxSizeZ.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtWaterboxSizeZ.Location = new System.Drawing.Point(113, 113);
+			this.txtWaterboxSizeZ.Location = new System.Drawing.Point(129, 113);
 			this.txtWaterboxSizeZ.Name = "txtWaterboxSizeZ";
-			this.txtWaterboxSizeZ.Size = new System.Drawing.Size(200, 20);
+			this.txtWaterboxSizeZ.Size = new System.Drawing.Size(184, 20);
 			this.txtWaterboxSizeZ.TabIndex = 10;
 			this.txtWaterboxSizeZ.TextChanged += new System.EventHandler(this.txtWaterboxSizeZ_TextChanged);
 			// 
@@ -1433,7 +1435,7 @@
 			this.lblWaterboxRoom.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblWaterboxRoom.Location = new System.Drawing.Point(3, 136);
 			this.lblWaterboxRoom.Name = "lblWaterboxRoom";
-			this.lblWaterboxRoom.Size = new System.Drawing.Size(104, 27);
+			this.lblWaterboxRoom.Size = new System.Drawing.Size(120, 27);
 			this.lblWaterboxRoom.TabIndex = 11;
 			this.lblWaterboxRoom.Text = "Exists in Room:";
 			this.lblWaterboxRoom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1442,9 +1444,9 @@
 			// 
 			this.cbWaterboxRoom.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.cbWaterboxRoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbWaterboxRoom.Location = new System.Drawing.Point(113, 139);
+			this.cbWaterboxRoom.Location = new System.Drawing.Point(129, 139);
 			this.cbWaterboxRoom.Name = "cbWaterboxRoom";
-			this.cbWaterboxRoom.Size = new System.Drawing.Size(200, 21);
+			this.cbWaterboxRoom.Size = new System.Drawing.Size(184, 21);
 			this.cbWaterboxRoom.TabIndex = 12;
 			this.cbWaterboxRoom.SelectedIndexChanged += new System.EventHandler(this.cbWaterboxRoom_SelectedIndexChanged);
 			// 
@@ -1463,15 +1465,15 @@
 			// ofdOpenROM
 			// 
 			this.ofdOpenROM.Filter = "Nintendo 64 ROMs (*.z64;*.v64;*.n64;*.bin)|*.z64;*.v64;*.n64;*.bin|All Files (*.*" +
-	")|*.*";
+    ")|*.*";
 			this.ofdOpenROM.Title = "Open ROM File";
 			// 
 			// cmsMoveableObjectEdit
 			// 
 			this.cmsMoveableObjectEdit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.deselectToolStripMenuItem,
-			this.toolStripMenuItem6,
-			this.rotateToolStripMenuItem});
+            this.deselectToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.rotateToolStripMenuItem});
 			this.cmsMoveableObjectEdit.Name = "cmsPickableObjectEdit";
 			this.cmsMoveableObjectEdit.Size = new System.Drawing.Size(119, 54);
 			// 
@@ -1491,9 +1493,9 @@
 			// rotateToolStripMenuItem
 			// 
 			this.rotateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.xAxisToolStripMenuItem,
-			this.yAxisToolStripMenuItem,
-			this.zAxisToolStripMenuItem});
+            this.xAxisToolStripMenuItem,
+            this.yAxisToolStripMenuItem,
+            this.zAxisToolStripMenuItem});
 			this.rotateToolStripMenuItem.HelpText = null;
 			this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
 			this.rotateToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
@@ -1502,8 +1504,8 @@
 			// xAxisToolStripMenuItem
 			// 
 			this.xAxisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.xPlus45DegreesToolStripMenuItem,
-			this.xMinus45DegreesToolStripMenuItem});
+            this.xPlus45DegreesToolStripMenuItem,
+            this.xMinus45DegreesToolStripMenuItem});
 			this.xAxisToolStripMenuItem.HelpText = null;
 			this.xAxisToolStripMenuItem.Name = "xAxisToolStripMenuItem";
 			this.xAxisToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
@@ -1528,8 +1530,8 @@
 			// yAxisToolStripMenuItem
 			// 
 			this.yAxisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.yPlus45DegreesToolStripMenuItem,
-			this.yMinus45DegreesToolStripMenuItem});
+            this.yPlus45DegreesToolStripMenuItem,
+            this.yMinus45DegreesToolStripMenuItem});
 			this.yAxisToolStripMenuItem.HelpText = null;
 			this.yAxisToolStripMenuItem.Name = "yAxisToolStripMenuItem";
 			this.yAxisToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
@@ -1554,8 +1556,8 @@
 			// zAxisToolStripMenuItem
 			// 
 			this.zAxisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.zPlus45DegreesToolStripMenuItem,
-			this.zMinus45DegreesToolStripMenuItem});
+            this.zPlus45DegreesToolStripMenuItem,
+            this.zMinus45DegreesToolStripMenuItem});
 			this.zAxisToolStripMenuItem.HelpText = null;
 			this.zAxisToolStripMenuItem.Name = "zAxisToolStripMenuItem";
 			this.zAxisToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
@@ -1590,7 +1592,7 @@
 			// cmsSceneTree
 			// 
 			this.cmsSceneTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.propertiesToolStripMenuItem});
+            this.propertiesToolStripMenuItem});
 			this.cmsSceneTree.Name = "cmsSceneTree";
 			this.cmsSceneTree.Size = new System.Drawing.Size(128, 26);
 			// 
@@ -1624,9 +1626,9 @@
 			// cmsVertexEdit
 			// 
 			this.cmsVertexEdit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.changeColorToolStripMenuItem,
-			this.toolStripMenuItem11,
-			this.propertiesToolStripMenuItem1});
+            this.changeColorToolStripMenuItem,
+            this.toolStripMenuItem11,
+            this.propertiesToolStripMenuItem1});
 			this.cmsVertexEdit.Name = "cmsVertexEdit";
 			this.cmsVertexEdit.Size = new System.Drawing.Size(157, 54);
 			// 
@@ -1648,6 +1650,15 @@
 			this.propertiesToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
 			this.propertiesToolStripMenuItem1.Text = "&Properties";
 			this.propertiesToolStripMenuItem1.Click += new System.EventHandler(this.propertiesToolStripMenuItem1_Click);
+			// 
+			// emulateFogToolStripMenuItem
+			// 
+			this.emulateFogToolStripMenuItem.CheckOnClick = true;
+			this.emulateFogToolStripMenuItem.HelpText = "Emulate fog according to environment settings";
+			this.emulateFogToolStripMenuItem.Name = "emulateFogToolStripMenuItem";
+			this.emulateFogToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.emulateFogToolStripMenuItem.Text = "Emulate &Fog";
+			this.emulateFogToolStripMenuItem.Click += new System.EventHandler(this.emulateFogToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -1829,7 +1840,7 @@
 		private System.Windows.Forms.TextBox txtWaterboxProperties;
 		private Controls.ToolStripHintMenuItem enableAntiAliasingToolStripMenuItem;
 		private Controls.ToolStripHintMenuItem openGLToolStripMenuItem;
-		private Controls.ToolStripHintMenuItem limitDrawDistanceToolStripMenuItem;
+		private Controls.ToolStripHintMenuItem emulateDrawDistanceToolStripMenuItem;
 		private GUIHelpers.ButtonStripItem bsiCamCoords;
 		private GUIHelpers.ButtonStripItem bsiToolMode;
 		private GUIHelpers.SeparatorStripItem separatorStripItem1;
@@ -1839,5 +1850,6 @@
 		private System.Windows.Forms.ToolStripMenuItem changeColorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
 		private System.Windows.Forms.ToolStripMenuItem propertiesToolStripMenuItem1;
+		private Controls.ToolStripHintMenuItem emulateFogToolStripMenuItem;
 	}
 }
